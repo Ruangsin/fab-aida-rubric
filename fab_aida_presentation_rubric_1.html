@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินการนำเสนอ FAB & AIDA Framework | EC46741N</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#050a14;
+    --bg-1:#0a1424;
+    --bg-2:#0f1c33;
+    --panel:rgba(15,32,54,0.55);
+    --panel-border:rgba(103,232,249,0.22);
+    --cyan:#22d3ee;
+    --cyan-soft:#67e8f9;
+    --cyan-dim:rgba(34,211,238,0.14);
+    --text-hi:#eef6fb;
+    --text-mid:#a9bcd0;
+    --text-dim:#5f7387;
+    --amber:#f0b649;
+    --green:#4ade80;
+    --red:#f87171;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 600px at 12% -10%, rgba(34,211,238,0.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(103,140,249,0.08), transparent 55%),
+      linear-gradient(180deg, var(--bg-0), var(--bg-1) 40%, var(--bg-0));
+    color:var(--text-hi);
+    font-family:'Sarabun', sans-serif;
+    min-height:100vh;
+    padding:28px 18px 60px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  /* header */
+  .head{
+    display:flex;align-items:center;gap:16px;
+    margin-bottom:22px;
+  }
+  .head-badge{
+    width:54px;height:54px;border-radius:50%;
+    border:1.5px solid var(--cyan);
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 30%, rgba(34,211,238,0.28), rgba(15,32,54,0.4));
+    box-shadow:0 0 22px rgba(34,211,238,0.35), inset 0 0 14px rgba(34,211,238,0.25);
+    flex-shrink:0;
+  }
+  .head-badge svg{width:26px;height:26px;stroke:var(--cyan-soft);}
+  .head h1{
+    font-family:'Prompt',sans-serif;font-weight:700;
+    font-size:1.28rem;margin:0 0 3px;letter-spacing:.2px;color:var(--text-hi);
+  }
+  .head p{margin:0;color:var(--text-mid);font-size:.86rem;}
+  .head .tag{
+    display:inline-block;margin-top:6px;
+    font-family:'Prompt',sans-serif;font-size:.68rem;letter-spacing:1.5px;
+    color:var(--cyan-soft);text-transform:uppercase;
+    border:1px solid var(--panel-border);border-radius:999px;
+    padding:3px 10px;background:var(--cyan-dim);
+  }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:var(--radius);
+    padding:20px;margin-bottom:16px;
+    backdrop-filter:blur(6px);
+  }
+  .panel-title{
+    font-family:'Prompt',sans-serif;font-weight:600;font-size:.95rem;
+    color:var(--cyan-soft);letter-spacing:.3px;margin:0 0 14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .panel-title::before{
+    content:'';width:6px;height:6px;border-radius:50%;
+    background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+  }
+
+  /* setup panel */
+  .setup-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .setup-row input[type=text]{flex:1;min-width:240px;}
+  .setup-status{font-size:.78rem;color:var(--text-dim);margin-top:8px;}
+  .setup-status.ok{color:var(--green);}
+  .setup-status.off{color:var(--amber);}
+  details.setup summary{cursor:pointer;font-family:'Prompt',sans-serif;font-size:.82rem;color:var(--text-mid);list-style:none;}
+  details.setup summary::-webkit-details-marker{display:none;}
+  details.setup summary::before{content:'⚙ ';color:var(--cyan-soft);}
+  details.setup[open] summary{margin-bottom:12px;}
+
+  label{font-size:.82rem;color:var(--text-mid);display:block;margin-bottom:6px;}
+  input[type=text], select, textarea{
+    width:100%;
+    background:rgba(5,12,22,0.6);
+    border:1px solid rgba(103,232,249,0.18);
+    color:var(--text-hi);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:'Sarabun',sans-serif;
+    font-size:.92rem;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input[type=text]:focus, select:focus, textarea:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 0 3px rgba(34,211,238,0.15);
+  }
+  select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2367e8f9' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;background-size:16px;padding-right:36px;
+  }
+  textarea{resize:vertical;min-height:70px;line-height:1.5;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:620px){.grid2{grid-template-columns:1fr;}}
+  .field{margin-bottom:0;}
+
+  /* criteria */
+  .crit{margin-bottom:18px;}
+  .crit:last-child{margin-bottom:0;}
+  .crit-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:10px;
+  }
+  .crit-name{font-family:'Prompt',sans-serif;font-weight:600;font-size:.92rem;color:var(--text-hi);}
+  .crit-name .en{color:var(--text-dim);font-weight:400;font-size:.76rem;margin-left:6px;}
+  .crit-max{
+    font-family:'Prompt',sans-serif;font-size:.76rem;color:var(--cyan-soft);
+    border:1px solid var(--panel-border);border-radius:999px;padding:2px 10px;background:var(--cyan-dim);
+    white-space:nowrap;
+  }
+  .levels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  @media (max-width:700px){.levels{grid-template-columns:1fr 1fr;}}
+  .level{
+    border:1px solid rgba(103,232,249,0.14);
+    background:rgba(5,12,22,0.45);
+    border-radius:12px;
+    padding:10px 10px 11px;
+    cursor:pointer;
+    transition:.15s;
+    text-align:left;
+  }
+  .level:hover{border-color:rgba(103,232,249,0.45);}
+  .level.active{
+    border-color:var(--cyan);
+    background:linear-gradient(180deg, rgba(34,211,238,0.16), rgba(34,211,238,0.05));
+    box-shadow:0 0 0 1px var(--cyan), 0 0 16px rgba(34,211,238,0.25);
+  }
+  .level .lv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+  .level .lv-name{font-family:'Prompt',sans-serif;font-size:.74rem;font-weight:600;color:var(--text-mid);}
+  .level.active .lv-name{color:var(--cyan-soft);}
+  .level .lv-pt{font-family:'Prompt',sans-serif;font-size:.74rem;font-weight:700;color:var(--text-dim);}
+  .level.active .lv-pt{color:var(--cyan);}
+  .level .lv-desc{font-size:.72rem;line-height:1.45;color:var(--text-dim);}
+  .level.active .lv-desc{color:var(--text-mid);}
+
+  /* total */
+  .total-panel{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .total-num{
+    font-family:'Prompt',sans-serif;font-weight:700;font-size:2.6rem;
+    color:var(--cyan-soft);text-shadow:0 0 22px rgba(34,211,238,0.45);
+    line-height:1;
+  }
+  .total-num span{font-size:1.1rem;color:var(--text-dim);font-weight:500;}
+  .total-band{
+    font-family:'Prompt',sans-serif;font-size:.78rem;letter-spacing:.4px;
+    padding:5px 14px;border-radius:999px;border:1px solid var(--panel-border);
+  }
+  .band-excellent{color:var(--green);border-color:rgba(74,222,128,0.4);background:rgba(74,222,128,0.08);}
+  .band-good{color:var(--cyan-soft);border-color:rgba(34,211,238,0.4);background:var(--cyan-dim);}
+  .band-fair{color:var(--amber);border-color:rgba(240,182,73,0.4);background:rgba(240,182,73,0.08);}
+  .band-poor{color:var(--red);border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.08);}
+  .band-none{color:var(--text-dim);}
+
+  .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  button{
+    font-family:'Prompt',sans-serif;font-weight:600;font-size:.86rem;
+    border-radius:10px;padding:11px 20px;cursor:pointer;border:none;
+    transition:.15s;letter-spacing:.2px;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--cyan), #0891b2);
+    color:#04141c;box-shadow:0 4px 18px rgba(34,211,238,0.3);
+  }
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;filter:none;}
+  .btn-ghost{
+    background:transparent;border:1px solid rgba(103,232,249,0.25);color:var(--text-mid);
+  }
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan-soft);}
+  .btn-small{padding:7px 14px;font-size:.76rem;}
+
+  .msg{font-size:.8rem;margin-top:10px;min-height:18px;}
+  .msg.ok{color:var(--green);}
+  .msg.err{color:var(--red);}
+  .msg.pending{color:var(--amber);}
+
+  /* log table */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  th{
+    text-align:left;font-family:'Prompt',sans-serif;font-weight:600;font-size:.72rem;
+    color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;
+    padding:8px 10px;border-bottom:1px solid var(--panel-border);
+  }
+  td{padding:9px 10px;border-bottom:1px solid rgba(103,232,249,0.08);color:var(--text-mid);}
+  tr:last-child td{border-bottom:none;}
+  .empty-row td{text-align:center;color:var(--text-dim);padding:22px 10px;font-size:.8rem;}
+  .pill-status{font-size:.68rem;font-family:'Prompt',sans-serif;padding:2px 9px;border-radius:999px;}
+  .pill-status.synced{color:var(--green);background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);}
+  .pill-status.local{color:var(--amber);background:rgba(240,182,73,0.1);border:1px solid rgba(240,182,73,0.3);}
+
+  footer{text-align:center;color:var(--text-dim);font-size:.72rem;margin-top:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="head-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9z"/></svg>
+    </div>
+    <div>
+      <h1>แบบประเมินการนำเสนอ FAB &amp; AIDA Framework</h1>
+      <p>603-35-07[66] English for Advertisement and Public Relations · กลุ่มเรียน EC46741N · ผู้สอน: นายเรืองสิน ปลื้มปั่น</p>
+      <span class="tag">Single-Rater Rubric · 5 Points</span>
+    </div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="panel">
+    <details class="setup">
+      <summary>ตั้งค่าการเชื่อมต่อ Google Sheet (Apps Script Web App URL)</summary>
+      <div class="setup-row">
+        <input type="text" id="gasUrl" placeholder="วาง Web App URL จาก Google Apps Script ที่นี่ เช่น https://script.google.com/macros/s/xxxx/exec">
+        <button class="btn-ghost btn-small" onclick="saveGasUrl()">บันทึก URL</button>
+      </div>
+      <p class="setup-status" id="gasStatus">ยังไม่ได้เชื่อมต่อ Google Sheet — คะแนนจะถูกเก็บไว้ในตารางด้านล่างเท่านั้น (ส่งออกเป็น CSV ได้)</p>
+    </details>
+  </div>
+
+  <!-- STUDENT / AD INFO -->
+  <div class="panel">
+    <p class="panel-title">ข้อมูลผู้นำเสนอ</p>
+    <div class="grid2">
+      <div class="field">
+        <label>นักศึกษา</label>
+        <select id="student"></select>
+      </div>
+      <div class="field">
+        <label>โฆษณา / แบรนด์ที่นำเสนอ</label>
+        <input type="text" id="adName" placeholder="เช่น โฆษณา Dove — Real Beauty">
+      </div>
+    </div>
+  </div>
+
+  <!-- RUBRIC -->
+  <div class="panel">
+    <p class="panel-title">เกณฑ์การประเมิน</p>
+
+    <div class="crit" data-crit="alignment" data-max="1.5">
+      <div class="crit-head">
+        <div class="crit-name">1. ความสอดคล้องของเนื้อหากับ Framework <span class="en">Content–Framework Alignment</span></div>
+        <div class="crit-max">เต็ม 1.50</div>
+      </div>
+      <div class="levels">
+        <div class="level" data-pt="1.5" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดีเยี่ยม</span><span class="lv-pt">1.50</span></div><div class="lv-desc">ระบุองค์ประกอบ FAB และ AIDA ได้ครบถ้วน เชื่อมโยงกับโฆษณาที่เลือกอย่างสมเหตุสมผลและชัดเจน</div></div>
+        <div class="level" data-pt="1.1" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดี</span><span class="lv-pt">1.10</span></div><div class="lv-desc">ระบุองค์ประกอบส่วนใหญ่ได้ถูกต้อง เชื่อมโยงกับโฆษณาได้ดี แต่บางจุดยังไม่ชัดเจน</div></div>
+        <div class="level" data-pt="0.7" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">พอใช้</span><span class="lv-pt">0.70</span></div><div class="lv-desc">ระบุองค์ประกอบได้เพียงบางส่วน การเชื่อมโยงกับโฆษณายังสับสนหรือไม่ชัดเจน</div></div>
+        <div class="level" data-pt="0.3" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ควรปรับปรุง</span><span class="lv-pt">0.30</span></div><div class="lv-desc">ไม่สามารถระบุองค์ประกอบของ framework ได้ชัดเจน หรือเข้าใจหลักการคลาดเคลื่อน</div></div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid rgba(103,232,249,0.1);margin:18px 0;">
+
+    <div class="crit" data-crit="accuracy" data-max="1.25">
+      <div class="crit-head">
+        <div class="crit-name">2. ความถูกต้องของการวิเคราะห์ <span class="en">Accuracy of Analysis</span></div>
+        <div class="crit-max">เต็ม 1.25</div>
+      </div>
+      <div class="levels">
+        <div class="level" data-pt="1.25" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดีเยี่ยม</span><span class="lv-pt">1.25</span></div><div class="lv-desc">วิเคราะห์ถูกต้องตามหลักวิชาการ ใช้คำศัพท์และแนวคิดของ FAB/AIDA อย่างแม่นยำ</div></div>
+        <div class="level" data-pt="0.9" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดี</span><span class="lv-pt">0.90</span></div><div class="lv-desc">วิเคราะห์ถูกต้องเป็นส่วนใหญ่ มีข้อผิดพลาดเล็กน้อยที่ไม่กระทบภาพรวม</div></div>
+        <div class="level" data-pt="0.6" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">พอใช้</span><span class="lv-pt">0.60</span></div><div class="lv-desc">มีข้อผิดพลาดในการวิเคราะห์หลายจุด ใช้แนวคิดคลาดเคลื่อนบางส่วน</div></div>
+        <div class="level" data-pt="0.3" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ควรปรับปรุง</span><span class="lv-pt">0.30</span></div><div class="lv-desc">วิเคราะห์ผิดหลักการเป็นส่วนใหญ่ ไม่เข้าใจแนวคิดหลักของ framework</div></div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid rgba(103,232,249,0.1);margin:18px 0;">
+
+    <div class="crit" data-crit="completeness" data-max="1.25">
+      <div class="crit-head">
+        <div class="crit-name">3. ความครบถ้วนของเนื้อหา <span class="en">Completeness</span></div>
+        <div class="crit-max">เต็ม 1.25</div>
+      </div>
+      <div class="levels">
+        <div class="level" data-pt="1.25" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดีเยี่ยม</span><span class="lv-pt">1.25</span></div><div class="lv-desc">นำเสนอครบทุกองค์ประกอบของทั้งสอง framework พร้อมตัวอย่างประกอบจากโฆษณาจริง</div></div>
+        <div class="level" data-pt="0.9" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดี</span><span class="lv-pt">0.90</span></div><div class="lv-desc">นำเสนอครบเกือบทุกองค์ประกอบ ขาดตัวอย่างประกอบในบางจุด</div></div>
+        <div class="level" data-pt="0.6" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">พอใช้</span><span class="lv-pt">0.60</span></div><div class="lv-desc">ขาดองค์ประกอบสำคัญบางส่วน เนื้อหายังไม่ครบถ้วนตามที่กำหนด</div></div>
+        <div class="level" data-pt="0.3" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ควรปรับปรุง</span><span class="lv-pt">0.30</span></div><div class="lv-desc">เนื้อหาขาดหายไปมาก ไม่ครบตามที่กำหนดของทั้งสอง framework</div></div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid rgba(103,232,249,0.1);margin:18px 0;">
+
+    <div class="crit" data-crit="presentation" data-max="1.0">
+      <div class="crit-head">
+        <div class="crit-name">4. ทักษะการนำเสนอ <span class="en">Presentation Skills</span></div>
+        <div class="crit-max">เต็ม 1.00</div>
+      </div>
+      <div class="levels">
+        <div class="level" data-pt="1.0" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดีเยี่ยม</span><span class="lv-pt">1.00</span></div><div class="lv-desc">นำเสนอมั่นใจ ชัดเจน ควบคุมเวลาได้ดี สื่อสารกับผู้ฟังได้อย่างมีประสิทธิภาพ</div></div>
+        <div class="level" data-pt="0.7" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ดี</span><span class="lv-pt">0.70</span></div><div class="lv-desc">นำเสนอได้ดี มีความมั่นใจ แต่การควบคุมเวลาหรือการสื่อสารยังไม่สมบูรณ์แบบ</div></div>
+        <div class="level" data-pt="0.4" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">พอใช้</span><span class="lv-pt">0.40</span></div><div class="lv-desc">นำเสนอได้ตามเนื้อหา แต่ขาดความมั่นใจหรือควบคุมเวลาไม่ดี</div></div>
+        <div class="level" data-pt="0.2" onclick="selectLevel(this)"><div class="lv-top"><span class="lv-name">ควรปรับปรุง</span><span class="lv-pt">0.20</span></div><div class="lv-desc">นำเสนอไม่ชัดเจน ขาดความมั่นใจ หรือควบคุมเวลาไม่ได้</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT -->
+  <div class="panel">
+    <p class="panel-title">ความเห็นเพิ่มเติม (ถ้ามี)</p>
+    <textarea id="comment" placeholder="ข้อเสนอแนะสำหรับนักศึกษา..."></textarea>
+  </div>
+
+  <!-- TOTAL + SUBMIT -->
+  <div class="panel">
+    <div class="total-panel">
+      <div>
+        <div class="total-num" id="totalNum">0.00<span>/ 5.00</span></div>
+      </div>
+      <div class="total-band band-none" id="totalBand">ยังไม่ได้ประเมิน</div>
+    </div>
+    <div class="actions">
+      <button class="btn-primary" id="submitBtn" onclick="submitScore()" disabled>บันทึกคะแนน</button>
+      <button class="btn-ghost" onclick="resetForm()">ล้างฟอร์ม</button>
+    </div>
+    <div class="msg" id="submitMsg"></div>
+  </div>
+
+  <!-- LOG -->
+  <div class="panel">
+    <p class="panel-title">ประวัติการบันทึกคะแนน (เซสชันนี้)</p>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>เวลา</th><th>นักศึกษา</th><th>โฆษณา</th><th>คะแนน</th><th>สถานะ</th></tr>
+        </thead>
+        <tbody id="logBody">
+          <tr class="empty-row"><td colspan="5">ยังไม่มีรายการบันทึกคะแนน</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="actions" style="margin-top:14px;">
+      <button class="btn-ghost btn-small" onclick="exportCsv()">ส่งออก CSV</button>
+    </div>
+  </div>
+
+  <footer>RUS Teamwork · EC46741N Presentation Rubric · ให้คะแนนโดย นายเรืองสิน ปลื้มปั่น</footer>
+</div>
+
+<script>
+const STUDENTS = [
+  {id:"467601241001", name:"นางสาวกชกร จันนิมิต", group:"EC46741N"},
+  {id:"467601241003", name:"นายคณิศร การสมงาม", group:"EC46741N"},
+  {id:"467601241005", name:"นายชนาธิป ยมรัตน์", group:"EC46741N"},
+  {id:"467601241006", name:"นางสาวชลิดา นามสง่า", group:"EC46741N"},
+  {id:"467601241007", name:"นางสาวชุติมา ไววิญญา", group:"EC46741N"},
+  {id:"467601241009", name:"นางสาวดวงนภา เสงี่ยมงาม", group:"EC46741N"},
+  {id:"467601241010", name:"นางสาวดารินทร์ สุขประเสริฐ", group:"EC46741N"},
+  {id:"467601241011", name:"นางสาวธนิสร เทียวประสงค์", group:"EC46741N"},
+  {id:"467601241012", name:"นางสาวธัญจิรา งามสมชาติ", group:"EC46741N"},
+  {id:"467601241013", name:"นายธีรธัช เกษมรัตน์", group:"EC46741N"},
+  {id:"467601241014", name:"นายนครินทร์ สุขอร่าม", group:"EC46741N"},
+  {id:"467601241015", name:"นางสาวปลายฟ้า", group:"EC46741N"},
+  {id:"467601241017", name:"นางสาวปิยวรรณ ทองประกอบ", group:"EC46741N"},
+  {id:"467601241018", name:"นายปีรติ เพชรแก้ว", group:"EC46741N"},
+  {id:"467601241020", name:"นางสาวพิยดา ปัสสาจันทร์", group:"EC46741N"},
+  {id:"467601241021", name:"นางสาวระพีพัฒน์ เทียมมล", group:"EC46741N"},
+  {id:"467601241023", name:"นางสาววรวรรณ อมรดิษฐ์", group:"EC46741N"},
+  {id:"467601241024", name:"นางสาววราลักษณ์ ปัฐพี", group:"EC46741N"},
+  {id:"467601241025", name:"นางสาววรินธร ศรีอรุณ", group:"EC46741N"},
+  {id:"467601241026", name:"นายวิชยุตม์ กุลทอง", group:"EC46741N"},
+  {id:"467601241027", name:"นางสาวศรุตา เสือคำราม", group:"EC46741N"},
+  {id:"467601241028", name:"นางสาวสุกฤตา ไตรทอง", group:"EC46741N"},
+  {id:"467601241029", name:"นางสาวอพัชยาดา พจน์ด้วง", group:"EC46741N"},
+  {id:"467601241030", name:"นายธีรวัสส์ ทรัพย์เอนก", group:"EC46741N"},
+  {id:"467601241031", name:"นางสาววิมลรัตน์ หาญแก้ว", group:"EC46741N"},
+  {id:"467601241032", name:"นางสาวภูชิษา อธิกิติคุณ", group:"EC46741N"},
+  {id:"467601241033", name:"นายนิธิกร สมจันทร์", group:"EC46741N"},
+  {id:"467601241034", name:"นายสิรวิชญ์ อภัยสุข", group:"EC46741N"},
+  {id:"467601241035", name:"นายจิรภัทร การประเสริฐ", group:"EC46741N"},
+  {id:"467601241037", name:"นายกฤษฎา วิมลศิลป์", group:"EC46741N"},
+  {id:"467601241038", name:"นายณภัทร โพธการ", group:"EC46741N"},
+  {id:"467601241039", name:"นายนพกร โสดา", group:"EC46741N"},
+  {id:"467601241040", name:"นางสาวตัสนีม เส้นขาว", group:"EC46741N"},
+  {id:"467601241042", name:"นายระพีพัฒน์ จันทร์สว่าง", group:"EC46741N"},
+  {id:"467601241044", name:"นายสนทยา แฉ่งแดง", group:"EC46741N"},
+  {id:"467601241045", name:"นางสาวรุจรวี นาคะปักษิณ", group:"EC46741N"},
+  {id:"468601221003", name:"นางสาวปภัสสรณ์ ชินบุตร", group:"EC46821N"}
+];
+
+let gasUrl = "";
+let sessionLog = [];
+
+function populateStudents(){
+  const sel = document.getElementById('student');
+  sel.innerHTML = '<option value="">— เลือกนักศึกษา —</option>' +
+    STUDENTS.map(s => `<option value="${s.id}">${s.id} — ${s.name} (${s.group})</option>`).join('');
+}
+populateStudents();
+
+function saveGasUrl(){
+  const val = document.getElementById('gasUrl').value.trim();
+  const status = document.getElementById('gasStatus');
+  if(!val){
+    gasUrl = "";
+    status.textContent = "ยังไม่ได้เชื่อมต่อ Google Sheet — คะแนนจะถูกเก็บไว้ในตารางด้านล่างเท่านั้น (ส่งออกเป็น CSV ได้)";
+    status.className = "setup-status off";
+    return;
+  }
+  gasUrl = val;
+  status.textContent = "เชื่อมต่อแล้ว — คะแนนจะถูกส่งไปยัง Google Sheet โดยอัตโนมัติเมื่อกด \"บันทึกคะแนน\"";
+  status.className = "setup-status ok";
+}
+
+function selectLevel(el){
+  const crit = el.closest('.crit');
+  crit.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+  updateTotal();
+}
+
+function getSelections(){
+  const crits = document.querySelectorAll('.crit');
+  const result = {};
+  let complete = true;
+  crits.forEach(c => {
+    const key = c.dataset.crit;
+    const active = c.querySelector('.level.active');
+    if(active){
+      result[key] = parseFloat(active.dataset.pt);
+    } else {
+      result[key] = null;
+      complete = false;
+    }
+  });
+  return {result, complete};
+}
+
+function bandFor(total){
+  const pct = total/5;
+  if(pct >= 0.9) return {label:'ดีเยี่ยม (Excellent)', cls:'band-excellent'};
+  if(pct >= 0.75) return {label:'ดี (Good)', cls:'band-good'};
+  if(pct >= 0.6) return {label:'พอใช้ (Fair)', cls:'band-fair'};
+  return {label:'ควรปรับปรุง (Needs Improvement)', cls:'band-poor'};
+}
+
+function updateTotal(){
+  const {result, complete} = getSelections();
+  const total = Object.values(result).reduce((a,b) => a + (b || 0), 0);
+  document.getElementById('totalNum').innerHTML = total.toFixed(2) + '<span>/ 5.00</span>';
+  const bandEl = document.getElementById('totalBand');
+  const student = document.getElementById('student').value;
+  const submitBtn = document.getElementById('submitBtn');
+
+  if(complete){
+    const b = bandFor(total);
+    bandEl.textContent = b.label;
+    bandEl.className = 'total-band ' + b.cls;
+  } else {
+    bandEl.textContent = 'ยังประเมินไม่ครบทุกข้อ';
+    bandEl.className = 'total-band band-none';
+  }
+  submitBtn.disabled = !(complete && student);
+}
+
+document.getElementById('student').addEventListener('change', updateTotal);
+
+async function submitScore(){
+  const {result, complete} = getSelections();
+  const studentSel = document.getElementById('student');
+  const studentId = studentSel.value;
+  if(!complete || !studentId) return;
+
+  const student = STUDENTS.find(s => s.id === studentId);
+  const total = Object.values(result).reduce((a,b) => a + b, 0);
+  const adName = document.getElementById('adName').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+  const timestamp = new Date().toLocaleString('th-TH', {dateStyle:'short', timeStyle:'short'});
+
+  const payload = {
+    timestamp,
+    studentId: student.id,
+    studentName: student.name,
+    group: student.group,
+    adName,
+    alignment: result.alignment,
+    accuracy: result.accuracy,
+    completeness: result.completeness,
+    presentation: result.presentation,
+    total: total.toFixed(2),
+    comment,
+    evaluator: "นายเรืองสิน ปลื้มปั่น"
+  };
+
+  const msg = document.getElementById('submitMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  let status = 'local';
+
+  if(gasUrl){
+    msg.textContent = 'กำลังส่งคะแนนไปยัง Google Sheet...';
+    msg.className = 'msg pending';
+    try{
+      await fetch(gasUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify(payload)
+      });
+      status = 'synced';
+      msg.textContent = 'ส่งคะแนนไปยัง Google Sheet แล้ว ✓ (โปรดตรวจสอบในชีตเพื่อยืนยัน)';
+      msg.className = 'msg ok';
+    } catch(err){
+      status = 'local';
+      msg.textContent = 'ส่งไปยัง Google Sheet ไม่สำเร็จ — บันทึกไว้ในตารางด้านล่างแทน (ส่งออก CSV ได้ภายหลัง)';
+      msg.className = 'msg err';
+    }
+  } else {
+    msg.textContent = 'บันทึกไว้ในตารางด้านล่าง (ยังไม่ได้เชื่อมต่อ Google Sheet)';
+    msg.className = 'msg pending';
+  }
+
+  addToLog(payload, status);
+  resetForm(false);
+}
+
+function addToLog(payload, status){
+  sessionLog.push({...payload, status});
+  renderLog();
+}
+
+function renderLog(){
+  const body = document.getElementById('logBody');
+  if(sessionLog.length === 0){
+    body.innerHTML = '<tr class="empty-row"><td colspan="5">ยังไม่มีรายการบันทึกคะแนน</td></tr>';
+    return;
+  }
+  body.innerHTML = sessionLog.slice().reverse().map(r => `
+    <tr>
+      <td>${r.timestamp}</td>
+      <td>${r.studentName}<br><span style="color:var(--text-dim);font-size:.72rem;">${r.studentId}</span></td>
+      <td>${r.adName || '—'}</td>
+      <td style="color:var(--cyan-soft);font-family:'Prompt',sans-serif;font-weight:600;">${r.total} / 5.00</td>
+      <td><span class="pill-status ${r.status === 'synced' ? 'synced' : 'local'}">${r.status === 'synced' ? 'ส่งแล้ว' : 'ในเครื่อง'}</span></td>
+    </tr>
+  `).join('');
+}
+
+function resetForm(clearStudent = true){
+  document.querySelectorAll('.level.active').forEach(l => l.classList.remove('active'));
+  document.getElementById('adName').value = '';
+  document.getElementById('comment').value = '';
+  if(clearStudent) document.getElementById('student').value = '';
+  updateTotal();
+  document.getElementById('submitMsg').textContent = '';
+}
+
+function exportCsv(){
+  if(sessionLog.length === 0){
+    alert('ยังไม่มีข้อมูลให้ส่งออก');
+    return;
+  }
+  const headers = ['เวลา','รหัสนักศึกษา','ชื่อ-นามสกุล','กลุ่มเรียน','โฆษณา/แบรนด์','Alignment','Accuracy','Completeness','Presentation','รวม','ความเห็น','ผู้ประเมิน','สถานะ'];
+  const rows = sessionLog.map(r => [
+    r.timestamp, r.studentId, r.studentName, r.group, r.adName,
+    r.alignment, r.accuracy, r.completeness, r.presentation, r.total,
+    (r.comment||'').replace(/\n/g,' '), r.evaluator, r.status
+  ]);
+  const csv = [headers, ...rows].map(row =>
+    row.map(cell => `"${String(cell ?? '').replace(/"/g,'""')}"`).join(',')
+  ).join('\n');
+  const blob = new Blob(["\uFEFF" + csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `FAB_AIDA_scores_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+updateTotal();
+</script>
+</body>
+</html>
