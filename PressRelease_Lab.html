@@ -966,7 +966,7 @@ function choose(id){
 
 
 /* ================= PRACTICE (Part 2) ================= */
-const SCRIPT_URL = ""; // ← วาง URL ของ Google Apps Script Web App ที่นี่ (ส่วนที่ 3)
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW_noIluR9ONdVXtPGYxVCoeMCmYbcsBttIp4Badf-SOuqjf15F7oEpcwMHsKyUoWLdg/exec"; // ← วาง URL ของ Google Apps Script Web App ที่นี่ (ส่วนที่ 3)
 const CLS = {release:"p-release",headline:"p-head",subhead:"p-sub",dateline:"p-date",lead:"p-text",body:"p-text",quote:"p-text",boiler:"p-boiler",contact:"p-contact",end:"p-end"};
 const WKEYS = ["who","what","when","where","why","how"];
 const WANS = {
@@ -1122,8 +1122,11 @@ async function sendScore(){
     C_detail:R.C.map(x=>`${COMP[x.k].en}${x.ok?"✓":"✗"}`).join(" ")};
   st.textContent="⏳ กำลังส่งคะแนน…";
   try{
-    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-    P.sent=true; st.innerHTML="✅ ส่งคะแนนเข้าระบบแล้ว";
+    // plain-text body = "simple" request, so the browser can read Apps Script's JSON reply
+    const res=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify(payload)});
+    const j=await res.json();
+    if(!j.ok) throw new Error(j.error||"server error");
+    P.sent=true; st.innerHTML=`✅ ส่งคะแนนเข้าระบบแล้ว <span class='muted'>(บันทึกเป็นครั้งที่ ${j.attempt})</span>`;
   }catch(e){st.innerHTML="❌ ส่งไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";rb.style.display=""}
 }
 
