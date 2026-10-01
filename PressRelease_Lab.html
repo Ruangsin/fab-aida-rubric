@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Press Release Anatomy Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7FF; --bg2:#F5EDFF;
+  --ink:#2A1840; --ink2:#5B4A73; --ink3:#8E7FA6;
+  --card:rgba(255,255,255,.82); --line:#EADCF8;
+  --purple:#7C3AED; --purple2:#A78BFA; --pink:#EC4899; --pink2:#F9A8D4;
+  --grad:linear-gradient(135deg,#7C3AED 0%,#C026D3 50%,#EC4899 100%);
+  --paper:#FFFFFF; --shadow:0 10px 30px -12px rgba(124,58,237,.25);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans Thai","Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);
+  background:var(--bg);background-image:
+  radial-gradient(900px 500px at 0% 0%,#F3E8FF 0%,transparent 60%),
+  radial-gradient(800px 500px at 100% 10%,#FCE7F3 0%,transparent 60%);
+  background-attachment:fixed;line-height:1.65;min-height:100vh;font-size:16px}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Noto Sans Thai",sans-serif;line-height:1.2}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* Header */
+header{position:sticky;top:0;z-index:40;background:rgba(251,247,255,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:800;font-family:"Bricolage Grotesque";flex:none;box-shadow:var(--shadow)}
+.brand b{display:block;font-family:"Bricolage Grotesque";font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;color:var(--ink3);font-size:12px}
+.who{font-size:13px;color:var(--ink2);text-align:right;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.steps{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.step{flex:none;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;background:#fff;border:1px solid var(--line);color:var(--ink3)}
+.step i{font-style:normal;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--bg2);font-size:11px}
+.step.on{background:var(--grad);color:#fff;border-color:transparent}
+.step.on i{background:rgba(255,255,255,.25)}
+.step.done{color:var(--purple);border-color:#D8C4F7}
+.step.done i{background:#EDE3FD}
+.step.lock{opacity:.55}
+
+/* Generic */
+section.view{display:none;padding:22px 0 80px;animation:fade .35s ease}
+section.view.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.h-xl{font-size:clamp(28px,5vw,44px);font-weight:800}
+.h-l{font-size:clamp(22px,3.6vw,30px);font-weight:800}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead-p{color:var(--ink2);font-size:clamp(15px,2vw,17px);max-width:720px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:14px;font-weight:700;font-size:15px;transition:.2s;min-height:46px}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 8px 22px -8px rgba(192,38,211,.6)}
+.btn-p:hover{transform:translateY(-2px)}
+.btn-p:disabled{opacity:.45;transform:none;cursor:not-allowed}
+.btn-g{background:#fff;border:1px solid var(--line);color:var(--purple)}
+.btn-g:hover{border-color:var(--purple2)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sec-head{margin:40px 0 16px}
+.sec-head .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--grad);color:#fff;font-weight:800;font-size:14px;margin-right:8px;vertical-align:middle}
+.muted{color:var(--ink3);font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--bg2);color:var(--purple)}
+
+/* Login */
+.login{max-width:560px;margin:4vh auto 0;padding:32px 24px;text-align:center}
+.login .hero-ic{font-size:44px;margin-bottom:6px}
+.field{text-align:left;margin:22px 0 8px}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+select,input[type=text]{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);font-family:inherit;font-size:15px;background:#fff;color:var(--ink)}
+select:focus,input:focus{outline:none;border-color:var(--purple2);box-shadow:0 0 0 4px #EDE3FD}
+.preview-id{margin-top:10px;padding:12px;border-radius:12px;background:var(--bg2);font-size:14px;display:none;text-align:left}
+.objectives{text-align:left;margin-top:22px;padding:16px 18px;border-radius:14px;background:#fff;border:1px dashed #D8C4F7;font-size:14px;color:var(--ink2)}
+.objectives b{color:var(--ink)}
+.objectives ol{padding-left:20px;margin-top:6px}
+
+/* Component legend */
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:16px}
+.lg{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:12px;background:#fff;border:1.5px solid var(--line);font-size:13px;font-weight:600;text-align:left;transition:.15s}
+.lg .dot{width:12px;height:12px;border-radius:4px;flex:none}
+.lg small{display:block;color:var(--ink3);font-weight:500;font-size:11px}
+.lg.active{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent)}
+.lg:hover{border-color:var(--c)}
+
+/* Explorer */
+.explorer{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;margin-top:18px;align-items:start}
+.paper{background:var(--paper);border-radius:14px;padding:clamp(18px,4vw,40px);box-shadow:0 1px 0 #EADCF8,0 18px 40px -20px rgba(42,24,64,.35);font-family:"Newsreader",Georgia,serif;color:#1d1428;position:relative}
+.paper::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;border-radius:14px 14px 0 0;background:var(--grad)}
+.blk{position:relative;display:block;width:100%;text-align:left;font:inherit;color:inherit;padding:8px 10px;margin:2px -10px;border-radius:10px;border:2px solid transparent;transition:.15s;cursor:pointer;width:calc(100% + 20px)}
+.blk:hover{background:color-mix(in srgb,var(--c) 7%,transparent)}
+.blk.hl{background:color-mix(in srgb,var(--c) 12%,transparent);border-color:var(--c)}
+.blk .tag{display:none;position:absolute;top:-10px;right:8px;font-family:"Noto Sans Thai",sans-serif;font-size:10.5px;font-weight:700;color:#fff;background:var(--c);padding:1px 8px;border-radius:999px;letter-spacing:.02em}
+.paper.labels .blk{border-color:color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 6%,transparent);margin-top:12px}
+.paper.labels .blk .tag,.blk.hl .tag{display:block}
+.p-release{font-family:"Noto Sans Thai",sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em}
+.p-head{font-size:clamp(21px,3.2vw,28px);font-weight:700;line-height:1.25}
+.p-sub{font-size:clamp(15px,2.2vw,18px);font-style:italic;color:#4a3b5e;line-height:1.4}
+.p-date{font-weight:700;font-size:15px}
+.p-text{font-size:16.5px;line-height:1.7}
+.p-boiler{font-size:14.5px;color:#4a3b5e;line-height:1.6}
+.p-contact{font-family:"Noto Sans Thai",sans-serif;font-size:13.5px;color:#4a3b5e}
+.p-end{text-align:center;font-weight:700;letter-spacing:.3em}
+
+.info{position:sticky;top:120px;padding:22px}
+.info .ph{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.info .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:color-mix(in srgb,var(--c) 15%,#fff);flex:none}
+.info h3{font-size:20px}
+.info .th{font-size:14px;color:var(--ink3);font-weight:600}
+.info .what{font-size:15px;margin:6px 0 12px}
+.dd{display:grid;gap:8px;margin:10px 0}
+.dd div{font-size:14px;padding:10px 12px;border-radius:12px}
+.dd .do{background:#ECFDF5;color:#065F46}
+.dd .dont{background:#FFF1F2;color:#9F1239}
+.exs{margin-top:12px}
+.exs h4{font-size:13px;color:var(--ink3);margin-bottom:6px;font-family:"Noto Sans Thai"}
+.ex{font-family:"Newsreader",serif;font-size:15px;padding:10px 12px;border-left:3px solid var(--c);background:#FAF7FF;border-radius:0 10px 10px 0;margin-bottom:6px}
+.ex small{display:block;font-family:"Noto Sans Thai";font-size:11px;color:var(--ink3)}
+.info-empty{text-align:center;color:var(--ink3);padding:30px 10px}
+.info-empty .big{font-size:40px}
+.sheet-close{display:none}
+.sheet-nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.sheet-nav .btn{padding:9px 14px;min-height:40px;font-size:13px}
+
+/* 5W1H */
+.w-wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;margin-top:16px;align-items:start}
+.w-lead{font-family:"Newsreader",serif;font-size:clamp(17px,2.4vw,21px);line-height:1.8;padding:clamp(18px,3vw,30px)}
+.w-lead .dl{font-weight:700}
+.w-lead span[data-w]{border-radius:6px;padding:1px 2px;transition:.2s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.w-lead span[data-w].on{background:color-mix(in srgb,var(--wc) 22%,transparent);box-shadow:inset 0 -3px 0 var(--wc)}
+.wchips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.wchip{padding:12px 6px;border-radius:14px;background:#fff;border:1.5px solid var(--line);font-weight:800;font-family:"Bricolage Grotesque";font-size:16px;transition:.15s}
+.wchip small{display:block;font-family:"Noto Sans Thai";font-weight:500;font-size:11.5px;color:var(--ink3)}
+.wchip.on{border-color:var(--wc);background:color-mix(in srgb,var(--wc) 12%,#fff);color:var(--ink)}
+.wans{margin-top:12px;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid var(--line);min-height:76px;font-size:14.5px}
+.wans b{color:var(--purple)}
+
+/* Pyramid */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:16px;align-items:center}
+.pyr{display:grid;gap:6px;justify-items:center;padding:10px}
+.pl{color:#fff;font-weight:700;text-align:center;padding:12px 10px;border-radius:12px;font-size:14px;transition:.2s;cursor:pointer;border:none}
+.pl small{display:block;font-weight:500;font-size:12px;opacity:.92}
+.pl:hover{transform:scale(1.02)}
+.pyr-note{padding:20px}
+.pyr-note p{font-size:15px;color:var(--ink2);margin-top:8px}
+
+/* Quick check */
+.qc{display:grid;gap:14px;margin-top:16px}
+.q{padding:18px}
+.q p.qt{font-weight:700;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:15px;transition:.15s}
+.opt:hover{border-color:var(--purple2)}
+.opt.right{border-color:#10B981;background:#ECFDF5}
+.opt.wrong{border-color:#F43F5E;background:#FFF1F2}
+.fb{margin-top:8px;font-size:14px;display:none}
+.fb.show{display:block}
+.qc-score{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Choose */
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-top:20px}
+.pr-card{padding:20px;display:flex;flex-direction:column;gap:10px;text-align:left;transition:.2s;border:2px solid transparent;position:relative;overflow:hidden}
+.pr-card:hover{transform:translateY(-4px);border-color:var(--purple2)}
+.pr-card .top{display:flex;justify-content:space-between;align-items:center}
+.pr-card .emo{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:var(--bg2)}
+.pr-card h3{font-size:17.5px;font-family:"Newsreader",serif;font-weight:700}
+.pr-card .sum{font-size:14px;color:var(--ink2)}
+.pr-card .meta{font-size:12px;color:var(--ink3);margin-top:auto}
+.pr-card .go{margin-top:6px}
+.pr-card.sel{border-color:var(--pink);box-shadow:0 0 0 4px #FCE7F3,var(--shadow)}
+
+/* Reader */
+.reader{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;margin-top:18px;align-items:start}
+.reader .paper .blk{cursor:default}
+.reader .paper .blk:hover{background:none}
+.side{position:sticky;top:120px;padding:20px;display:grid;gap:14px}
+.side h3{font-size:17px}
+.adapt{font-size:12.5px;padding:10px 12px;border-radius:12px;background:#FFF7ED;color:#9A3412;font-family:"Noto Sans Thai"}
+.adapt a{color:#C2410C;font-weight:700}
+.next-box{padding:14px;border-radius:14px;background:var(--bg2);font-size:14px;color:var(--ink2)}
+.tasks{display:grid;gap:8px}
+.task{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#fff;border-radius:12px;border:1px solid var(--line);font-size:14px}
+.task b{font-family:"Bricolage Grotesque"}
+.task span.pts{margin-left:auto;font-size:12px;color:var(--ink3);white-space:nowrap}
+
+footer{text-align:center;padding:24px 16px 40px;color:var(--ink3);font-size:12.5px}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(140%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;z-index:90;transition:.3s;max-width:90vw;opacity:0;visibility:hidden}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+
+/* Responsive */
+@media (max-width:900px){
+  .explorer,.w-wrap,.pyr-wrap,.reader{grid-template-columns:1fr}
+  .side{position:static}
+  .info{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:60;border-radius:22px 22px 0 0;max-height:72vh;overflow:auto;transform:translateY(105%);transition:transform .3s ease;background:#fff;padding-top:28px}
+  .info.open{transform:none}
+  .info::before{content:"";position:absolute;top:10px;left:50%;width:44px;height:5px;border-radius:5px;background:#E2D4F5;transform:translateX(-50%)}
+  .sheet-close{display:block;position:absolute;top:12px;right:14px;font-size:22px;color:var(--ink3);width:36px;height:36px}
+  .info .info-empty{display:none}
+  .scrim{position:fixed;inset:0;background:rgba(42,24,64,.35);z-index:55;display:none}
+  .scrim.show{display:block}
+}
+@media (max-width:520px){
+  .who{display:none}
+  .wchips{grid-template-columns:repeat(3,1fr)}
+  .legend{grid-template-columns:repeat(2,1fr)}
+  .p-text{font-size:16px}
+}
+
+
+/* ===== Learn slide deck ===== */
+.deck{margin-top:4px}
+.deck-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px}
+.deck-title{font-weight:600;font-size:14px;color:var(--ink2)}
+.stage{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;height:min(640px,calc(100vh - 300px));min-height:470px;backdrop-filter:blur(10px)}
+.stage::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--grad);z-index:2}
+.sl{height:100%;overflow:auto;padding:clamp(20px,3.6vw,40px)}
+.sl.in-r{animation:inR .38s ease}
+.sl.in-l{animation:inL .38s ease}
+@keyframes inR{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes inL{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+.sl-h{font-size:clamp(26px,4.2vw,42px);font-weight:800;margin:4px 0 10px}
+.sl-h2{font-size:clamp(22px,3.2vw,32px);font-weight:800;margin:2px 0 8px}
+.sl-lead{color:var(--ink2);font-size:clamp(15px,1.9vw,18px);max-width:760px}
+.deck-bar{display:flex;align-items:center;gap:10px;margin-top:12px}
+.nav-b{width:52px;padding:0;font-size:20px}
+.nav-b:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.dots{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+.dot-b{width:9px;height:9px;border-radius:5px;background:#E4D7F7;transition:.25s;padding:0}
+.dot-b.seen{background:#C4B5FD}
+.dot-b.on{width:26px;background:var(--grad)}
+.pbar{display:none;flex:1;height:8px;border-radius:8px;background:#EDE3FD;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--grad);border-radius:8px;transition:width .3s}
+.counter{font-size:13px;font-weight:700;color:var(--ink3);min-width:52px;text-align:center}
+.deck-hint{text-align:center;margin-top:8px;font-size:12.5px}
+/* intro */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.flip{perspective:900px;height:200px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.face.f{background:#fff;border:1.5px solid var(--line)}
+.face.f .em{font-size:34px}
+.face.f b{font-family:"Bricolage Grotesque";font-size:18px}
+.face.f small{color:var(--ink3);font-size:12px}
+.face.bk{background:var(--grad);color:#fff;transform:rotateY(180deg);font-size:14.5px}
+.face.bk .x{opacity:.85;text-decoration:line-through}
+/* map */
+.map{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;margin-top:12px;height:calc(100% - 92px);min-height:0}
+.mini{padding:20px 22px!important;overflow:auto;height:100%;position:relative}
+.mini .blk{padding:5px 8px;margin:1px -8px;width:calc(100% + 16px)}
+.mini .p-head{font-size:19px}
+.mini .p-sub{font-size:14px}
+.mini .p-date{font-size:13px}
+.mini .p-text{font-size:14px;line-height:1.55}
+.mini .p-boiler{font-size:12.5px}
+.mini .p-contact{font-size:12px}
+.mini.labels .blk{margin-top:12px}
+.mini.focus .blk{opacity:.32}
+.mini.focus .blk.hl{opacity:1}
+.mini .blk:hover{opacity:1}
+.map-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start;overflow:auto}
+/* component slide */
+.cs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:26px;height:100%;min-height:0}
+.cs .mini{height:100%}
+.cs-info{overflow:auto;min-height:0}
+.cs-top{display:flex;gap:14px;align-items:center}
+.cs-ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:30px;flex:none}
+.cs-num{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.cs-what{font-size:clamp(15px,1.8vw,17px);margin:14px 0 10px}
+.reveal{margin-top:10px}
+.reveal-btn{font-size:14px;font-weight:700;color:var(--purple);padding:8px 0}
+.reveal-body{display:none}
+.reveal.on .reveal-body{display:block;animation:fade .3s}
+/* 5W1H + pyramid inside slides */
+.sl .w-wrap,.sl .pyr-wrap{margin-top:14px}
+/* quick check slides */
+.qslide{max-width:720px;margin:0 auto}
+.qslide .qt{font-size:clamp(18px,2.4vw,22px);font-weight:700;margin:8px 0 16px;font-family:"Bricolage Grotesque","Noto Sans Thai"}
+.qslide .opt{font-size:16px;padding:14px 16px}
+.qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px}
+/* done */
+.done-wrap{text-align:center;max-width:760px;margin:0 auto}
+.done-wrap .big{font-size:56px}
+.recap{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0}
+.recap button{padding:7px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}
+.recap button:hover{border-color:var(--purple2)}
+/* fullscreen (for classroom projection) */
+.deck:fullscreen{background:var(--bg);padding:20px 28px;display:flex;flex-direction:column;overflow:auto}
+.deck:fullscreen .stage{flex:1;height:auto;min-height:0}
+.deck:fullscreen .sl{font-size:18px}
+.deck:fullscreen .deck-hint{display:none}
+@media (max-width:900px){
+  .fs-btn span{display:none}
+  .stage{height:auto;min-height:62vh;overflow:visible}
+  .sl{height:auto;overflow:visible}
+  .map,.cs{grid-template-columns:1fr;height:auto}
+  .map .mini,.cs .mini{height:280px}
+  .cs .mini{order:2}
+  .trio{grid-template-columns:1fr}
+  .flip{height:150px}
+  .dots{display:none}
+  .pbar{display:block}
+  .deck-bar{position:sticky;bottom:0;z-index:20;background:linear-gradient(transparent,var(--bg) 30%);padding:16px 0 10px;margin-top:4px}
+}
+
+@media (min-width:901px) and (max-height:820px){.flip{height:165px}.trio{margin-top:14px}.sl .w-wrap{gap:16px}.w-lead{font-size:17px!important;line-height:1.7!important}}
+@media (max-height:500px) and (orientation:landscape){
+  header{position:static}
+  .ptabs{top:0}
+  .stage{min-height:auto}
+  .deck-hint{display:none}
+}
+/* ===== Practice ===== */
+.ptabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;position:sticky;top:104px;z-index:30;padding:8px 0;background:linear-gradient(var(--bg) 70%,transparent)}
+.ptab{padding:10px 8px;border-radius:14px;background:#fff;border:1.5px solid var(--line);text-align:left;display:flex;gap:10px;align-items:center;transition:.15s}
+.ptab .l{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-family:"Bricolage Grotesque";background:var(--bg2);color:var(--purple);flex:none}
+.ptab b{display:block;font-size:14px;line-height:1.3}
+.ptab small{display:block;font-size:12px;color:var(--ink3)}
+.ptab.on{border-color:transparent;background:var(--grad);color:#fff}
+.ptab.on .l{background:rgba(255,255,255,.25);color:#fff}
+.ptab.on small{color:rgba(255,255,255,.9)}
+.ptab.ok:not(.on) .l{background:#D1FAE5;color:#047857}
+.ex-head{margin:18px 0 12px}
+.ex-head h3{font-size:clamp(20px,3vw,26px)}
+.ex-head p{margin-top:4px}
+.tagpaper .tblk{margin-top:16px}
+.tblk .tag{display:block!important}
+.tblk.need{border:2px dashed #D8C4F7}
+.tblk.need .tag{background:#C4B5FD}
+.tblk.tagged{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,transparent)}
+.wbox{padding:clamp(16px,3vw,26px);font-family:"Newsreader",serif;font-size:clamp(16px,2.2vw,19px);line-height:1.75}
+.wrows{display:grid;gap:10px;margin-top:14px}
+.wrow{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;padding:12px 14px}
+.wrow .wq b{font-family:"Bricolage Grotesque";font-size:18px;display:block}
+.wrow .wq small{color:var(--ink3);font-size:12.5px}
+.wrow select.ans{border-color:var(--line)}
+.wrow select.ans.filled{border-color:var(--purple2);background:#FAF5FF}
+.olist{display:grid;gap:8px;margin-top:12px}
+.oitem{display:flex;gap:10px;align-items:center;padding:10px 10px 10px 12px;background:#fff;border:1.5px solid var(--line);border-radius:14px;transition:.15s}
+.oitem.sel{border-color:var(--pink);box-shadow:0 0 0 4px #FCE7F3}
+.oitem .n{width:28px;height:28px;border-radius:9px;background:var(--bg2);color:var(--purple);font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
+.oitem .txt{flex:1;min-width:0;text-align:left;font-family:"Newsreader",serif;font-size:15px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:2px 0}
+.oitem .ar{display:flex;flex-direction:column;gap:4px;flex:none}
+.oitem .ar button{width:36px;height:30px;border-radius:9px;background:var(--bg2);color:var(--purple);font-weight:800}
+.oitem .ar button:disabled{opacity:.3}
+.submit-bar{margin-top:22px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pk-wrap{position:fixed;inset:0;background:rgba(42,24,64,.42);z-index:80;display:none;align-items:center;justify-content:center;padding:16px}
+.pk-wrap.show{display:flex}
+.pk{width:min(540px,100%);padding:20px;max-height:86vh;overflow:auto;background:#fff;border-radius:22px}
+.pk-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pk-h button{font-size:20px;color:var(--ink3);width:36px;height:36px}
+.pk-prev{margin-top:10px;padding:10px 12px;border-radius:12px;background:#FAF7FF;font-family:"Newsreader",serif;font-size:14.5px;max-height:96px;overflow:hidden;color:var(--ink2)}
+.pk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+/* ===== Result ===== */
+.res-hero{padding:26px;text-align:center}
+.res-total{font-size:clamp(44px,8vw,64px);font-weight:800;font-family:"Bricolage Grotesque"}
+.res-parts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.rp{padding:16px;text-align:center}
+.rp .sc{font-size:30px;font-weight:800;font-family:"Bricolage Grotesque"}
+.rp .bar{height:8px;border-radius:8px;background:var(--bg2);margin-top:8px;overflow:hidden}
+.rp .bar i{display:block;height:100%;background:var(--grad);border-radius:8px}
+.rev{padding:18px;margin-top:14px}
+.rev h3{font-size:18px;margin-bottom:8px}
+.rv{display:grid;grid-template-columns:24px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.rv:first-of-type{border-top:none}
+.rv .why{color:var(--ink3);font-size:13px}
+.send{padding:16px 18px;margin-top:14px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.send .st{font-size:14px}
+@media (max-width:900px){
+  .ptabs{top:100px}
+  .pk-wrap{align-items:flex-end;padding:0}
+  .pk{border-radius:22px 22px 0 0;max-height:80vh}
+}
+@media (max-width:600px){
+  .ptabs{gap:6px;padding:6px 0}
+  .ptab{gap:6px;padding:6px 8px;border-radius:12px}
+  .ptab .l{width:26px;height:26px;border-radius:8px;font-size:13px}
+  .ptab b{font-size:12px;line-height:1.25}
+  .ptab small{display:none}
+  .wrow{grid-template-columns:1fr;gap:6px}
+  .res-parts{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brand">
+        <div class="logo">PR</div>
+        <div><b>Press Release Anatomy Lab</b><small>603-35-07 · English for Ads &amp; PR · W12</small></div>
+      </div>
+      <div class="who" id="whoTag"></div>
+    </div>
+    <nav class="steps" id="steps"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1 LOGIN -->
+  <section class="view show" id="v-login">
+    <div class="card login">
+      <div class="hero-ic">📰</div>
+      <span class="eyebrow">Week 12 · Online Lesson</span>
+      <h1 class="h-xl">Inside a <span class="grad-text">Press Release</span></h1>
+      <p class="lead-p" style="margin:10px auto 0">เรียนรู้ 10 องค์ประกอบของข่าวประชาสัมพันธ์ แล้วเลือกข่าวจริง 1 ชิ้นจาก 5 ชิ้น มาวิเคราะห์โครงสร้างด้วยตัวเอง</p>
+      <div class="field">
+        <label for="stuSel">เลือกรหัสนักศึกษา / ชื่อของคุณ</label>
+        <select id="stuSel"><option value="">— เลือกชื่อ —</option></select>
+        <div class="preview-id" id="stuPrev"></div>
+      </div>
+      <button class="btn btn-p" id="btnStart" style="width:100%;margin-top:12px" disabled>เริ่มเรียน →</button>
+      <div class="objectives">
+        <b>เมื่อจบบทเรียนนี้ นักศึกษาจะสามารถ</b>
+        <ol>
+          <li>บอกชื่อและหน้าที่ขององค์ประกอบ 10 ส่วนใน press release ได้</li>
+          <li>ถอดข้อมูล 5W1H จากย่อหน้านำ (lead) ได้</li>
+          <li>เรียงลำดับโครงสร้าง press release ตามหลักพีระมิดหัวกลับได้</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 LEARN (slide deck) -->
+  <section class="view" id="v-learn">
+    <div class="deck" id="deck">
+      <div class="deck-top">
+        <div><span class="eyebrow" style="margin:0">Part 1 · Learn</span><div class="deck-title" id="deckTitle"></div></div>
+        <button class="btn btn-g fs-btn" id="btnFs" title="เต็มจอ">⤢ <span>เต็มจอ</span></button>
+      </div>
+      <div class="stage" id="stage"></div>
+      <div class="deck-bar">
+        <button class="btn btn-g nav-b" id="dPrev" aria-label="สไลด์ก่อนหน้า">←</button>
+        <div class="dots" id="dots"></div>
+        <div class="pbar"><i id="pbarFill"></i></div>
+        <span class="counter" id="dCount"></span>
+        <button class="btn btn-p nav-b" id="dNext" aria-label="สไลด์ถัดไป">→</button>
+      </div>
+      <p class="muted deck-hint">ใช้ปุ่ม ← → ปัดซ้าย/ขวาบนมือถือ หรือกดลูกศรบนคีย์บอร์ด</p>
+    </div>
+  </section>
+
+  <!-- 3 CHOOSE -->
+  <section class="view" id="v-choose">
+    <span class="eyebrow">Part 2 · Choose</span>
+    <h2 class="h-xl">Pick <span class="grad-text">1 Real Press Release</span></h2>
+    <p class="lead-p" style="margin-top:8px">ทั้ง 5 ชิ้นเป็นข่าวจริงจากปี 2026 คนละประเภท เลือกเรื่องที่สนใจที่สุด 1 ชิ้น อ่านให้ละเอียด แล้วนำไปวิเคราะห์ในแบบฝึกหัด</p>
+    <div class="pr-grid" id="prGrid"></div>
+  </section>
+
+  <!-- 4 READ -->
+  <section class="view" id="v-read">
+    <div class="row" style="justify-content:space-between">
+      <div><span class="eyebrow" id="readEyebrow">Part 2 · Read</span>
+      <h2 class="h-l" id="readTitle">Read carefully</h2></div>
+      <button class="btn btn-g" id="btnChange">↺ เปลี่ยนข่าว</button>
+    </div>
+    <div class="reader">
+      <article class="paper" id="readPaper"></article>
+      <aside class="card side">
+        <div class="adapt" id="adaptNote"></div>
+        <div>
+          <h3>สิ่งที่จะต้องทำต่อ</h3>
+          <p class="muted" style="margin:4px 0 10px">อ่านข่าวให้จบก่อน แล้วสังเกตว่าแต่ละส่วนทำหน้าที่อะไร</p>
+          <div class="tasks">
+            <div class="task">🏷️ <b>A</b> แตะระบุองค์ประกอบ <span class="pts">10 คะแนน</span></div>
+            <div class="task">🔍 <b>B</b> ถอด 5W1H จาก Lead <span class="pts">6 คะแนน</span></div>
+            <div class="task">🧩 <b>C</b> เรียงลำดับโครงสร้าง <span class="pts">10 คะแนน</span></div>
+          </div>
+        </div>
+        <button class="btn btn-p" id="btnPractice">เริ่มแบบฝึกหัด →</button>
+        <div class="next-box">💡 เคล็ดลับ: ลองหา <b>ประโยคที่มีคำว่า said</b> และ <b>ย่อหน้าที่ขึ้นต้นด้วย About</b> ก่อน เพราะเป็นสองส่วนที่สังเกตง่ายที่สุด</div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- 5 PRACTICE -->
+  <section class="view" id="v-practice">
+    <span class="eyebrow" id="prEyebrow">Part 3 · Practice</span>
+    <h2 class="h-l" id="prTitle">Analyse the Press Release</h2>
+    <p class="muted" style="margin-top:4px">ทำได้ทีละข้อ สลับไปมาได้ คะแนนจะคิดเมื่อกด “ส่งคำตอบ” ท้ายหน้า</p>
+    <div class="ptabs" id="ptabs"></div>
+    <div id="ppanel"></div>
+    <div class="card submit-bar">
+      <div><b id="subStatus">ทำให้ครบทั้ง 3 ข้อก่อนส่ง</b><div class="muted" id="subHint"></div></div>
+      <div class="row"><button class="btn btn-g" id="btnPrevTab">← ข้อก่อนหน้า</button><button class="btn btn-p" id="btnNextTab">ข้อถัดไป →</button></div>
+    </div>
+  </section>
+
+  <!-- 6 RESULT -->
+  <section class="view" id="v-result">
+    <div class="card res-hero">
+      <span class="eyebrow">Your Result</span>
+      <div class="res-total"><span class="grad-text" id="resTotal">0</span><span style="font-size:.45em;color:var(--ink3)"> / 26</span></div>
+      <div class="muted" id="resWho"></div>
+      <div class="res-parts" id="resParts"></div>
+    </div>
+    <div class="card send">
+      <div class="st" id="sendStatus">⏳ กำลังส่งคะแนน…</div>
+      <button class="btn btn-g" id="btnResend" style="display:none">ลองส่งอีกครั้ง</button>
+    </div>
+    <div id="resReview"></div>
+    <div class="row" style="margin-top:18px;justify-content:center">
+      <button class="btn btn-p" id="btnRetry">↻ ทำข่าวนี้อีกครั้ง</button>
+      <button class="btn btn-g" id="btnOther">เลือกข่าวอื่นแล้วทำใหม่</button>
+    </div>
+  </section>
+</main>
+
+<footer>Press Release Anatomy Lab · W12 · 603-35-07 ภาษาอังกฤษเพื่อการโฆษณาและประชาสัมพันธ์ · มทร.สุวรรณภูมิ ศูนย์หันตรา</footer>
+<div class="toast" id="toast"></div>
+<div class="pk-wrap" id="pk">
+  <div class="pk">
+    <div class="pk-h"><b class="disp" style="font-size:18px">ท่อนนี้คือส่วนไหน?</b><button id="pkX" aria-label="ปิด">✕</button></div>
+    <div class="pk-prev" id="pkPrev"></div>
+    <div class="pk-grid" id="pkGrid"></div>
+    <button class="btn btn-g" id="pkClear" style="width:100%">ล้างป้ายท่อนนี้</button>
+  </div>
+</div>
+
+
+<script>
+/* ================= DATA ================= */
+const STUDENTS = [
+["467601241001","นางสาวกชกร จันนิมิต"],["467601241003","นายคณิศร การสมงาม"],["467601241005","นายชนาธิป ยมรัตน์"],
+["467601241006","นางสาวชลิดา นามสง่า"],["467601241007","นางสาวชุติมา ไววิญญา"],["467601241009","นางสาวดวงนภา เสงี่ยมงาม"],
+["467601241010","นางสาวดารินทร์ สุขประเสริฐ"],["467601241011","นางสาวธนิสร เทียวประสงค์"],["467601241012","นางสาวธัญจิรา งามสมชาติ"],
+["467601241013","นายธีรธัช เกษมรัตน์"],["467601241014","นายนครินทร์ สุขอร่าม"],["467601241015","นางสาวปลายฟ้า"],
+["467601241017","นางสาวปิยวรรณ ทองประกอบ"],["467601241018","นายปีรติ เพชรแก้ว"],["467601241020","นางสาวพิยดา ปัสสาจันทร์"],
+["467601241021","นางสาวระพีพัฒน์ เทียมมล"],["467601241023","นางสาววรวรรณ อมรดิษฐ์"],["467601241024","นางสาววราลักษณ์ ปัฐพี"],
+["467601241025","นางสาววรินธร ศรีอรุณ"],["467601241026","นายวิชยุตม์ กุลทอง"],["467601241027","นางสาวศรุตา เสือคำราม"],
+["467601241028","นางสาวสุกฤตา ไตรทอง"],["467601241029","นางสาวอพัชยาดา พจน์ด้วง"],["467601241030","นายธีรวัสส์ ทรัพย์เอนก"],
+["467601241031","นางสาววิมลรัตน์ หาญแก้ว"],["467601241032","นางสาวภูชิษา อธิกิติคุณ"],["467601241033","นายนิธิกร สมจันทร์"],
+["467601241034","นายสิรวิชญ์ อภัยสุข"],["467601241035","นายจิรภัทร การประเสริฐ"],["467601241037","นายกฤษฎา วิมลศิลป์"],
+["467601241038","นายณภัทร โพธการ"],["467601241039","นายนพกร โสดา"],["467601241040","นางสาวตัสนีม เส้นขาว"],
+["467601241042","นายระพีพัฒน์ จันทร์สว่าง"],["467601241044","นายสนทยา แฉ่งแดง"],["467601241045","นางสาวรุจรวี นาคะปักษิณ"],
+["468601221003","นางสาวปภัสสรณ์ ชินบุตร"]
+];
+
+const COMP_ORDER = ["release","headline","subhead","dateline","lead","body","quote","boiler","contact","end"];
+const COMP = {
+ release:{en:"Release Line",th:"บรรทัดกำหนดการเผยแพร่",ic:"🚦",c:"#8B5CF6",
+  what:"บอกนักข่าวว่าเผยแพร่ข่าวนี้ได้เมื่อไร อยู่บนสุดของข่าว เขียนด้วยตัวพิมพ์ใหญ่",
+  dos:"ใช้ FOR IMMEDIATE RELEASE ถ้าเผยแพร่ได้ทันที หรือ EMBARGOED UNTIL + วันเวลา ถ้าต้องรอ",
+  dont:"ลืมใส่ หรือเขียนวันห้ามเผยแพร่คลุมเครือ เช่น “soon”",
+  ex:[["FOR IMMEDIATE RELEASE","ใช้บ่อยที่สุด"],["EMBARGOED UNTIL 09:00 ICT, 15 OCTOBER 2026","รอเวลาเปิดตัวพร้อมกัน"]]},
+ headline:{en:"Headline",th:"พาดหัวข่าว",ic:"📣",c:"#EC4899",
+  what:"สรุปข่าวทั้งหมดใน 1 บรรทัด บอกว่า “ใคร ทำอะไร” ใช้กริยาแสดงการกระทำในรูปปัจจุบัน",
+  dos:"ขึ้นต้นด้วยชื่อองค์กร + กริยา เช่น Launches, Opens, Announces, Awards",
+  dont:"ใช้คำโฆษณาเกินจริง เช่น Amazing!, Best Ever, Must-Have",
+  ex:[["BioSiam Launches Low-Sugar Herbal Drink for Office Workers","BioSiam"],["SkySiam Airways Adds Daily Flights to Chiang Rai","SkySiam Airways"]]},
+ subhead:{en:"Subheadline",th:"พาดหัวรอง",ic:"✏️",c:"#F472B6",
+  what:"ขยายพาดหัวด้วยรายละเอียดสำคัญอีก 1 ข้อ เช่น ตัวเลข จุดเด่น หรือประโยชน์ต่อผู้อ่าน",
+  dos:"เพิ่มข้อมูลใหม่ที่พาดหัวยังไม่ได้บอก ยาวไม่เกิน 1–2 บรรทัด",
+  dont:"พูดซ้ำพาดหัวด้วยคำอื่น",
+  ex:[["New drink contains 50% less sugar and is sold in 7,000 stores nationwide","BioSiam"],["Free online course helps 5,000 teachers use AI in the classroom","EduTech Innovations"]]},
+ dateline:{en:"Dateline",th:"สถานที่และวันที่",ic:"📍",c:"#6366F1",
+  what:"บอกว่าข่าวออกจาก “เมืองไหน” และ “วันไหน” อยู่ต้นย่อหน้าแรก ตามด้วยขีด –",
+  dos:"รูปแบบ: CITY, Country – Month Day, Year –",
+  dont:"ใส่ที่อยู่เต็มหรือเวลาเป็นนาที",
+  ex:[["BANGKOK, Thailand – October 1, 2026 –","ข่าวในประเทศ"],["CHIANG MAI, Thailand – June 3, 2026 –","Apex Mobility"]]},
+ lead:{en:"Lead",th:"ย่อหน้านำ",ic:"🎯",c:"#D946EF",
+  what:"ย่อหน้าแรกที่สำคัญที่สุด ตอบ 5W1H (Who, What, When, Where, Why, How) ให้ครบในประมาณ 25–50 คำ",
+  dos:"ใส่ข้อเท็จจริงที่สำคัญที่สุดก่อน อ่านแค่ย่อหน้านี้ก็ต้องเข้าใจข่าว",
+  dont:"เปิดด้วยคำถาม ประวัติบริษัท หรือคำชมตัวเอง",
+  ex:[["Apex Mobility today opened Thailand’s largest EV charging hub in Chiang Mai to support the city’s growing number of electric cars.","Apex Mobility"]]},
+ body:{en:"Body",th:"เนื้อข่าว",ic:"📄",c:"#A78BFA",
+  what:"ย่อหน้าที่ 2 เป็นต้นไป ให้รายละเอียดเพิ่ม เช่น ตัวเลข ราคา วันวางจำหน่าย ข้อมูลพื้นหลัง",
+  dos:"เขียนเป็นข้อเท็จจริง มีตัวเลขรองรับ เรียงจากสำคัญมากไปน้อย",
+  dont:"ใส่ความเห็นของบริษัทลงในเนื้อข่าวโดยไม่อ้างผู้พูด",
+  ex:[["The hub has 40 fast chargers and is open 24 hours a day.","Apex Mobility"],["Tickets go on sale on November 1 through the airline’s website.","SkySiam Airways"]]},
+ quote:{en:"Quote",th:"คำพูดอ้างอิง",ic:"💬",c:"#F59E0B",
+  what:"คำพูดของผู้บริหารหรือโฆษก ให้ “มุมมองและความรู้สึก” ที่ข้อเท็จจริงให้ไม่ได้ ต้องมีผู้พูดกำกับเสมอ",
+  dos:"ใช้รูปแบบ “…,” said [ชื่อ/ตำแหน่ง]. และให้ quote อธิบายว่าข่าวนี้ “สำคัญอย่างไร”",
+  dont:"ใช้ quote บอกราคา/ข้อมูลทางเทคนิค หรือเขียนเหมือนโฆษณา",
+  ex:[["“Teachers told us they wanted practical help, not more theory,” said the CEO of EduTech Innovations.","EduTech Innovations"]]},
+ boiler:{en:"Boilerplate",th:"ข้อมูลเกี่ยวกับองค์กร",ic:"🏢",c:"#14B8A6",
+  what:"ย่อหน้า “About [Company]” แนะนำองค์กรสั้น ๆ เป็นข้อความมาตรฐานที่ใช้ซ้ำในทุกข่าว",
+  dos:"บอกว่าองค์กรคือใคร ก่อตั้งเมื่อไร อยู่ที่ไหน ทำอะไร",
+  dont:"ใส่ข่าวใหม่หรือโปรโมชั่นลงในส่วนนี้",
+  ex:[["About BioSiam — BioSiam is a Thai beverage company founded in 2015. It makes herbal drinks from local ingredients.","BioSiam"]]},
+ contact:{en:"Media Contact",th:"ผู้ติดต่อสำหรับสื่อ",ic:"☎️",c:"#0EA5E9",
+  what:"ชื่อ ตำแหน่ง อีเมล และเบอร์โทรของผู้ที่นักข่าวติดต่อเพื่อขอข้อมูลเพิ่มได้",
+  dos:"ระบุคนที่ติดต่อได้จริง พร้อมอีเมลและโทรศัพท์",
+  dont:"ใส่แค่เว็บไซต์ หรือใช้อีเมลกลางที่ไม่มีคนตอบ",
+  ex:[["Media Contact: Napat S., PR Manager | press@example.com | +66 2 000 0000","รูปแบบทั่วไป"]]},
+ end:{en:"End Mark",th:"สัญลักษณ์จบข่าว",ic:"⏹️",c:"#64748B",
+  what:"บอกนักข่าวว่าข่าวจบแล้ว ไม่มีหน้าต่อ วางกึ่งกลางหน้า",
+  dos:"ใช้ ### หรือ -END- หรือ -30-",
+  dont:"ลืมใส่ ทำให้ไม่แน่ใจว่าข่าวครบหรือไม่",
+  ex:[["###","นิยมที่สุด"],["-END-","อีกรูปแบบหนึ่ง"]]}
+};
+
+/* Model (Urban Brew) — lead keeps 5W1H spans */
+const MODEL = [
+ ["release","FOR IMMEDIATE RELEASE"],
+ ["headline","Urban Brew Opens Bangkok’s First Zero-Waste Cold Brew Bar"],
+ ["subhead","New Ari location serves drinks only in reusable cups and turns used coffee grounds into compost for local farms"],
+ ["dateline","BANGKOK, Thailand – October 1, 2026 –"],
+ ["lead",`<span data-w="who">Urban Brew, a Thai cold brew coffee company,</span> <span data-w="what">will open its first zero-waste coffee bar</span> <span data-w="where">in Bangkok’s Ari district</span> <span data-w="when">on October 15, 2026,</span> <span data-w="how">serving drinks only in reusable cups and composting all used grounds,</span> <span data-w="why">to cut single-use plastic among young city coffee drinkers</span>.`],
+ ["body","The 60-seat bar will lend customers stainless-steel cups for a 50-baht deposit, which is returned when the cup comes back. Used coffee grounds, about 30 kilograms a week, will be sent to two organic farms in Nonthaburi."],
+ ["quote","“Our customers love cold brew, but they don’t love the plastic that comes with it,” said Ploy Rattana, founder of Urban Brew. “This bar shows that great coffee and zero waste can go together.”"],
+ ["body","Urban Brew plans to bring the same system to its five other Bangkok branches by mid-2027."],
+ ["boiler","<b>About Urban Brew</b> — Founded in 2021, Urban Brew is a Bangkok-based coffee company that slow-steeps Thai-grown arabica beans for 18 hours. It sells cold brew through six cafés and online."],
+ ["contact","<b>Media Contact:</b> Kanya P., Communications Lead · press@urbanbrew.example · +66 2 123 4567"],
+ ["end","###"]
+];
+
+const W = {
+ who:{c:"#EC4899",th:"ใคร",q:"Who is the news about?",a:"Urban Brew, a Thai cold brew coffee company"},
+ what:{c:"#8B5CF6",th:"ทำอะไร",q:"What is happening?",a:"will open its first zero-waste coffee bar"},
+ when:{c:"#0EA5E9",th:"เมื่อไร",q:"When will it happen?",a:"on October 15, 2026"},
+ where:{c:"#14B8A6",th:"ที่ไหน",q:"Where will it happen?",a:"in Bangkok’s Ari district"},
+ why:{c:"#F59E0B",th:"ทำไม",q:"Why is it happening?",a:"to cut single-use plastic among young city coffee drinkers"},
+ how:{c:"#6366F1",th:"อย่างไร",q:"How will it work?",a:"serving drinks only in reusable cups and composting all used grounds"}
+};
+
+const PYR = [
+ ["Headline + Lead","สิ่งที่ต้องรู้ที่สุด: ใคร ทำอะไร เมื่อไร ที่ไหน","#C026D3","100%","Headline และ Lead คือ “หัวใจ” ของข่าว นักข่าวส่วนใหญ่ตัดสินใจว่าจะใช้ข่าวหรือไม่จาก 2 ส่วนนี้ภายในไม่กี่วินาที"],
+ ["Body + Quote","รายละเอียดสำคัญ ตัวเลข คำพูดของผู้บริหาร","#DB2777","80%","ส่วนกลางช่วยยืนยันและขยายข่าว: ราคา วันที่ จำนวน รวมถึง quote ที่บอกว่าข่าวนี้สำคัญต่อผู้คนอย่างไร"],
+ ["Background","ข้อมูลเสริม ประวัติ แผนในอนาคต","#E879F9","60%","ข้อมูลพื้นหลังมีประโยชน์ แต่ถ้าถูกตัดออก ข่าวก็ยังสมบูรณ์"],
+ ["Boilerplate + Contact","ข้อมูลองค์กรและผู้ติดต่อ","#A78BFA","42%","ส่วนท้ายเป็นข้อมูลมาตรฐานสำหรับนักข่าว ไม่ใช่ตัวข่าว จึงอยู่ล่างสุดก่อน ###"]
+];
+
+const QC = [
+ ["Which part answers Who, What, When, Where, Why and How?",["Headline","Lead","Boilerplate","Quote"],1,"ถูกต้อง! Lead คือย่อหน้าแรกที่ตอบ 5W1H","Lead (ย่อหน้าแรก) คือส่วนที่ตอบ 5W1H ส่วน Headline สรุปสั้นเพียงบรรทัดเดียว"],
+ ["“About Urban Brew — Founded in 2021…” is called the…",["Body","Subheadline","Boilerplate","Dateline"],2,"ใช่เลย! Boilerplate คือย่อหน้า About ที่ใช้ซ้ำทุกข่าว","คำว่า About + ชื่อบริษัท เป็นสัญญาณของ Boilerplate"],
+ ["What is the best job for a QUOTE?",["To give the price of the product","To share a human opinion on why the news matters","To list the company’s address","To end the press release"],1,"ถูกต้อง! Quote ให้มุมมองของคน ไม่ใช่ข้อมูลตัวเลข","ราคาและที่อยู่เป็นข้อเท็จจริง ควรอยู่ใน body / contact ส่วน quote ใช้ถ่ายทอดมุมมองของผู้บริหาร"],
+ ["Which is the correct DATELINE format?",["October 1 2026, Bangkok","BANGKOK, Thailand – October 1, 2026 –","Bangkok (today)","FOR IMMEDIATE RELEASE"],1,"เยี่ยม! CITY, Country – Date –","รูปแบบมาตรฐานคือ CITY, Country – Month Day, Year –"],
+ ["Which headline sounds like PR, not an advertisement?",["Best Coffee Ever! Don’t Miss Out!","Urban Brew Opens Zero-Waste Cold Brew Bar in Ari","You Will LOVE Our New Café!!!","Buy One Get One Free Today Only"],1,"ถูกต้อง! ชื่อองค์กร + กริยา + ข้อเท็จจริง","Headline ข่าว PR ต้องเป็นข้อเท็จจริง ไม่ใช้คำเชิญชวนหรือคำโอ้อวด"]
+];
+
+/* Five real press releases — adapted for classroom use */
+const RELEASES = [
+ {id:"lego",emo:"🧱",type:"Product Launch",typeTh:"เปิดตัวสินค้าใหม่",brand:"The LEGO Group",
+  sum:"LEGO เปิดตัวชุดตัวต่อเครื่องเล่นเกม PlayStation รุ่นแรก 1,911 ชิ้น พร้อมฉากเกมลับซ่อนอยู่ข้างใน",
+  src:"https://www.lego.com/en-us/aboutus/news/2026/september/first-ever-lego-playstation-set-revealed",srcName:"LEGO.com Newsroom (3 Sep 2026)",
+  blocks:[
+   ["release","FOR IMMEDIATE RELEASE"],
+   ["headline","LEGO Group Reveals First-Ever LEGO PlayStation Set"],
+   ["subhead","1,911-piece model recreates the original PlayStation console and controller, with hidden Gran Turismo and Ape Escape scenes inside"],
+   ["dateline","BILLUND, Denmark – September 3, 2026 –"],
+   ["lead","The LEGO Group today revealed the LEGO PlayStation (set 72306), a 1,911-piece building set that recreates Sony’s original PlayStation console and its first controller. The set was introduced during PlayStation’s State of Play broadcast to celebrate gaming history with adult fans."],
+   ["body","The near life-size model is about 26 centimetres wide. Builders can press the working Open and Power buttons, plug the controller into the front of the console and lift the lid to find two removable scenes based on the classic games Gran Turismo and Ape Escape."],
+   ["quote","“The original PlayStation shaped how a whole generation played games,” said a spokesperson for the LEGO Group. “We wanted adult fans to rebuild that memory brick by brick and discover a few surprises along the way.”"],
+   ["body","LEGO Insiders members can buy the set from October 1, 2026, and it will be available to everyone from October 4 at LEGO.com, LEGO Stores and selected retailers. The recommended price is US$179.99 (£139.99 / €159.99)."],
+   ["boiler","<b>About the LEGO Group</b> — The LEGO Group is a family-owned company based in Billund, Denmark. Founded in 1932, it designs and sells LEGO building sets around the world and aims to inspire future builders through creative play."],
+   ["contact","<b>Media Contact:</b> LEGO Group Press Office · press@example.com"],
+   ["end","###"]]},
+ {id:"thai",emo:"✈️",type:"New Route / Service",typeTh:"เปิดเส้นทาง/บริการใหม่",brand:"Thai Airways",
+  sum:"การบินไทยเปิดเส้นทางบินตรงกรุงเทพฯ–ดานัง วันละ 2 เที่ยว เริ่ม 1 ธันวาคม 2026",
+  src:"https://vietnamwithme.com/2026/09/19/thai-airways-bangkok-da-nang-flights-december-2026/",srcName:"Thai Airways winter 2026/27 schedule announcement (17 Sep 2026), via Vietnam With Me",
+  blocks:[
+   ["release","FOR IMMEDIATE RELEASE"],
+   ["headline","Thai Airways to Launch Direct Bangkok–Da Nang Flights from December"],
+   ["subhead","Twice-daily service adds a new gateway to central Vietnam in the airline’s winter 2026/27 schedule"],
+   ["dateline","BANGKOK, Thailand – September 17, 2026 –"],
+   ["lead","Thai Airways International today announced that it will launch direct flights between Bangkok’s Suvarnabhumi Airport and Da Nang International Airport in Vietnam on December 1, 2026. The new route, operating twice daily in each direction, gives travellers a faster way to reach central Vietnam without a stopover."],
+   ["body","The flights will use Airbus A320 aircraft as part of the airline’s winter 2026/27 schedule, which runs from October 25, 2026, to March 27, 2027. Da Nang is the main airport for visitors travelling to Hoi An, Hue and the beaches of central Vietnam."],
+   ["quote","“Da Nang has become one of the most popular destinations in Southeast Asia,” said a Thai Airways spokesperson. “With two flights a day, passengers can easily combine Thailand and Vietnam in one trip and connect through Bangkok to our wider network.”"],
+   ["body","Full flight times and booking information are available on the Thai Airways website."],
+   ["boiler","<b>About Thai Airways International</b> — Thai Airways International Public Company Limited is the national airline of Thailand. Founded in 1960 and based at Bangkok’s Suvarnabhumi Airport, the airline flies to destinations across Asia, Europe and Oceania."],
+   ["contact","<b>Media Contact:</b> Corporate Communications Department · media@example.com"],
+   ["end","###"]]},
+ {id:"eri",emo:"♻️",type:"Partnership",typeTh:"ความร่วมมือทางธุรกิจ",brand:"ERI × Green Marble",
+  sum:"บริษัทรีไซเคิลขยะอิเล็กทรอนิกส์อันดับ 1 ของสหรัฐฯ ร่วมทุนกับบริษัทเวียดนาม ตั้ง “ERI Vietnam”",
+  src:"https://www.morningstar.com/news/business-wire/20260811574455/eri-and-green-marble-announce-strategic-partnership-to-launch-eri-vietnam",srcName:"Business Wire (11 Aug 2026)",
+  blocks:[
+   ["release","FOR IMMEDIATE RELEASE"],
+   ["headline","ERI and Green Marble Partner to Launch “ERI Vietnam”"],
+   ["subhead","50/50 joint venture will bring advanced e-waste recycling and data-safe IT disposal services to Vietnam"],
+   ["dateline","FRESNO, Calif. &amp; HANOI, Vietnam – August 11, 2026 –"],
+   ["lead","ERI, the largest electronics recycler in the United States, today announced a strategic partnership with Green Marble Company, part of Vietnam’s VSD Holdings, to create ERI Vietnam. The new company will recycle electronic waste and safely dispose of old IT equipment in Vietnam to keep used devices out of landfills."],
+   ["body","Each company will own 50 percent of the venture. ERI will bring its recycling technology and data-destruction expertise, while Green Marble will provide local facilities and business networks. ERI Vietnam is expected to begin operations later in 2026."],
+   ["quote","“Together we can recover valuable materials, protect people’s data and support Vietnam’s move toward a circular economy,” said a spokesperson for VSD Holdings."],
+   ["body","Since its founding in 2002, ERI has recycled more than 3 billion pounds of electronic waste in the United States. ERI Vietnam will be the company’s first owned and branded location in the country."],
+   ["boiler","<b>About ERI</b> — ERI is an electronics recycling company headquartered in Fresno, California, with eight locations in the United States. It provides recycling, data destruction and IT asset disposition services and works with audited partners in more than 140 countries."],
+   ["contact","<b>Media Contact:</b> ERI Media Relations · media@example.com"],
+   ["end","###"]]},
+ {id:"nyl",emo:"🎓",type:"CSR / Scholarship",typeTh:"กิจกรรมเพื่อสังคม/ทุนการศึกษา",brand:"New York Life",
+  sum:"New York Life มอบทุน Golden Futures แก่นักเรียน 20 คนจาก 15 รัฐ ทุนละ $10,000–$20,000",
+  src:"https://www.newyorklife.com/newsroom/2026/nyl-awards-20-golden-futures-scholarships",srcName:"New York Life Newsroom (11 Aug 2026)",
+  blocks:[
+   ["release","FOR IMMEDIATE RELEASE"],
+   ["headline","New York Life Awards 20 Golden Futures Scholarships to Rising College Students"],
+   ["subhead","Program now goes beyond funding to include career exploration, networking and professional development"],
+   ["dateline","NEW YORK – August 11, 2026 –"],
+   ["lead","New York Life today honored 20 students from 15 U.S. states at its New York City Home Office as recipients of its 2026 Golden Futures Scholarship. Each student will receive $10,000 or $20,000 to help pay for college, along with new chances to explore careers and build professional skills."],
+   ["body","To apply, students first completed online financial education modules on budgeting, saving and credit. At the recognition event, the recipients and their families met employees, joined career activities and received professional headshots."],
+   ["quote","“Helping young people understand money is one of the best ways to prepare them for the future,” said a New York Life spokesperson."],
+   ["body","The Golden Futures Scholarship is managed by Scholarship America. Information about the next application period will be shared on the New York Life website."],
+   ["boiler","<b>About New York Life</b> — Founded in 1845 and headquartered in New York City, New York Life Insurance Company is the largest mutual life insurance company in the United States. It offers life insurance, retirement income, investments and long-term care insurance."],
+   ["contact","<b>Media Contact:</b> New York Life Corporate Communications · media@example.com"],
+   ["end","###"]]},
+ {id:"regal",emo:"🍿",type:"New Subscription",typeTh:"บริการสมาชิกรายเดือน",brand:"Regal Cinemas",
+  sum:"โรงหนัง Regal เปิดตัว Rewards+ สมาชิกรายเดือน ได้ตั๋วหนังเดือนละ 1 ใบ ใช้ไม่หมดสะสมได้",
+  src:"https://www.prnewswire.com/news-releases/regal-launches-regal-rewards-to-bring-moviegoers-more-value-and-flexibility-302879108.html",srcName:"PR Newswire (15 Sep 2026)",
+  blocks:[
+   ["release","FOR IMMEDIATE RELEASE"],
+   ["headline","Regal Launches Regal Rewards+, a Flexible Monthly Movie Subscription"],
+   ["subhead","New membership gives moviegoers a monthly 2D ticket that rolls over when unused, plus snack savings and discounted tickets for friends"],
+   ["dateline","KNOXVILLE, Tenn. – September 15, 2026 –"],
+   ["lead","Regal today launched Regal Rewards+, a new monthly movie subscription, at its theatres across the United States. Designed for people who love the movies but do not go every week, the plan starts at $10.99 per month, depending on location: members receive one 2D ticket each month, and unused tickets roll over for a future film."],
+   ["body","Members can also buy up to four discounted tickets for friends and family, save 20 percent on snacks and non-alcoholic drinks, skip online convenience fees on eligible tickets and earn 100 Regal Rewards points for every dollar spent."],
+   ["quote","“Going to the movies should be easy to plan, whether it’s a big release or a last-minute night out,” said a Regal spokesperson. “Rewards+ gives regular moviegoers more flexibility and more value every time they visit.”"],
+   ["body","Regal Rewards+ sits between the free Regal Rewards program and the Regal Unlimited subscription. Moviegoers can sign up through the Regal app or website."],
+   ["boiler","<b>About Regal</b> — Regal operates movie theatres across the United States and is part of the Cineworld Group, which also runs the Cinema City, Picturehouse and Planet brands. Regal offers premium formats such as IMAX, 4DX and ScreenX."],
+   ["contact","<b>Media Contact:</b> Regal Communications · media@example.com"],
+   ["end","###"]]}
+];
+
+/* ================= STATE ================= */
+const S = {student:null, view:"login", explored:new Set(), labels:false, qc:{}, chosen:null};
+const $ = s=>document.querySelector(s);
+const STEPS = [["login","เข้าระบบ"],["learn","เรียนรู้"],["choose","เลือกข่าว"],["read","อ่านข่าว"],["practice","แบบฝึกหัด"],["result","ผลคะแนน"]];
+
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("show"),2300)}
+
+function stepLocked(t){
+  if(t==="login") return false;
+  if(!S.student) return "กรุณาเลือกชื่อก่อนเริ่มเรียน";
+  if(t==="choose" && P.started && !P.done) return "กำลังทำแบบฝึกหัดอยู่ เปลี่ยนข่าวไม่ได้จนกว่าจะส่งคำตอบ";
+  if(t==="read" && !S.chosen) return "เลือกข่าว 1 ชิ้นก่อนนะ";
+  if(t==="practice" && !P.started) return "อ่านข่าวแล้วกด “เริ่มแบบฝึกหัด” ก่อน";
+  if(t==="practice" && P.done) return "ส่งคำตอบแล้ว ดูผลที่หน้า “ผลคะแนน”";
+  if(t==="result" && !P.done) return "ยังไม่ได้ส่งคำตอบ";
+  return false;
+}
+function renderSteps(){
+  const idx = STEPS.findIndex(s=>s[0]===S.view);
+  $("#steps").innerHTML = STEPS.map((s,i)=>{
+    let cls = i===idx?"on":(i<idx?"done":"");
+    if(i!==idx && stepLocked(s[0])) cls+=" lock";
+    return `<button class="step ${cls}" data-go="${s[0]}"><i>${i<idx?"✓":i+1}</i>${s[1]}</button>`;
+  }).join("");
+  document.querySelectorAll(".step").forEach(b=>b.onclick=()=>{
+    const t=b.dataset.go, why=stepLocked(t);
+    if(why) return toast(why);
+    go(t);
+  });
+  const on=document.querySelector(".step.on"); on&&on.scrollIntoView({inline:"center",block:"nearest"});
+}
+function go(v){
+  S.view=v;
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("show"));
+  $("#v-"+v).classList.add("show");
+  renderSteps(); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ================= LOGIN ================= */
+function initLogin(){
+  const sel=$("#stuSel");
+  STUDENTS.forEach((s,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`${i+1}. ${s[0]} ${s[1]}`;sel.appendChild(o)});
+  sel.onchange=()=>{
+    const v=sel.value, p=$("#stuPrev");
+    if(v===""){p.style.display="none";$("#btnStart").disabled=true;return}
+    const s=STUDENTS[v]; p.style.display="block";
+    p.innerHTML=`👋 สวัสดี <b>${s[1]}</b><br><span class="muted">รหัส ${s[0]} · ตรวจสอบให้ถูกต้องก่อนเริ่ม คะแนนจะบันทึกด้วยรหัสนี้</span>`;
+    $("#btnStart").disabled=false;
+  };
+  $("#btnStart").onclick=()=>{
+    const s=STUDENTS[$("#stuSel").value];
+    S.student={id:s[0],name:s[1]};
+    $("#whoTag").textContent=`${s[0]} · ${s[1]}`;
+    go("learn");
+  };
+}
+
+/* ================= LEARN — interactive slide deck ================= */
+const D = {i:0, seen:new Set([0]), dir:"r"};
+const CLS0 = {release:"p-release",headline:"p-head",subhead:"p-sub",dateline:"p-date",lead:"p-text",body:"p-text",quote:"p-text",boiler:"p-boiler",contact:"p-contact",end:"p-end"};
+function miniPaper(opts){
+  // opts: {focus:k, labels:bool, numbered:bool}
+  const cls=["paper","mini"]; if(opts.labels)cls.push("labels"); if(opts.focus)cls.push("focus");
+  return `<article class="${cls.join(" ")}" id="mini">${MODEL.map((b,i)=>{const c=COMP[b[0]], n=COMP_ORDER.indexOf(b[0])+1;
+    return `<button class="blk ${CLS0[b[0]]} ${opts.focus===b[0]?"hl":""}" data-k="${b[0]}" style="--c:${c.c}"><span class="tag">${opts.numbered?n+" · ":""}${c.en}</span>${b[1]}</button>`}).join("")}</article>`;
+}
+function compSlideIndex(k){return 2+COMP_ORDER.indexOf(k)}
+
+const SLIDES = [
+ {t:"What is a press release?", html:()=>`
+   <span class="eyebrow">Week 12 · Press Release Anatomy</span>
+   <h2 class="sl-h">What is a <span class="grad-text">Press Release</span>?</h2>
+   <p class="sl-lead">Press release คือ <b>“ข่าวที่องค์กรเขียนเอง แล้วส่งให้สื่อ”</b> เพื่อให้นักข่าวนำไปเผยแพร่ต่อ จึงต้องอ่านแล้วเหมือนข่าวจริง ไม่ใช่โฆษณา</p>
+   <p class="muted" style="margin-top:10px">👆 แตะการ์ดแต่ละใบเพื่อดูตัวอย่างเปรียบเทียบ</p>
+   <div class="trio">
+     <div class="flip"><div class="flip-in"><div class="face f"><span class="em">📰</span><b>Written like news</b><small>เขียนแบบข่าว ข้อเท็จจริงมาก่อน</small></div>
+       <div class="face bk"><span class="x">Ad: Come and try our AMAZING café!</span><span>PR: Urban Brew will open a zero-waste café in Ari on October 15.</span></div></div></div>
+     <div class="flip"><div class="flip-in"><div class="face f"><span class="em">⚖️</span><b>Neutral tone</b><small>น้ำเสียงเป็นกลาง ไม่โอ้อวด</small></div>
+       <div class="face bk"><span class="x">Ad: The best cold brew in the world!</span><span>PR: The café uses Thai-grown beans steeped for 18 hours.</span></div></div></div>
+     <div class="flip"><div class="flip-in"><div class="face f"><span class="em">🧱</span><b>Standard structure</b><small>มีโครงสร้าง 10 ส่วนที่นักข่าวคุ้นเคย</small></div>
+       <div class="face bk"><span>Headline → Lead → Body → Quote → Boilerplate → Contact → ###<br><br>นักข่าวหาข้อมูลได้ทันทีเพราะทุกข่าวเรียงแบบเดียวกัน</span></div></div></div>
+   </div>`,
+  bind:()=>document.querySelectorAll(".flip").forEach(f=>f.onclick=()=>f.classList.toggle("on"))},
+
+ {t:"The 10 parts at a glance", html:()=>`
+   <h2 class="sl-h2">The <span class="grad-text">10 Parts</span> at a Glance</h2>
+   <p class="muted">ข่าวตัวอย่าง: Urban Brew · แตะชื่อองค์ประกอบ หรือแตะท่อนในข่าว เพื่อไปที่สไลด์อธิบายส่วนนั้น</p>
+   <div class="map">${miniPaper({labels:true,numbered:true})}
+     <div class="map-legend">${COMP_ORDER.map((k,i)=>{const c=COMP[k];return `<button class="lg" data-k="${k}" style="--c:${c.c}"><span class="dot" style="background:${c.c}"></span><span>${i+1}. ${c.en}<small>${c.th}</small></span></button>`}).join("")}</div>
+   </div>`,
+  bind:()=>document.querySelectorAll(".map-legend .lg, #mini .blk").forEach(b=>b.onclick=()=>goSlide(compSlideIndex(b.dataset.k)))},
+
+ ...COMP_ORDER.map((k,n)=>({t:`${n+1}. ${COMP[k].en}`, comp:k, html:()=>{const c=COMP[k];return `
+   <div class="cs">
+     ${miniPaper({focus:k})}
+     <div class="cs-info">
+       <div class="cs-top"><div class="cs-ic" style="background:color-mix(in srgb,${c.c} 15%,#fff)">${c.ic}</div>
+         <div><div class="cs-num" style="color:${c.c}">Part ${n+1} of 10</div><h2 class="sl-h2" style="margin:0">${c.en}</h2><div class="muted" style="font-weight:600">${c.th}</div></div></div>
+       <p class="cs-what">${c.what}</p>
+       <div class="dd"><div class="do">✅ <b>Do:</b> ${c.dos}</div><div class="dont">⛔ <b>Don’t:</b> ${c.dont}</div></div>
+       <div class="reveal" id="rv"><button class="reveal-btn" id="rvBtn">▸ ดูตัวอย่างจากแบรนด์อื่น</button>
+         <div class="reveal-body">${c.ex.map(e=>`<div class="ex" style="--c:${c.c}">${e[0]}<small>${e[1]}</small></div>`).join("")}</div></div>
+       <p class="muted" style="margin-top:10px;font-size:12.5px">💡 แตะท่อนอื่นในข่าวด้านข้าง เพื่อกระโดดไปดูส่วนนั้น</p>
+     </div>
+   </div>`},
+  bind:()=>{
+    const m=$("#mini"), h=m.querySelector(".blk.hl");
+    if(h && getComputedStyle(m).overflowY!=="visible") m.scrollTop=h.offsetTop-m.clientHeight/2+h.offsetHeight/2;
+    m.querySelectorAll(".blk").forEach(b=>b.onclick=()=>{if(b.dataset.k!==k)goSlide(compSlideIndex(b.dataset.k))});
+    $("#rvBtn").onclick=()=>{const r=$("#rv");r.classList.toggle("on");$("#rvBtn").textContent=(r.classList.contains("on")?"▾ ซ่อนตัวอย่าง":"▸ ดูตัวอย่างจากแบรนด์อื่น")};
+  }})),
+
+ {t:"The Lead = 5W1H", html:()=>`
+   <h2 class="sl-h2">The Lead = <span class="grad-text">5W1H</span></h2>
+   <p class="muted">ย่อหน้าแรกต้องตอบคำถาม 6 ข้อให้ครบใน 1–2 ประโยค (ประมาณ 25–50 คำ) แตะแต่ละคำถามเพื่อดูว่าคำตอบซ่อนอยู่ตรงไหน</p>
+   <div class="w-wrap"><div class="card w-lead" id="wLead"></div>
+     <div><div class="wchips" id="wChips"></div><div class="wans" id="wAns">แตะ <b>Who / What / When / Where / Why / How</b> เพื่อเริ่ม</div>
+       <button class="btn btn-g" id="wAll" style="margin-top:10px;width:100%">แสดงครบทั้ง 6 ข้อ</button></div></div>`,
+  bind:()=>renderW()},
+
+ {t:"Inverted Pyramid", html:()=>`
+   <h2 class="sl-h2">The <span class="grad-text">Inverted Pyramid</span></h2>
+   <p class="muted">ข่าวประชาสัมพันธ์เรียงข้อมูลจาก “สำคัญที่สุด” ไป “สำคัญน้อยที่สุด” แตะแต่ละชั้นเพื่ออ่านคำอธิบาย</p>
+   <div class="pyr-wrap"><div class="pyr" id="pyr"></div>
+     <div class="card pyr-note" id="pyrNote"><span class="chip">ทำไมต้องหัวกลับ?</span>
+       <p>บรรณาธิการมักตัดข่าวจาก “ท้ายขึ้นมา” เมื่อพื้นที่ไม่พอ ถ้าเราวางข้อมูลสำคัญไว้ด้านบนเสมอ ต่อให้ข่าวถูกตัดเหลือแค่ย่อหน้าแรก ผู้อ่านก็ยังได้ใจความครบ</p></div></div>`,
+  bind:()=>renderPyr()},
+
+ ...QC.map((q,qi)=>({t:`Quick Check ${qi+1}/5`, html:()=>`
+   <div class="qslide">
+     <div class="qmeta"><span class="chip">Quick Check · ข้อ ${qi+1}/5</span><span class="muted">ตอบถูกแล้ว <b id="qcScore">${Object.keys(S.qc).length}</b>/5 · ไม่เก็บคะแนน</span></div>
+     <p class="qt">${q[0]}</p>
+     <div class="opts">${q[1].map((o,j)=>`<button class="opt ${S.qc[qi]===true&&j===q[2]?"right":""}" data-o="${j}">${o}</button>`).join("")}</div>
+     <div class="fb ${S.qc[qi]?"show":""}" id="fb">${S.qc[qi]?"✅ "+q[3]:""}</div>
+   </div>`,
+  bind:()=>document.querySelectorAll(".qslide .opt").forEach(b=>b.onclick=()=>{
+    if(S.qc[qi]===true) return;
+    const oi=+b.dataset.o, ok=oi===q[2];
+    document.querySelectorAll(".qslide .opt").forEach(x=>x.classList.remove("wrong"));
+    b.classList.add(ok?"right":"wrong");
+    const fb=$("#fb"); fb.classList.add("show"); fb.innerHTML=ok?`✅ ${q[3]}`:`💡 ${q[4]} — ลองอีกครั้ง`;
+    if(ok){S.qc[qi]=true;$("#qcScore").textContent=Object.keys(S.qc).length}
+  })})),
+
+ {t:"Ready to analyse!", html:()=>{const n=Object.keys(S.qc).length;return `
+   <div class="done-wrap">
+     <div class="big">🎉</div>
+     <h2 class="sl-h">Ready to <span class="grad-text">Analyse!</span></h2>
+     <p class="sl-lead" style="margin:0 auto">Quick Check ตอบถูก <b>${n}/5</b> ข้อ ${n<5?"· ย้อนกลับไปทบทวนข้อที่ยังไม่ถูกได้":"· ยอดเยี่ยม!"}</p>
+     <p class="muted" style="margin-top:14px">ทบทวน 10 องค์ประกอบอีกครั้ง (แตะเพื่อกลับไปดู)</p>
+     <div class="recap">${COMP_ORDER.map((k,i)=>`<button data-k="${k}"><span class="dot" style="width:10px;height:10px;border-radius:3px;background:${COMP[k].c}"></span>${i+1}. ${COMP[k].en}</button>`).join("")}</div>
+     <button class="btn btn-p" id="toChoose" style="margin-top:6px">ไปเลือกข่าววิเคราะห์ →</button>
+   </div>`},
+  bind:()=>{document.querySelectorAll(".recap button").forEach(b=>b.onclick=()=>goSlide(compSlideIndex(b.dataset.k)));$("#toChoose").onclick=()=>{exitFs();go("choose")}}}
+];
+
+function renderDeck(){
+  const sl=SLIDES[D.i];
+  $("#stage").innerHTML=`<div class="sl in-${D.dir}">${sl.html()}</div>`;
+  sl.bind&&sl.bind();
+  $("#deckTitle").textContent=sl.t;
+  $("#dCount").textContent=`${D.i+1} / ${SLIDES.length}`;
+  $("#dPrev").disabled=D.i===0;
+  const last=D.i===SLIDES.length-1;
+  $("#dNext").textContent=last?"✓":"→";
+  $("#dNext").setAttribute("aria-label",last?"ไปเลือกข่าว":"สไลด์ถัดไป");
+  $("#pbarFill").style.width=`${(D.i+1)/SLIDES.length*100}%`;
+  $("#dots").innerHTML=SLIDES.map((s,i)=>`<button class="dot-b ${i===D.i?"on":D.seen.has(i)?"seen":""}" data-i="${i}" title="${s.t}" aria-label="${s.t}"></button>`).join("");
+  document.querySelectorAll(".dot-b").forEach(b=>b.onclick=()=>goSlide(+b.dataset.i));
+}
+function goSlide(i){
+  if(i<0||i>=SLIDES.length) return;
+  D.dir=i>=D.i?"r":"l"; D.i=i; D.seen.add(i); renderDeck();
+  if(window.matchMedia("(max-width:900px)").matches){const y=$("#deck").getBoundingClientRect().top+scrollY-110;window.scrollTo({top:Math.max(0,y),behavior:"smooth"})}
+}
+function exitFs(){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
+function initDeck(){
+  if(!document.fullscreenEnabled) $("#btnFs").style.display="none";
+  $("#dPrev").onclick=()=>goSlide(D.i-1);
+  $("#dNext").onclick=()=>{if(D.i===SLIDES.length-1){exitFs();go("choose")}else goSlide(D.i+1)};
+  $("#btnFs").onclick=()=>{const d=$("#deck");
+    if(document.fullscreenElement) exitFs();
+    else if(d.requestFullscreen) d.requestFullscreen().catch(()=>toast("เบราว์เซอร์นี้ไม่รองรับโหมดเต็มจอ"));
+    else toast("เบราว์เซอร์นี้ไม่รองรับโหมดเต็มจอ")};
+  document.addEventListener("keydown",e=>{
+    if(S.view!=="learn"||/SELECT|INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();goSlide(D.i+1)}
+    if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();goSlide(D.i-1)}
+  });
+  let sx=0,sy=0;
+  $("#stage").addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  $("#stage").addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dy)<50) goSlide(D.i+(dx<0?1:-1))},{passive:true});
+  renderDeck();
+}
+
+function renderW(){
+  const lead=MODEL.find(b=>b[0]==="lead")[1];
+  $("#wLead").innerHTML=`<span class="dl">BANGKOK, Thailand – October 1, 2026 –</span> ${lead}`;
+  Object.entries(W).forEach(([k,v])=>{const s=$(`#wLead span[data-w="${k}"]`);s&&s.style.setProperty("--wc",v.c)});
+  $("#wChips").innerHTML=Object.entries(W).map(([k,v])=>`<button class="wchip" data-w="${k}" style="--wc:${v.c}">${k[0].toUpperCase()+k.slice(1)}<small>${v.th}</small></button>`).join("");
+  document.querySelectorAll(".wchip").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.w, on=!b.classList.contains("on");
+    document.querySelectorAll(".wchip").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("#wLead span[data-w]").forEach(x=>x.classList.remove("on"));
+    if(on){b.classList.add("on");$(`#wLead span[data-w="${k}"]`).classList.add("on");
+      $("#wAns").innerHTML=`<b>${W[k].q}</b><br>→ ${W[k].a}`}
+    else $("#wAns").innerHTML=`แตะ <b>Who / What / When / Where / Why / How</b> เพื่อเริ่ม`;
+  });
+  $("#wAll").onclick=()=>{
+    document.querySelectorAll(".wchip,#wLead span[data-w]").forEach(x=>x.classList.add("on"));
+    $("#wAns").innerHTML=Object.entries(W).map(([k,v])=>`<div style="margin:2px 0"><b style="color:${v.c}">${k.toUpperCase()}</b> → ${v.a}</div>`).join("")+`<div class="muted" style="margin-top:6px">ครบ 6 ข้อในประโยคเดียว (43 คำ) ✨</div>`;
+  };
+}
+function renderPyr(){
+  $("#pyr").innerHTML=PYR.map((p,i)=>`<button class="pl" data-i="${i}" style="background:${p[2]};width:${p[3]}">${p[0]}<small>${p[1]}</small></button>`).join("");
+  document.querySelectorAll(".pl").forEach(b=>b.onclick=()=>{const p=PYR[b.dataset.i];
+    $("#pyrNote").innerHTML=`<span class="chip" style="background:${p[2]};color:#fff">${p[0]}</span><p>${p[4]}</p>`});
+}
+
+/* ================= CHOOSE / READ ================= */
+function renderChoose(){
+  $("#prGrid").innerHTML=RELEASES.map((r,i)=>`
+    <div class="card pr-card ${S.chosen===r.id?"sel":""}" data-id="${r.id}">
+      <div class="top"><div class="emo">${r.emo}</div><span class="chip">${r.type}</span></div>
+      <div class="muted" style="font-weight:700">${i+1}. ${r.brand} · ${r.typeTh}</div>
+      <h3>${r.blocks.find(b=>b[0]==="headline")[1]}</h3>
+      <p class="sum">${r.sum}</p>
+      <button class="btn btn-p go" data-id="${r.id}">เลือกข่าวนี้ →</button>
+    </div>`).join("");
+  document.querySelectorAll(".pr-card .go").forEach(b=>b.onclick=()=>choose(b.dataset.id));
+}
+function choose(id){
+  if(P.started && !P.done) return toast("กำลังทำแบบฝึกหัดอยู่ เปลี่ยนข่าวไม่ได้");
+  if(P.done){P.started=false;P.done=false;P.attempt=0;$("#btnChange").style.display="";}
+  if(S.chosen!==id) P.attempt=0;
+  S.chosen=id; const r=RELEASES.find(x=>x.id===id);
+  $("#readEyebrow").textContent=`Part 2 · Read · ${r.type}`;
+  $("#readTitle").innerHTML=`${r.emo} ${r.brand}`;
+  $("#readPaper").innerHTML=r.blocks.map((b,i)=>{
+    const cls={release:"p-release",headline:"p-head",subhead:"p-sub",dateline:"p-date",lead:"p-text",body:"p-text",quote:"p-text",boiler:"p-boiler",contact:"p-contact",end:"p-end"}[b[0]];
+    return `<div class="blk ${cls}">${b[1]}</div>`}).join("");
+  $("#adaptNote").innerHTML=`📝 <b>Adapted for classroom use</b> — ข้อเท็จจริงอิงจากข่าวจริง แต่เรียบเรียงภาษาใหม่ให้เหมาะกับการเรียน คำพูดอ้างอิงใช้ชื่อตำแหน่งแทนชื่อบุคคล และข้อมูลติดต่อเป็นตัวอย่างสมมติ<br>ต้นฉบับ: <a href="${r.src}" target="_blank" rel="noopener">${r.srcName}</a>`;
+  renderChoose(); go("read");
+}
+
+
+/* ================= PRACTICE (Part 2) ================= */
+const SCRIPT_URL = ""; // ← วาง URL ของ Google Apps Script Web App ที่นี่ (ส่วนที่ 3)
+const CLS = {release:"p-release",headline:"p-head",subhead:"p-sub",dateline:"p-date",lead:"p-text",body:"p-text",quote:"p-text",boiler:"p-boiler",contact:"p-contact",end:"p-end"};
+const WKEYS = ["who","what","when","where","why","how"];
+const WANS = {
+ lego:{who:"The LEGO Group",what:"revealed the LEGO PlayStation (set 72306)",when:"today – September 3, 2026",where:"during PlayStation’s State of Play broadcast",why:"to celebrate gaming history with adult fans",how:"as a 1,911-piece set that recreates the original console and controller"},
+ thai:{who:"Thai Airways International",what:"will launch direct flights",when:"on December 1, 2026",where:"between Bangkok’s Suvarnabhumi Airport and Da Nang, Vietnam",why:"to give travellers a faster way to reach central Vietnam without a stopover",how:"operating twice daily in each direction"},
+ eri:{who:"ERI and Green Marble Company",what:"formed a partnership to create ERI Vietnam",when:"today – August 11, 2026",where:"in Vietnam",why:"to keep used devices out of landfills",how:"by recycling e-waste and safely disposing of old IT equipment"},
+ nyl:{who:"New York Life",what:"honored 20 students as 2026 Golden Futures Scholarship recipients",when:"today – August 11, 2026",where:"at its New York City Home Office",why:"to help the students pay for college",how:"by giving each student $10,000 or $20,000"},
+ regal:{who:"Regal",what:"launched Regal Rewards+, a monthly movie subscription",when:"today – September 15, 2026",where:"at its theatres across the United States",why:"for people who love the movies but do not go every week",how:"one 2D ticket each month that rolls over, from $10.99 per month"}
+};
+const P = {started:false, done:false, tab:"A", A:{}, B:{}, C:[], cTouched:false, swapSel:null, bOpts:{}, attempt:0, pick:null, result:null, sent:false};
+
+function relNow(){return RELEASES.find(r=>r.id===S.chosen)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function plain(h){const d=document.createElement("div");d.innerHTML=h;return d.textContent}
+function esc(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+
+function startPractice(){
+  if(P.started && !P.done){go("practice");return}
+  const r=relNow();
+  P.started=true; P.done=false; P.A={}; P.B={}; P.swapSel=null; P.cTouched=false; P.result=null; P.sent=false; P.attempt++;
+  let order; do{order=shuffle(r.blocks.map((_,i)=>i))}while(order.every((v,i)=>v===i));
+  P.C=order;
+  WKEYS.forEach(k=>P.bOpts[k]=shuffle(WKEYS));
+  $("#btnChange").style.display="none";
+  $("#prEyebrow").textContent=`Part 3 · Practice · ครั้งที่ ${P.attempt}`;
+  $("#prTitle").innerHTML=`${r.emo} ${r.brand}`;
+  P.tab="A"; renderPractice(); go("practice");
+}
+
+function doneA(){return relNow().blocks.every((_,i)=>P.A[i])}
+function doneB(){return WKEYS.every(k=>P.B[k])}
+function doneC(){return P.cTouched}
+function cntA(){return Object.keys(P.A).length}
+
+function renderTabs(){
+  const n=relNow().blocks.length;
+  const t=[["A","Tag the Parts",`${cntA()}/${n} ท่อน · 10 คะแนน`,doneA()],
+           ["B","5W1H in the Lead",`${Object.keys(P.B).length}/6 ข้อ · 6 คะแนน`,doneB()],
+           ["C","Put It in Order",`${P.cTouched?"เรียงแล้ว":"ยังไม่เริ่ม"} · 10 คะแนน`,doneC()]];
+  $("#ptabs").innerHTML=t.map(x=>`<button class="ptab ${P.tab===x[0]?"on":""} ${x[3]?"ok":""}" data-t="${x[0]}"><span class="l">${x[3]&&P.tab!==x[0]?"✓":x[0]}</span><span><b>${x[1]}</b><small>${x[2]}</small></span></button>`).join("");
+  document.querySelectorAll(".ptab").forEach(b=>b.onclick=()=>{P.tab=b.dataset.t;renderPractice();scrollToPanel()});
+  const all=doneA()&&doneB()&&doneC();
+  const miss=[!doneA()&&"A",!doneB()&&"B",!doneC()&&"C"].filter(Boolean);
+  $("#subStatus").textContent= all?"ครบทุกข้อแล้ว พร้อมส่ง ✨":"ทำให้ครบทั้ง 3 ข้อก่อนส่ง";
+  $("#subHint").textContent= all?"ตรวจทานได้ก่อนกดส่ง ส่งแล้วแก้ไม่ได้":`ยังเหลือข้อ ${miss.join(", ")}`;
+  $("#btnPrevTab").style.visibility=P.tab==="A"?"hidden":"visible";
+  const nb=$("#btnNextTab");
+  if(P.tab==="C"){nb.textContent="ส่งคำตอบ ✓";nb.disabled=!all}
+  else{nb.textContent="ข้อถัดไป →";nb.disabled=false}
+}
+function scrollToPanel(){const y=$("#ppanel").getBoundingClientRect().top+scrollY-180;window.scrollTo({top:Math.max(0,y),behavior:"smooth"})}
+
+function renderPractice(){
+  const r=relNow();
+  if(P.tab==="A"){
+    $("#ppanel").innerHTML=`<div class="ex-head"><h3>A · Tag the Parts</h3><p class="muted">แตะแต่ละท่อนของข่าว แล้วเลือกว่าเป็นองค์ประกอบใด (มี Body 2 ย่อหน้า ให้ติดป้าย Body ทั้งคู่)</p></div>
+      <article class="paper tagpaper">${r.blocks.map((b,i)=>{const a=P.A[i];const c=a?COMP[a].c:"#C4B5FD";
+        return `<button class="blk ${CLS[b[0]]} tblk ${a?"tagged":"need"}" data-i="${i}" style="--c:${c}"><span class="tag">${a?COMP[a].ic+" "+COMP[a].en:"แตะเพื่อติดป้าย"}</span>${b[1]}</button>`}).join("")}</article>`;
+    document.querySelectorAll(".tblk").forEach(b=>b.onclick=()=>openPicker(+b.dataset.i));
+  }
+  if(P.tab==="B"){
+    const lead=r.blocks.find(b=>b[0]==="lead")[1], dl=r.blocks.find(b=>b[0]==="dateline")[1];
+    $("#ppanel").innerHTML=`<div class="ex-head"><h3>B · 5W1H in the Lead</h3><p class="muted">อ่านย่อหน้านำ แล้วเลือกท่อนข้อความที่ตอบคำถามแต่ละข้อ (แต่ละท่อนใช้ตอบได้ข้อเดียว)</p></div>
+      <div class="card wbox"><b>${dl}</b> ${lead}</div>
+      <div class="wrows">${WKEYS.map(k=>`<div class="card wrow"><div class="wq" style="color:${W[k].c}"><b>${k[0].toUpperCase()+k.slice(1)}?</b><small>${W[k].th}</small></div>
+        <select class="ans ${P.B[k]?"filled":""}" data-w="${k}"><option value="">— เลือกคำตอบ —</option>${P.bOpts[k].map(o=>`<option value="${o}" ${P.B[k]===o?"selected":""}>${esc(WANS[r.id][o])}</option>`).join("")}</select></div>`).join("")}</div>`;
+    document.querySelectorAll("select.ans").forEach(sel=>sel.onchange=()=>{
+      const k=sel.dataset.w;
+      if(sel.value){P.B[k]=sel.value;sel.classList.add("filled")}else{delete P.B[k];sel.classList.remove("filled")}
+      renderTabs();
+    });
+  }
+  if(P.tab==="C"){
+    $("#ppanel").innerHTML=`<div class="ex-head"><h3>C · Put It in Order</h3><p class="muted">ท่อนข่าวถูกสลับ เรียงกลับให้ถูกตามโครงสร้าง press release ใช้ปุ่ม ▲ ▼ หรือ<b>แตะข้อความ 2 ท่อนเพื่อสลับตำแหน่งกัน</b> (Body 2 ย่อหน้าวางสลับกันได้)</p></div>
+      <div class="olist">${P.C.map((bi,pos)=>`<div class="oitem ${P.swapSel===pos?"sel":""}"><span class="n">${pos+1}</span>
+        <button class="txt" data-p="${pos}">${esc(plain(r.blocks[bi][1]))}</button>
+        <span class="ar"><button data-up="${pos}" ${pos===0?"disabled":""} aria-label="เลื่อนขึ้น">▲</button><button data-dn="${pos}" ${pos===P.C.length-1?"disabled":""} aria-label="เลื่อนลง">▼</button></span></div>`).join("")}</div>`;
+    const mv=(a,b)=>{[P.C[a],P.C[b]]=[P.C[b],P.C[a]];P.cTouched=true;P.swapSel=null;renderPractice()};
+    document.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>mv(+b.dataset.up,+b.dataset.up-1));
+    document.querySelectorAll("[data-dn]").forEach(b=>b.onclick=()=>mv(+b.dataset.dn,+b.dataset.dn+1));
+    document.querySelectorAll(".oitem .txt").forEach(b=>b.onclick=()=>{
+      const p=+b.dataset.p;
+      if(P.swapSel===null){P.swapSel=p;renderPractice()}
+      else if(P.swapSel===p){P.swapSel=null;renderPractice()}
+      else mv(P.swapSel,p);
+    });
+  }
+  renderTabs();
+}
+
+/* Label picker */
+function openPicker(i){
+  P.pick=i; const r=relNow();
+  $("#pkPrev").textContent=plain(r.blocks[i][1]);
+  $("#pkGrid").innerHTML=COMP_ORDER.map(k=>{const c=COMP[k];
+    return `<button class="lg ${P.A[i]===k?"active":""}" data-k="${k}" style="--c:${c.c}"><span class="dot" style="background:${c.c}"></span><span>${c.en}<small>${c.th}</small></span></button>`}).join("");
+  document.querySelectorAll("#pkGrid .lg").forEach(b=>b.onclick=()=>{P.A[P.pick]=b.dataset.k;closePicker();renderPractice();nudgeNext()});
+  $("#pk").classList.add("show");
+}
+function closePicker(){$("#pk").classList.remove("show")}
+function nudgeNext(){
+  const nx=document.querySelector(".tblk.need");
+  if(nx) nx.scrollIntoView({behavior:"smooth",block:"center"});
+  else toast("ติดป้ายครบทุกท่อนแล้ว ไปข้อ B ต่อได้เลย");
+}
+
+/* Scoring — always broken down by part */
+function score(){
+  const r=relNow(), keys=r.blocks.map(b=>b[0]);
+  const A=COMP_ORDER.map(k=>{
+    const idx=keys.map((x,i)=>x===k?i:-1).filter(i=>i>=0);
+    return {k, ok:idx.every(i=>P.A[i]===k), given:idx.map(i=>P.A[i]?COMP[P.A[i]].en:"—").join(", ")};
+  });
+  const B=WKEYS.map(k=>({k, ok:P.B[k]===k, given:P.B[k]?WANS[r.id][P.B[k]]:"—", ans:WANS[r.id][k]}));
+  const placed=P.C.map(i=>keys[i]);
+  const C=COMP_ORDER.map(k=>{
+    const pos=keys.map((x,i)=>x===k?i:-1).filter(i=>i>=0);
+    return {k, ok:pos.every(i=>placed[i]===k), at:placed.map((x,i)=>x===k?i+1:0).filter(Boolean).join(", "), should:pos.map(i=>i+1).join(", ")};
+  });
+  const sum=a=>a.filter(x=>x.ok).length;
+  return {A,B,C,a:sum(A),b:sum(B),c:sum(C),total:sum(A)+sum(B)+sum(C)};
+}
+
+function submitPractice(){
+  if(!(doneA()&&doneB()&&doneC())) return toast("ยังทำไม่ครบทุกข้อ");
+  if(!confirm("ยืนยันส่งคำตอบ? ส่งแล้วจะแก้ไขไม่ได้")) return;
+  P.result=score(); P.done=true;
+  renderResult(); go("result"); sendScore();
+}
+
+function renderResult(){
+  const R=P.result, r=relNow();
+  $("#resTotal").textContent=R.total;
+  $("#resWho").textContent=`${S.student.id} · ${S.student.name} · ${r.brand} · ครั้งที่ ${P.attempt}`;
+  const parts=[["A","Tag the Parts",R.a,10],["B","5W1H in the Lead",R.b,6],["C","Put It in Order",R.c,10]];
+  $("#resParts").innerHTML=parts.map(p=>`<div class="card rp"><span class="chip">ข้อ ${p[0]}</span><div class="sc">${p[2]}<span class="muted" style="font-size:16px"> / ${p[3]}</span></div><div class="muted">${p[1]}</div><div class="bar"><i style="width:${p[2]/p[3]*100}%"></i></div></div>`).join("");
+  const mark=ok=>ok?"✅":"❌";
+  $("#resReview").innerHTML=`
+   <div class="card rev"><h3>เฉลยข้อ A · Tag the Parts (${R.a}/10)</h3>${R.A.map(x=>`<div class="rv"><span>${mark(x.ok)}</span><div><b>${COMP[x.k].en}</b> <span class="muted">${COMP[x.k].th}</span>${x.ok?"":`<div class="why">ท่อนนี้คุณติดป้ายว่า: ${x.given}</div>`}</div></div>`).join("")}</div>
+   <div class="card rev"><h3>เฉลยข้อ B · 5W1H (${R.b}/6)</h3>${R.B.map(x=>`<div class="rv"><span>${mark(x.ok)}</span><div><b style="color:${W[x.k].c}">${x.k.toUpperCase()}</b> → ${esc(x.ans)}${x.ok?"":`<div class="why">คุณตอบ: ${esc(x.given)}</div>`}</div></div>`).join("")}</div>
+   <div class="card rev"><h3>เฉลยข้อ C · Order (${R.c}/10)</h3>${R.C.map(x=>`<div class="rv"><span>${mark(x.ok)}</span><div><b>${COMP[x.k].en}</b> <span class="muted">ตำแหน่งที่ถูก: ${x.should}</span>${x.ok?"":`<div class="why">คุณวางไว้ที่: ${x.at}</div>`}</div></div>`).join("")}</div>`;
+}
+
+/* Send to Google Sheet (wired up in Part 3) */
+async function sendScore(){
+  const st=$("#sendStatus"), rb=$("#btnResend"); rb.style.display="none";
+  if(!SCRIPT_URL){st.innerHTML="⚠️ ยังไม่ได้เชื่อม Google Sheet <span class='muted'>(จะเปิดใช้ในส่วนที่ 3)</span>";return}
+  const R=P.result, r=relNow();
+  const payload={studentId:S.student.id,name:S.student.name,release:r.brand,releaseId:r.id,attempt:P.attempt,
+    A:R.a,B:R.b,C:R.c,total:R.total,
+    A_detail:R.A.map(x=>`${COMP[x.k].en}${x.ok?"✓":"✗"}`).join(" "),
+    B_detail:R.B.map(x=>`${x.k}${x.ok?"✓":"✗"}`).join(" "),
+    C_detail:R.C.map(x=>`${COMP[x.k].en}${x.ok?"✓":"✗"}`).join(" ")};
+  st.textContent="⏳ กำลังส่งคะแนน…";
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    P.sent=true; st.innerHTML="✅ ส่งคะแนนเข้าระบบแล้ว";
+  }catch(e){st.innerHTML="❌ ส่งไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";rb.style.display=""}
+}
+
+/* ================= INIT ================= */
+initLogin(); renderSteps(); initDeck(); renderChoose();
+$("#btnChange").onclick=()=>go("choose");
+$("#btnPractice").onclick=startPractice;
+$("#btnPrevTab").onclick=()=>{P.tab={B:"A",C:"B"}[P.tab]||"A";renderPractice();scrollToPanel()};
+$("#btnNextTab").onclick=()=>{if(P.tab==="C")return submitPractice();P.tab={A:"B",B:"C"}[P.tab];renderPractice();scrollToPanel()};
+$("#pkX").onclick=closePicker; $("#pk").onclick=e=>{if(e.target.id==="pk")closePicker()};
+$("#pkClear").onclick=()=>{delete P.A[P.pick];closePicker();renderPractice()};
+$("#btnResend").onclick=sendScore;
+$("#btnRetry").onclick=()=>{P.started=false;P.done=false;startPractice()};
+$("#btnOther").onclick=()=>{P.started=false;P.done=false;$("#btnChange").style.display="";go("choose")};
+</script>
+</body>
+</html>
