@@ -418,6 +418,7 @@ footer{text-align:center;padding:24px 16px 40px;color:var(--ink3);font-size:12.5
         <div class="preview-id" id="stuPrev"></div>
       </div>
       <button class="btn btn-p" id="btnStart" style="width:100%;margin-top:12px" disabled>เริ่มเรียน →</button>
+      <p class="muted" style="margin-top:10px;font-size:12.5px">🔎 ระบบบันทึกความคืบหน้าการเรียน (ขั้นตอนที่ทำอยู่และคะแนน) เพื่อให้อาจารย์ติดตามและช่วยเหลือระหว่างเรียน</p>
       <div class="objectives">
         <b>เมื่อจบบทเรียนนี้ นักศึกษาจะสามารถ</b>
         <ol>
@@ -1130,6 +1131,37 @@ async function sendScore(){
   }catch(e){st.innerHTML="❌ ส่งไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";rb.style.display=""}
 }
 
+
+/* ================= LIVE PROGRESS (sent to the teacher dashboard) ================= */
+const LIVE = {last:"", t:null, beat:null};
+function progressNow(){
+  const v=S.view, rid=(v==="read"||v==="practice"||v==="result")?(S.chosen||""):"";
+  let stage="learn", detail="";
+  if(v==="learn"){detail=`สไลด์ ${D.i+1}/${SLIDES.length} · Quick Check ${Object.keys(S.qc).length}/5`}
+  else if(v==="choose"){stage="choose";detail="กำลังเลือกข่าว"}
+  else if(v==="read"){stage="read";detail="อ่านข่าว"}
+  else if(v==="practice"){stage="practice";
+    detail=`ข้อ ${P.tab} · A ${cntA()}/${relNow().blocks.length} · B ${Object.keys(P.B).length}/6 · C ${P.cTouched?"เรียงแล้ว":"ยังไม่เริ่ม"}`}
+  else if(v==="result"){stage="done";detail=P.result?`${P.result.total}/26 · ครั้งที่ ${P.attempt}`:"ส่งแล้ว"}
+  return {stage,detail,releaseId:rid};
+}
+function sendProgress(force,hidden){
+  if(!SCRIPT_URL||!S.student) return;
+  const p=progressNow(), sig=JSON.stringify(p)+(hidden?"h":"");
+  if(!force&&sig===LIVE.last) return;
+  LIVE.last=sig;
+  const body={type:"progress",studentId:S.student.id,name:S.student.name,stage:p.stage,detail:p.detail,releaseId:p.releaseId,hidden:!!hidden};
+  try{fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify(body),keepalive:true}).catch(()=>{})}catch(e){}
+}
+function track(){clearTimeout(LIVE.t);LIVE.t=setTimeout(()=>sendProgress(false),1200)}
+function startLive(){
+  if(LIVE.beat) return;
+  sendProgress(true);
+  LIVE.beat=setInterval(()=>{if(document.visibilityState==="visible")sendProgress(false)},5000);           // catch changes (e.g. Quick Check)
+  setInterval(()=>{if(document.visibilityState==="visible")sendProgress(true)},60000);                       // "still here" every minute
+  document.addEventListener("visibilitychange",()=>sendProgress(true,document.visibilityState!=="visible"));
+}
+
 /* ================= INIT ================= */
 initLogin(); renderSteps(); initDeck(); renderChoose();
 $("#btnChange").onclick=()=>go("choose");
@@ -1141,6 +1173,9 @@ $("#pkClear").onclick=()=>{delete P.A[P.pick];closePicker();renderPractice()};
 $("#btnResend").onclick=sendScore;
 $("#btnRetry").onclick=()=>{P.started=false;P.done=false;startPractice()};
 $("#btnOther").onclick=()=>{P.started=false;P.done=false;$("#btnChange").style.display="";go("choose")};
+{const _go=go;go=function(v){_go(v);if(S.student){startLive();track()}}}
+{const _rd=renderDeck;renderDeck=function(){_rd();track()}}
+{const _rt=renderTabs;renderTabs=function(){_rt();track()}}
 </script>
 </body>
 </html>
