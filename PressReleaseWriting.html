@@ -189,8 +189,18 @@ textarea.inp{min-height:110px;resize:vertical;line-height:1.55}
 .keybar .lbl{font-weight:800;color:var(--c4);font-size:14px}
 .ans{margin-top:12px;padding:14px 16px;border-radius:14px;background:var(--okbg);border:1px solid rgba(20,134,74,.3);font-size:16px;animation:fade .3s}
 .ans small{display:block;font-weight:800;color:var(--ok);font-size:12px;letter-spacing:.08em}
-.deck:fullscreen{background:var(--bg);padding:24px;overflow:auto;display:flex;flex-direction:column}
-.deck:fullscreen .stage{flex:1;font-size:19px}
+/* presentation mode: works with real Fullscreen API and as a CSS fallback (iPhone/Safari). Applied to <body>, so re-rendering the deck never exits it. */
+body.fs{overflow:hidden}
+body.fs #hdr,body.fs .pwrap,body.fs .foot{display:none!important}
+body.fs #vApp{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:auto;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));margin:0;max-width:none;display:flex;flex-direction:column}
+body.fs .deck{flex:1;display:flex;flex-direction:column;min-height:0}
+body.fs .stage{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;padding:clamp(18px,3vh,48px) clamp(20px,4vw,72px)}
+body.fs .slide{margin:auto 0;width:100%}           /* centred vertically, never clipped at the top */
+body.fs .slide h2.disp{font-size:clamp(34px,4.2vw,60px)}
+body.fs .rgrid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+@media (min-width:900px){body.fs .rgrid{grid-template-columns:repeat(2,1fr)}body.fs .rcard{padding:22px 26px}}
+body.fs .dbar{position:sticky;bottom:0;padding-top:8px}
+.dfs{touch-action:manipulation}
 .soon{text-align:center;padding:60px 20px}
 
 /* tracker */
@@ -886,7 +896,7 @@ function navEdges(){const nv=$("#pnav"),w=$("#pwrap"),max=nv.scrollWidth-nv.clie
  window.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;nv.classList.add("drag")}if(moved)nv.scrollLeft=sl-dx});
  window.addEventListener("pointerup",()=>{if(!down)return;down=false;setTimeout(()=>nv.classList.remove("drag"),0)});
 })();
-function go(id){S.part=id;saveLocal();render();window.scrollTo({top:0});if(S.role==="s")logEv("enter")}
+function go(id){if(S.fs&&id===0)setFs(false);S.part=id;saveLocal();render();window.scrollTo({top:0});if(S.role==="s")logEv("enter")}
 function render(){renderNav();const v=$("#vApp");v.className="view";
  if(S.role==="t"){if(S.part===0)renderTracker();else renderDeck()} else renderPart()}
 
@@ -1051,17 +1061,42 @@ function renderDeck(){
  $("#vApp").innerHTML=`<div class="deck" id="deck"><div class="stage"><div class="slide">${html}</div></div>
   <div class="dbar"><button class="btn btn-g" id="dPrev" ${i===0?"disabled":""} aria-label="Previous">←</button>
    <div class="dots">${sl.map((_,k)=>`<button class="${k===i?"on":""}" data-d="${k}" aria-label="slide ${k+1}"></button>`).join("")}</div>
-   <span class="cnt">${i+1}/${sl.length}</span><button class="btn btn-g" id="dFs" title="Full screen">⤢</button><button class="btn btn-p" id="dNext" ${i===sl.length-1?"disabled":""} aria-label="Next">→</button></div></div>`;
- bindCards(p);
+   <span class="cnt">${i+1}/${sl.length}</span><button class="btn btn-g dfs" id="dFs" title="Full screen (F) · Esc to exit" aria-label="Full screen">${S.fs?"⤡":"⤢"}</button><button class="btn btn-p" id="dNext" ${i===sl.length-1?"disabled":""} aria-label="Next">→</button></div></div>`;
+ bindCards(p); fitDeck();
  const set=k=>{S.deck[p.id]=Math.max(0,Math.min(sl.length-1,k));renderDeck()};
  $("#dPrev").onclick=()=>set(i-1);$("#dNext").onclick=()=>set(i+1);
  document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>set(+b.dataset.d));
  document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>{S.tkey[b.dataset.key]=!S.tkey[b.dataset.key];renderDeck()});
- $("#dFs").onclick=()=>{const d=$("#deck");if(document.fullscreenElement)document.exitFullscreen();else if(d.requestFullscreen)d.requestFullscreen().catch(()=>toast("Full screen not supported"));else toast("Full screen not supported")};
- S.deckKeys=e=>{if(S.role!=="t"||S.part===0||document.querySelector(".mwrap"))return;if(e.key==="ArrowRight"||e.key==="PageDown")set(i+1);if(e.key==="ArrowLeft"||e.key==="PageUp")set(i-1)};
+ $("#dFs").onclick=toggleFs;
+ const stg=document.querySelector(".stage");let tx=null,ty=0;
+ stg.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+ stg.addEventListener("touchend",e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;tx=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)set(i+(dx<0?1:-1))},{passive:true});
+ S.deckKeys=e=>{if(S.role!=="t"||S.part===0||document.querySelector(".mwrap"))return;if(e.key==="Escape"&&S.fs){setFs(false);return}if(e.key==="f"||e.key==="F"){if(!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"")){toggleFs();return}}if(e.key==="ArrowRight"||e.key==="PageDown")set(i+1);if(e.key==="ArrowLeft"||e.key==="PageUp")set(i-1)};
 }
 document.addEventListener("keydown",e=>S.deckKeys&&S.deckKeys(e));
-document.addEventListener("fullscreenchange",()=>{if(S.role==="t"&&S.part!==0)renderDeck()});
+/* Full screen / presentation mode.
+   Target = <html> (never re-rendered), plus body.fs layout; if the browser has no Fullscreen API (iPhone Safari) the same layout still fills the screen. */
+function setFs(on){
+ S.fs=on;document.body.classList.toggle("fs",on);
+ const de=document.documentElement,req=de.requestFullscreen||de.webkitRequestFullscreen,ex=document.exitFullscreen||document.webkitExitFullscreen;
+ if(on){S.fsReal=false;if(req){try{const r=req.call(de);S.fsReal=true;r&&r.catch&&r.catch(()=>{S.fsReal=false})}catch(e){S.fsReal=false}}}
+ else if(document.fullscreenElement||document.webkitFullscreenElement){try{const r=ex.call(document);r&&r.catch&&r.catch(()=>{})}catch(e){}}
+ if(S.role==="t"&&S.part!==0)renderDeck();
+}
+function toggleFs(){setFs(!S.fs)}
+/* scale slide content to the screen: zoom up to 2.2× on big screens, then shrink back until the slide fits without scrolling */
+function fitDeck(){
+ const st=document.querySelector(".stage"),sl=document.querySelector(".slide");if(!st||!sl)return;
+ sl.style.zoom=1;if(!S.fs)return;
+ let f=innerWidth<700?1:Math.max(.6,Math.min(innerWidth/1180,innerHeight/760,2.2));
+ const cs=getComputedStyle(st),avail=st.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+ sl.style.zoom=f;
+ for(let n=0;n<30&&f>.6&&sl.getBoundingClientRect().height>avail;n++){f=Math.max(.6,f-.05);sl.style.zoom=f}
+}
+window.addEventListener("resize",()=>{if(S.fs)fitDeck()});
+function onFsChange(){ // user pressed Esc / browser left full screen → leave presentation mode too
+ if(S.fs&&S.fsReal&&!document.fullscreenElement&&!document.webkitFullscreenElement){S.fs=false;document.body.classList.remove("fs");if(S.role==="t"&&S.part!==0)renderDeck()}}
+document.addEventListener("fullscreenchange",onFsChange);document.addEventListener("webkitfullscreenchange",onFsChange);
 
 /* ================= TEACHER: TRACKER ================= */
 const ALLITEMS=()=>PARTS.flatMap(p=>p.items||[]);
