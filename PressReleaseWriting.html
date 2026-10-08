@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Press Release Writing Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: sticky header with part pills → one working column (student) or slide deck / tracker (teacher). */
+:root{
+  --bg:#F6F7FC; --bg2:#EEF0FA; --card:rgba(255,255,255,.86); --line:rgba(98,99,217,.16);
+  --ink:#1A1938; --ink2:#46456A; --muted:#8584A3;
+  --c1:#17A9E5; --c2:#6263D9; --c3:#E53D92; --c4:#FD7742;
+  --grad:linear-gradient(110deg,#17A9E5 0%,#6263D9 36%,#E53D92 70%,#FD7742 100%);
+  --ok:#14864A; --okbg:#E7F7EE; --warn:#B45309; --warnbg:#FFF5E3; --bad:#C62845; --badbg:#FDEBEF;
+  --shadow:0 14px 34px -18px rgba(98,99,217,.45);
+  --display:"Anton","Impact","Haettenschweiler","Arial Narrow Bold",sans-serif; --body:"Inter","Noto Sans Thai",system-ui,sans-serif; --thai:"Noto Sans Thai","Inter",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px;min-height:100vh;
+  background-image:radial-gradient(700px 420px at 0% 0%,rgba(23,169,229,.10),transparent 60%),radial-gradient(700px 420px at 100% 0%,rgba(229,61,146,.10),transparent 60%),radial-gradient(700px 500px at 100% 100%,rgba(253,119,66,.08),transparent 60%);background-attachment:fixed}
+button,input,select,textarea{font-family:inherit;color:inherit;font-size:inherit}
+button{cursor:pointer;border:none;background:none}
+.th{font-family:var(--thai)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.disp{font-family:var(--display);font-weight:400;letter-spacing:.01em;line-height:1.05}
+.muted{color:var(--muted);font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:14px;font-weight:700;font-size:15px;min-height:46px;transition:transform .15s,box-shadow .15s,opacity .15s}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 10px 24px -10px rgba(229,61,146,.6)}
+.btn-p:hover{transform:translateY(-1px)}
+.btn-g{background:#fff;border:1.5px solid var(--line);color:var(--c2)}
+.btn-g:hover{border-color:var(--c2)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn:focus-visible,.pill:focus-visible,.rcard:focus-visible,.chip:focus-visible{outline:3px solid rgba(98,99,217,.45);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--bg2);color:var(--c2)}
+[hidden]{display:none!important}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(246,247,252,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:grid;place-items:center;font-family:var(--display);font-size:20px;flex:none}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.brand{overflow:hidden}.brand b{display:block;font-weight:800;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;color:var(--muted);font-size:12px}
+.hact{display:flex;gap:8px;align-items:center}
+.who{font-size:13px;color:var(--ink2);max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:42px;height:42px;border-radius:12px;background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;font-size:17px}
+.pwrap{position:relative}
+.pnav{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none;scroll-snap-type:x proximity;cursor:grab;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.pnav.drag{cursor:grabbing;scroll-snap-type:none}.pnav.drag .pill{pointer-events:none}
+.pill{scroll-snap-align:center}
+.pwrap::before,.pwrap::after{content:"";position:absolute;top:0;bottom:10px;width:34px;pointer-events:none;z-index:1;opacity:0;transition:opacity .2s}
+.pwrap::before{left:0;background:linear-gradient(90deg,var(--bg,#f6f7fd),transparent)}.pwrap::after{right:0;background:linear-gradient(270deg,var(--bg,#f6f7fd),transparent)}
+.pwrap.fl::before,.pwrap.fr::after{opacity:1}
+.pa{position:absolute;top:0;z-index:2;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--c2);font-size:22px;font-weight:700;line-height:1;box-shadow:0 3px 10px rgba(60,70,140,.18);cursor:pointer;display:grid;place-items:center;padding:0 0 3px}
+.pa:hover{background:var(--c2);color:#fff;border-color:transparent}.pa-l{left:0}.pa-r{right:0}
+@media (hover:none){.pa{display:none!important}}
+.pnav::-webkit-scrollbar{display:none}
+.pill{flex:none;display:flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:13.5px;font-weight:700;color:var(--ink2);white-space:nowrap}
+.pill i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--bg2)}
+.pill.on{background:var(--grad);color:#fff;border-color:transparent}
+.pill.on i{background:rgba(255,255,255,.25)}
+.pill.done i{background:var(--okbg);color:var(--ok)}
+.pill.lock{opacity:.5}
+
+main{padding-block:24px 90px}
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* login */
+.login{max-width:560px;margin:5vh auto 0;padding:30px 24px}
+.login h1{font-size:clamp(40px,8vw,64px)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:16px;background:var(--bg2);margin:22px 0 16px}
+.tabs button{padding:10px;border-radius:12px;font-weight:700;color:var(--ink2)}
+.tabs button.on{background:#fff;color:var(--c2);box-shadow:0 4px 14px -8px rgba(98,99,217,.6)}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.inp{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:16px}
+.inp:focus{outline:none;border-color:var(--c2);box-shadow:0 0 0 4px rgba(98,99,217,.12)}
+.note{margin-top:14px;font-size:13px;color:var(--muted)}
+.err{color:var(--bad);font-size:14px;margin-top:8px;min-height:20px}
+
+/* part head */
+.phead{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:18px}
+.phead .eb{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--c3)}
+.phead h2{font-size:clamp(34px,6vw,56px)}
+.phead p{color:var(--ink2);max-width:640px}
+.prog{min-width:200px}
+.bar{height:10px;border-radius:10px;background:var(--bg2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:10px;transition:width .4s}
+.sec-t{display:flex;align-items:center;gap:10px;margin:30px 0 12px;font-weight:800;font-size:18px}
+.sec-t .n{width:30px;height:30px;border-radius:10px;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:14px}
+
+/* review cards */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.rcard{text-align:left;padding:18px;border-radius:20px;background:#fff;border:1.5px solid var(--line);position:relative;overflow:hidden;
+  animation:rise .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*80ms);transition:transform .2s,box-shadow .2s,border-color .2s}
+.rcard::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--grad)}
+.rcard:hover{transform:translateY(-4px) scale(1.015);border-color:transparent;box-shadow:0 0 0 2px rgba(98,99,217,.25),0 18px 40px -16px rgba(229,61,146,.55)}
+.rcard .ic{font-size:26px}
+.rcard h3{font-size:18px;margin:6px 0 4px;font-weight:800}
+.rcard .sum{font-size:14px;color:var(--ink2)}
+.rcard .more{margin-top:10px;font-size:13px;font-weight:700;color:var(--c2)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+
+/* fact sheet */
+.facts{padding:18px 20px}
+.facts h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.fgrid{display:grid;grid-template-columns:120px 1fr;gap:6px 14px;font-size:14.5px}
+.fgrid dt{font-weight:800;color:var(--c2)}
+.fgrid dd{color:var(--ink)}
+
+/* items */
+.item{padding:20px;margin-bottom:14px;border-radius:20px;background:#fff;border:1.5px solid var(--line)}
+.item.sub{border-color:rgba(20,134,74,.35)}
+.ihead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ihead b{font-size:16.5px}
+.itype{font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff}
+.t-fill{background:var(--c1)}.t-order{background:var(--c2)}.t-write{background:var(--c3)}
+.ist{margin-left:auto;font-size:13px;font-weight:700;color:var(--muted)}
+.ist.ok{color:var(--ok)}
+.iprompt{color:var(--ink2);margin-bottom:12px}
+.iprompt .th{display:block;font-size:14px;color:var(--muted)}
+.sent{font-size:17px;line-height:2.4}
+.sent select,.sent input{padding:6px 10px;border-radius:10px;border:1.5px solid var(--line);background:#F9F9FE;font-weight:600;min-width:120px;max-width:100%}
+.sent input{width:170px}
+.sent .w-ok{border-color:var(--ok);background:var(--okbg)}
+.sent .w-bad{border-color:var(--bad);background:var(--badbg)}
+.pool,.built{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px}
+.pool{background:var(--bg2)}
+.built{border:2px dashed rgba(98,99,217,.3);margin-bottom:10px;background:#FBFBFF}
+.built:empty::before{content:"Tap the words below to build your answer · แตะคำด้านล่างเพื่อเรียง";color:var(--muted);font-size:13.5px}
+.chip{padding:8px 13px;border-radius:12px;background:#fff;border:1.5px solid var(--line);font-weight:600;font-size:15px;transition:transform .12s}
+.chip:hover{transform:translateY(-2px);border-color:var(--c2)}
+.built .chip{background:linear-gradient(#fff,#fff) padding-box,var(--grad) border-box;border:1.5px solid transparent}
+.chip.bad{background:var(--badbg);border-color:var(--bad)}
+.chip.good{background:var(--okbg);border-color:var(--ok)}
+.given{padding:12px 14px;border-left:4px solid var(--c4);background:#FFF8F3;border-radius:0 12px 12px 0;margin-bottom:12px;font-size:15px}
+.given small{display:block;font-weight:800;color:var(--c4);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+textarea.inp{min-height:110px;resize:vertical;line-height:1.55}
+.wc{font-size:13px;color:var(--muted);margin-top:4px}
+.iact{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.sync{font-size:12.5px;color:var(--muted)}
+.fb{margin-top:14px;padding:14px 16px;border-radius:14px;background:#FAFAFE;border:1px solid var(--line);animation:fade .3s}
+.fb h4{font-size:14.5px;margin-bottom:6px}
+.fb ul{list-style:none;display:grid;gap:5px}
+.fb li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:14.5px}
+.fb li small{display:block;color:var(--muted);font-size:13px}
+.fb .why{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink2)}
+.model{margin-top:8px;padding:10px 12px;border-radius:12px;background:#F3F4FF;font-size:14.5px}
+.tc{margin-top:12px;padding:12px 14px;border-radius:14px;background:#FFF7FB;border:1px solid rgba(229,61,146,.25);font-size:14.5px}
+.tc b{color:var(--c3)}
+.pdone{margin-top:22px;padding:18px;text-align:center;border-radius:20px;background:var(--okbg);color:var(--ok);font-weight:800}
+
+/* modal */
+.mwrap{position:fixed;inset:0;z-index:80;background:rgba(26,25,56,.42);display:flex;align-items:center;justify-content:center;padding:16px;animation:fade .2s}
+.modal{width:min(720px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:24px;padding:26px;position:relative;animation:pop .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.modal::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;border-radius:24px 24px 0 0;background:var(--grad)}
+.mx{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:12px;background:var(--bg2);font-size:18px}
+.modal h3{font-size:26px;font-weight:800;margin:4px 40px 4px 0}
+.modal .tht{color:var(--c3);font-weight:700;margin-bottom:12px}
+.bil{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.bil div{padding:12px 14px;border-radius:14px;background:#F7F8FE;font-size:15px}
+.bil small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--c2);margin-bottom:4px}
+.exs h4{font-size:14px;margin:10px 0 6px;color:var(--ink2)}
+.ex{padding:10px 14px;border-left:4px solid var(--c1);background:#F2FAFE;border-radius:0 12px 12px 0;margin-bottom:8px;font-size:15px}
+.ex.bad{border-color:var(--bad);background:var(--badbg)}
+.ex.good{border-color:var(--ok);background:var(--okbg)}
+.ex small{display:block;color:var(--muted);font-size:12.5px}
+
+/* teacher deck */
+.deck{position:relative}
+.stage{min-height:min(620px,calc(100vh - 260px));background:#fff;border-radius:26px;border:1px solid var(--line);box-shadow:var(--shadow);padding:clamp(20px,4vw,44px);position:relative;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--grad)}
+.slide{animation:slide .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes slide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.slide h2.disp{font-size:clamp(40px,7vw,78px)}
+.dbar{display:flex;align-items:center;gap:10px;margin-top:12px}
+.dots{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+.dots button{width:10px;height:10px;border-radius:6px;background:#DADBF2;transition:.2s}
+.dots button.on{width:28px;background:var(--grad)}
+.cnt{font-weight:700;color:var(--muted);font-size:13px;min-width:56px;text-align:center}
+.keybar{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 14px;border-radius:14px;background:#FFF8F0;border:1px dashed rgba(253,119,66,.5);flex-wrap:wrap}
+.keybar .lbl{font-weight:800;color:var(--c4);font-size:14px}
+.ans{margin-top:12px;padding:14px 16px;border-radius:14px;background:var(--okbg);border:1px solid rgba(20,134,74,.3);font-size:16px;animation:fade .3s}
+.ans small{display:block;font-weight:800;color:var(--ok);font-size:12px;letter-spacing:.08em}
+.deck:fullscreen{background:var(--bg);padding:24px;overflow:auto;display:flex;flex-direction:column}
+.deck:fullscreen .stage{flex:1;font-size:19px}
+.soon{text-align:center;padding:60px 20px}
+
+/* tracker */
+.tstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ts{padding:14px 16px;border-radius:18px;background:#fff;border:1.5px solid var(--line);text-align:left}
+.ts .n{font-family:var(--display);font-size:34px;line-height:1}
+.ts .k{font-size:13px;color:var(--ink2);font-weight:600}
+.ts.on{border-color:var(--c2);box-shadow:0 0 0 3px rgba(98,99,217,.15)}
+.ttools{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:16px 0 10px}
+.tbl{overflow-x:auto;background:#fff;border-radius:18px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{position:sticky;top:0;background:#fff;text-align:left;font-size:12px;color:var(--muted);font-weight:800;padding:11px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid #EEEFF8;vertical-align:middle;font-variant-numeric:tabular-nums}
+tr.r{cursor:pointer}
+tr.r:hover td{background:#FAFAFF}
+tr.r.sel td{background:#F3F4FF}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.d-on{background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,.18)}.d-seen{background:#F5B300}.d-no{background:#CBD0E0}
+.pc{font-size:12.5px;white-space:nowrap}
+.pc b{font-weight:800}
+.pc.low b{color:var(--bad)}
+.pc.full b{color:var(--ok)}
+.drawer{margin-top:14px;padding:18px}
+.dit{padding:12px 0;border-top:1px dashed var(--line)}
+.dit:first-of-type{border-top:none}
+.dit .a{padding:8px 12px;border-radius:10px;background:#F7F8FE;margin:6px 0;white-space:pre-wrap;font-size:14.5px}
+.dit textarea{width:100%;min-height:60px;padding:8px 10px;border-radius:10px;border:1.5px solid var(--line);font-size:14px}
+.ia{display:grid;grid-template-columns:150px 1fr 60px;gap:10px;align-items:center;font-size:13.5px;padding:5px 0}
+.ia .b{height:10px;border-radius:6px;background:var(--bg2);overflow:hidden}
+.ia .b i{display:block;height:100%;background:var(--grad)}
+.ia .b i.low{background:var(--bad)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(150%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;z-index:90;transition:.3s;opacity:0;visibility:hidden;max-width:90vw}
+.toast.show{transform:translateX(-50%);opacity:1;visibility:visible}
+
+@media (max-width:820px){
+  .tstats{grid-template-columns:1fr 1fr}
+  .bil{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:96px 1fr}
+  .hide-m{display:none}
+  .who{display:none}
+}
+@media (max-width:520px){
+  .sent{font-size:16px}
+  .sent input{width:100%}
+  .ia{grid-template-columns:100px 1fr 46px}
+  .modal{padding:22px 18px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+.exitf{display:grid;gap:12px}.exitf label{display:grid;gap:6px;font-weight:600}.exitf textarea{min-height:70px}
+.asm{margin-top:16px}.asmh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.paper{background:#fff;color:#1f2433;border-radius:14px;padding:22px 20px;box-shadow:0 6px 24px rgba(30,40,90,.12);font-family:Georgia,"Times New Roman",serif;line-height:1.6;overflow-wrap:anywhere}
+.paper .rl{font:700 12px/1 system-ui,sans-serif;letter-spacing:.12em;color:#6263D9;margin-bottom:10px}.paper .hl{font-size:22px;font-weight:700;line-height:1.3}
+.paper .sub{font-style:italic;color:#4b5263;margin:6px 0 12px}.paper p{margin:0 0 10px}.paper .bp,.paper .mc{font-size:14px;color:#4b5263}.paper .end{text-align:center;font-weight:700;letter-spacing:.2em}
+.paper .miss{font:italic 13px system-ui,sans-serif;color:#E53D92;background:#fde8f2;border-radius:6px;padding:1px 6px}
+</style>
+</head>
+<body>
+
+<header id="hdr" hidden>
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brand"><div class="logo">PR</div><div><b>Press Release Writing Lab</b><small>W13 · 603-35-07 English for Ads &amp; PR</small></div></div>
+      <div class="hact">
+        <span class="who" id="who"></span>
+        <button class="icon-btn" id="btnFacts" title="Fact sheet">📋</button>
+        <button class="icon-btn" id="btnOut" title="Log out">⎋</button>
+      </div>
+    </div>
+    <div class="pwrap" id="pwrap"><button class="pa pa-l" id="paL" aria-label="Previous parts" hidden>‹</button><nav class="pnav" id="pnav" aria-label="Parts"></nav><button class="pa pa-r" id="paR" aria-label="Next parts" hidden>›</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- LOGIN -->
+  <section id="vLogin" class="view">
+    <div class="card login">
+      <span class="tag">Week 13 · Online Lesson</span>
+      <h1 class="disp" style="margin-top:12px">WRITE THE <span class="gt">PRESS RELEASE</span></h1>
+      <p class="muted th" style="margin-top:8px">ฝึกเขียนข่าวประชาสัมพันธ์ทีละองค์ประกอบ จากข้อมูลจริงของโครงการเพื่อสังคม (NGO)</p>
+      <div class="tabs"><button class="on" data-r="s">🎓 Student</button><button data-r="t">🧑‍🏫 Teacher</button></div>
+      <div id="loginS">
+        <div class="field"><label for="selS">Select your name · เลือกชื่อของคุณ</label>
+          <select class="inp" id="selS"><option value="">— Select your name —</option></select></div>
+        <button class="btn btn-p" id="goS" style="width:100%;margin-top:14px" disabled>Start →</button>
+        <p class="note th">🔎 ระบบบันทึกความคืบหน้า คำตอบ และเวลาที่ทำ เพื่อให้อาจารย์ติดตามและให้คำแนะนำ · ออกจากระบบแล้วกลับมาทำต่อจากจุดเดิมได้</p>
+      </div>
+      <div id="loginT" hidden>
+        <div class="field"><label for="inT">Teacher code</label><input class="inp" id="inT" type="password" autocomplete="off"></div>
+        <button class="btn btn-p" id="goT" style="width:100%;margin-top:14px">Enter →</button>
+      </div>
+      <div class="err" id="lerr"></div>
+    </div>
+  </section>
+
+  <section id="vApp" hidden></section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= CONFIG ================= */
+const API_URL = "https://script.google.com/macros/s/AKfycbxBFjscmPjhC311nD0w4RQd_Ktv9l92PkLiBNNsn3jPQmjfAks9d97JHaBwXphUiXqA/exec";                  // ← วาง URL ของ Apps Script (/exec)
+const T_HASH  = "14011b34";          // FNV-1a ของรหัสอาจารย์ (ไม่เก็บรหัสตรง ๆ)
+const LS = "w13pr_";                 // localStorage prefix
+const SEQUENTIAL = false;          // true = ต้องส่งครบทุกข้อก่อนเปิด Part ถัดไป · false = ไปต่อได้อิสระ
+const ONLINE_MS = 150000, HEARTBEAT_MS = 60000, TRACK_MS = 15000;
+
+const STUDENTS = [
+[1,"467601241001","นางสาวกชกร จันนิมิต"],[2,"467601241003","นายคณิศร การสมงาม"],[3,"467601241005","นายชนาธิป ยมรัตน์"],
+[4,"467601241006","นางสาวชลิดา นามสง่า"],[5,"467601241007","นางสาวชุติมา ไววิญญา"],[6,"467601241009","นางสาวดวงนภา เสงี่ยมงาม"],
+[7,"467601241010","นางสาวดารินทร์ สุขประเสริฐ"],[8,"467601241011","นางสาวธนิสร เทียวประสงค์"],[9,"467601241012","นางสาวธัญจิรา งามสมชาติ"],
+[10,"467601241013","นายธีรธัช เกษมรัตน์"],[11,"467601241014","นายนครินทร์ สุขอร่าม"],[12,"467601241015","นางสาวปลายฟ้า"],
+[13,"467601241017","นางสาวปิยวรรณ ทองประกอบ"],[14,"467601241018","นายปีรติ เพชรแก้ว"],[15,"467601241020","นางสาวพิยดา ปัสสาจันทร์"],
+[16,"467601241021","นางสาวระพีพัฒน์ เทียมมล"],[17,"467601241023","นางสาววรวรรณ อมรดิษฐ์"],[18,"467601241024","นางสาววราลักษณ์ ปัฐพี"],
+[19,"467601241025","นางสาววรินธร ศรีอรุณ"],[20,"467601241026","นายวิชยุตม์ กุลทอง"],[21,"467601241027","นางสาวศรุตา เสือคำราม"],
+[22,"467601241028","นางสาวสุกฤตา ไตรทอง"],[23,"467601241029","นางสาวอพัชยาดา พจน์ด้วง"],[24,"467601241030","นายธีรวัสส์ ทรัพย์เอนก"],
+[25,"467601241031","นางสาววิมลรัตน์ หาญแก้ว"],[26,"467601241032","นางสาวภูชิษา อธิกิติคุณ"],[27,"467601241033","นายนิธิกร สมจันทร์"],
+[28,"467601241034","นายสิรวิชญ์ อภัยสุข"],[29,"467601241035","นายจิรภัทร การประเสริฐ"],[30,"467601241037","นายกฤษฎา วิมลศิลป์"],
+[31,"467601241038","นายณภัทร โพธการ"],[32,"467601241039","นายนพกร โสดา"],[33,"467601241040","นางสาวตัสนีม เส้นขาว"],
+[34,"467601241042","นายระพีพัฒน์ จันทร์สว่าง"],[35,"467601241044","นายสนทยา แฉ่งแดง"],[36,"467601241045","นางสาวรุจรวี นาคะปักษิณ"],
+[37,"468601221003","นางสาวปภัสสรณ์ ชินบุตร"]
+];
+
+/* ================= ANCHOR CASE (fictional NGO) ================= */
+const FACTS = [
+ ["Organisation","Blue Klong Foundation — a Bangkok-based non-profit that restores city canals (founded 2015; 12 staff; 3,000 registered volunteers; has cleaned 18 km of canals)"],
+ ["Event","Klong Day 2026 — a volunteer canal clean-up, plus the launch of the “Adopt-a-Klong” program"],
+ ["Date & time","Saturday, November 21, 2026 · 7:00–11:00 a.m."],
+ ["Place","Khlong Saen Saep, starting at Pratunam Pier, Bangkok"],
+ ["Goal","800 volunteers · remove 5 tonnes of waste (2025: 520 volunteers removed 4.2 tonnes)"],
+ ["New program","Adopt-a-Klong: schools and companies care for a 500-metre stretch of canal for one year"],
+ ["How to join","Free registration at blueklong.example/klongday · gloves, bags and drinking water provided"],
+ ["Recycling","Waste is sorted on site; plastics go to Siam Recycle Co. (partner)"],
+ ["Spokesperson","Napat Wongsiri, Executive Director"],
+ ["Media contact","Kanokwan Saelim, Communications Manager · press@blueklong.example · +66 2 555 0142"],
+ ["Release date","November 2, 2026 · for immediate release"]
+];
+const HYPE = ["amazing","incredible","best","ever","unbelievable","revolutionary","must-see","huge","awesome","world-class","perfect","ultimate","exciting","fantastic","biggest","greatest","guaranteed","epic","insane","don't miss"];
+const VERBS = ["launches","opens","invites","holds","hosts","calls","announces","rallies","kicks","unveils","brings","starts","begins","organises","organizes","welcomes","seeks","aims","marks","returns"];
+
+/* ================= PARTS =================
+   item types: fill (tpl + blanks) · order (tokens in correct order) · write (rule checks) */
+const PARTS = [
+ {id:1,key:"brief",icon:"🧭",title:"The Brief",th:"เตรียมตัวก่อนเขียน",
+  intro:"Meet the NGO, read the fact sheet, and see the 10 parts you will write this lesson.",
+  introTh:"รู้จักองค์กร อ่าน fact sheet และดูภาพรวม 10 องค์ประกอบที่จะเขียนในบทเรียนนี้",
+  cards:[
+   {ic:"🌏",t:"Why NGOs Need Press Releases",th:"ทำไม NGO ต้องใช้ข่าวประชาสัมพันธ์",sum:"Small budget, big cause: news coverage is free.",
+    en:"Most NGOs cannot pay for TV or billboard ads. A press release turns a campaign into news, so journalists publish it for free (earned media). It also builds trust, because news sounds more credible than an ad.",
+    thd:"NGO ส่วนใหญ่มีงบน้อย ซื้อโฆษณาทีวีหรือป้ายบิลบอร์ดไม่ไหว ข่าวประชาสัมพันธ์ช่วยเปลี่ยนแคมเปญให้กลายเป็น “ข่าว” ที่นักข่าวนำไปเผยแพร่ฟรี (earned media) และน่าเชื่อถือกว่าโฆษณา เพราะผู้อ่านมองว่าเป็นข้อเท็จจริง",
+    ex:[["good","Blue Klong Foundation will hold a volunteer canal clean-up on November 21.","News: facts a journalist can use"],["bad","Save our canals NOW! Join the best clean-up ever!","Ad: emotion and hype, no facts"]]},
+   {ic:"⚖️",t:"Ad Voice vs. News Voice",th:"น้ำเสียงโฆษณา vs น้ำเสียงข่าว",sum:"Same cause, different voice: facts first, no hype.",
+    en:"An ad speaks to “you” and pushes emotion. A press release speaks about the organisation in the third person, uses facts and numbers, and lets a quoted person express feelings.",
+    thd:"โฆษณาพูดกับ “คุณ” และเร้าอารมณ์ ส่วนข่าวประชาสัมพันธ์เล่าเรื่ององค์กรด้วยบุรุษที่ 3 ใช้ข้อเท็จจริงและตัวเลข ส่วนความรู้สึกหรือความคิดเห็นให้ใส่ไว้ในคำพูดอ้างอิง (quote) ของบุคคลเท่านั้น",
+    ex:[["bad","You can make Bangkok beautiful again!","Ad voice: “you”, emotion"],["good","The foundation aims to remove 5 tonnes of waste from Khlong Saen Saep.","News voice: third person, numbers"]]},
+   {ic:"📋",t:"The Fact Sheet Rule",th:"กฎของ fact sheet",sum:"Change the form, never the facts.",
+    en:"Every name, number, date and place in your press release must come from the fact sheet. If a fact is not given, do not invent it. Writers change the form (order, wording), never the facts.",
+    thd:"ชื่อ ตัวเลข วันที่ และสถานที่ทุกอย่างต้องมาจาก fact sheet ถ้าไม่มีข้อมูล ห้ามแต่งเพิ่มเอง นักเขียนเปลี่ยนได้แค่ “รูปแบบ” (ลำดับ การใช้คำ) แต่ห้ามเปลี่ยน “ข้อเท็จจริง”",
+    ex:[["good","800 volunteers (fact sheet)","✓ from the fact sheet"],["bad","more than 2,000 volunteers","✗ invented number"]]},
+   {ic:"🗺️",t:"Your 10-Part Roadmap",th:"แผนที่ 10 องค์ประกอบ",sum:"Release line → headline → … → ### : one part at a time.",
+    en:"Release Line · Headline · Subheadline · Dateline · Lead · Body · Quote · Boilerplate · Media Contact · End Mark. In each Part of this lesson you review the rule, then practise with fill-in, word-order and writing tasks. At the end, your own sentences are assembled into one full press release.",
+    thd:"บทเรียนนี้แบ่งเป็น Part ละองค์ประกอบ ทุก Part ทบทวนหลักการก่อน แล้วฝึกเติมคำ เรียงคำ และเขียนเอง ตอนจบระบบจะรวมประโยคที่นักศึกษาเขียนเป็นข่าวประชาสัมพันธ์ฉบับเต็มของตัวเอง",
+    ex:[["","FOR IMMEDIATE RELEASE → Headline → Subheadline → BANGKOK, Thailand – Date – → Lead → Body → “Quote,” said… → About… → Media Contact → ###","The order you will follow"]]}
+  ],
+  items:[
+   {k:"p1i1",type:"fill",title:"Fact check",prompt:"Complete the sentence using the fact sheet.",promptTh:"เติมข้อมูลจาก fact sheet (กดปุ่ม 📋 ด้านบนเพื่อเปิดดู)",
+    tpl:"Klong Day 2026 will take place on {0}, November 21, along Khlong {1}. The organisers hope {2} volunteers will join.",
+    blanks:[{opts:["Saturday","Sunday","Friday"],ans:["Saturday"]},{ans:["Saen Saep","Saen-Saep","Saensaep"],ph:"canal name"},{ans:["800","eight hundred"],ph:"number"}],
+    why:"All three facts come straight from the fact sheet: date, place and goal. · ข้อมูลทั้งสามมาจาก fact sheet โดยตรง"},
+   {k:"p1i2",type:"order",title:"Put the 10 parts in order",prompt:"Tap the parts in the order they appear in a press release.",promptTh:"แตะเรียงองค์ประกอบตามลำดับในข่าวประชาสัมพันธ์",
+    tokens:["Release Line","Headline","Subheadline","Dateline","Lead","Body","Quote","Boilerplate","Media Contact","End Mark"],max:2,
+    alt:[["Release Line","Headline","Subheadline","Dateline","Lead","Quote","Body","Boilerplate","Media Contact","End Mark"]],
+    why:"Most important first (inverted pyramid), company information and contact last. Body and Quote may swap. · สำคัญที่สุดอยู่บน ข้อมูลองค์กรและผู้ติดต่ออยู่ท้าย Body กับ Quote สลับกันได้"},
+   {k:"p1i3",type:"write",title:"From ad voice to news voice",prompt:"Rewrite this ad line as ONE news sentence. Use facts from the fact sheet.",promptTh:"เขียนประโยคโฆษณานี้ใหม่ให้เป็นประโยคข่าว 1 ประโยค ใช้ข้อมูลจาก fact sheet",
+    given:"Hey Bangkok! Join the BEST canal clean-up EVER this November!!!",
+    checks:[
+     {r:"starts",p:["Blue Klong Foundation"],en:"Starts with the organisation's name",th:"ขึ้นต้นด้วยชื่อองค์กร (third person)"},
+     {r:"words",p:[12,35],en:"12–35 words",th:"ยาว 12–35 คำ"},
+     {r:"anyOf",p:[["November 21","Nov. 21","21 November"]],en:"Gives the date (November 21)",th:"บอกวันที่ (November 21)"},
+     {r:"anyOf",p:[["Saen Saep","Pratunam"]],en:"Gives the place",th:"บอกสถานที่"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด เช่น best, ever, amazing"},
+     {r:"noneOf",p:[["you","your","hey"]],en:"No “you / hey” (that is ad voice)",th:"ไม่พูดกับผู้อ่านด้วย you / hey"},
+     {r:"noChar",p:["!"],en:"No exclamation marks",th:"ไม่มีเครื่องหมาย !"}],
+    model:"Blue Klong Foundation will hold Klong Day 2026, a volunteer clean-up along Khlong Saen Saep in Bangkok, on November 21, 2026.",
+    why:"News voice = third person + facts (who, what, when, where). The hype is removed, the facts stay. · น้ำเสียงข่าวใช้บุรุษที่ 3 และข้อเท็จจริง ตัดคำโอ้อวดออก"}
+  ]},
+ {id:2,key:"headline",icon:"📣",title:"Release Line & Headline",th:"บรรทัดเผยแพร่และพาดหัว",
+  intro:"Tell editors when they may publish, then sum up the whole story in one strong line.",
+  introTh:"บอกนักข่าวว่าเผยแพร่ได้เมื่อไร แล้วสรุปข่าวทั้งหมดในบรรทัดเดียว",
+  cards:[
+   {ic:"🚦",t:"The Release Line",th:"บรรทัดกำหนดการเผยแพร่",sum:"FOR IMMEDIATE RELEASE or EMBARGOED UNTIL + date.",
+    en:"The first line of every release, in capital letters. FOR IMMEDIATE RELEASE means the news can be published now. EMBARGOED UNTIL [date, time] asks editors to wait — useful when an NGO announces something at a press event.",
+    thd:"บรรทัดแรกของข่าว พิมพ์ตัวใหญ่ทั้งหมด FOR IMMEDIATE RELEASE = เผยแพร่ได้ทันที ส่วน EMBARGOED UNTIL + วันเวลา = ขอให้รอถึงเวลาที่กำหนด เหมาะกับการเปิดตัวพร้อมกันในงานแถลงข่าว",
+    ex:[["good","FOR IMMEDIATE RELEASE",""],["good","EMBARGOED UNTIL 10:00 ICT, NOVEMBER 21, 2026",""],["bad","Release soon!","✗ not a date, not standard"]]},
+   {ic:"🧪",t:"The Headline Formula",th:"สูตรพาดหัว",sum:"Organisation + active verb (present tense) + the news.",
+    en:"Start with the organisation, add a strong verb in the present simple tense (Launches, Invites, Holds), then the news. News headlines use the present tense even for future events.",
+    thd:"ขึ้นต้นด้วยชื่อองค์กร ตามด้วยกริยาแสดงการกระทำในรูป present simple (Launches, Invites, Holds) แล้วตามด้วยใจความข่าว พาดหัวข่าวใช้ present tense แม้เหตุการณ์จะเกิดในอนาคต",
+    ex:[["good","Blue Klong Foundation Invites Volunteers to Clean Up Khlong Saen Saep","Org + verb + news"],["bad","Blue Klong Foundation Will Be Inviting Volunteers","✗ weak future verb"]]},
+   {ic:"📏",t:"Headline Style Rules",th:"กฎรูปแบบพาดหัว",sum:"Title Case · about 6–14 words · no ! ? or full stop.",
+    en:"Capitalise the main words (Title Case). Keep it short: about 6–14 words. Never end with a full stop, and never use ! or ?. Do not speak to the reader (“you”) and do not use hype words.",
+    thd:"ขึ้นต้นคำหลักด้วยตัวพิมพ์ใหญ่ (Title Case) ยาวประมาณ 6–14 คำ ไม่ใส่จุดท้าย ไม่ใช้ ! หรือ ? ไม่พูดกับผู้อ่าน (you) และไม่ใช้คำโอ้อวด",
+    ex:[["good","Blue Klong Foundation Holds Canal Clean-Up Day in Bangkok",""],["bad","Join Us for the Best Clean-Up Ever!","✗ you-voice, hype, !"]]},
+   {ic:"💪",t:"Verb Bank",th:"คลังกริยาสำหรับพาดหัว",sum:"Launches · Invites · Holds · Calls On · Kicks Off · Rallies",
+    en:"Strong present-tense verbs for NGO news: Launches (a new program), Invites / Calls On (asks people to join), Holds / Hosts (an event), Kicks Off (starts), Rallies (brings many people together), Marks (an anniversary).",
+    thd:"กริยาที่ใช้บ่อยในข่าว NGO: Launches (เปิดตัวโครงการ), Invites / Calls On (เชิญชวน), Holds / Hosts (จัดงาน), Kicks Off (เริ่ม), Rallies (รวมพลคนจำนวนมาก), Marks (ครบรอบ)",
+    ex:[["good","Blue Klong Foundation Launches “Adopt-a-Klong” Program",""],["good","800 Volunteers Expected as Blue Klong Foundation Kicks Off Klong Day 2026",""]]}
+  ],
+  items:[
+   {k:"p2i1",type:"fill",title:"Choose the right words",prompt:"Choose the correct release line and headline verb.",promptTh:"เลือกบรรทัดเผยแพร่และกริยาพาดหัวที่ถูกต้อง",
+    tpl:"FOR {0} RELEASE<br>Blue Klong Foundation {1} Volunteers to Clean Up Khlong Saen Saep",
+    blanks:[{opts:["IMMEDIATE","URGENT","FAST"],ans:["IMMEDIATE"]},{opts:["Invites","Will Be Inviting","Is Excited to Invite","Invited"],ans:["Invites"]}],
+    why:"The standard release line is FOR IMMEDIATE RELEASE. Headlines use the present simple (Invites), not future or emotional phrases. · ใช้ FOR IMMEDIATE RELEASE และกริยา present simple"},
+   {k:"p2i2",type:"order",title:"Rebuild the headline",prompt:"Put the words in order to make a correct headline.",promptTh:"เรียงคำให้เป็นพาดหัวที่ถูกต้อง",
+    tokens:["Blue Klong Foundation","Launches","“Adopt-a-Klong”","Program","for","Bangkok","Canals"],max:2,
+    why:"Organisation → verb → what is new → for whom/where. · องค์กร → กริยา → สิ่งใหม่ → เพื่อใคร/ที่ไหน"},
+   {k:"p2i3",type:"write",title:"Write the headline",prompt:"Write a headline for Klong Day 2026 (the clean-up event).",promptTh:"เขียนพาดหัวข่าวสำหรับงาน Klong Day 2026",
+    checks:[
+     {r:"starts",p:["Blue Klong"],en:"Starts with the organisation",th:"ขึ้นต้นด้วยชื่อองค์กร"},
+     {r:"verb",en:"Uses a strong present-tense verb (e.g. Invites, Holds)",th:"มีกริยา present tense เช่น Invites, Holds"},
+     {r:"words",p:[6,14],en:"About 6–14 words",th:"ยาวประมาณ 6–14 คำ"},
+     {r:"title",en:"Title Case (main words capitalised)",th:"คำหลักขึ้นต้นตัวพิมพ์ใหญ่"},
+     {r:"noEnd",en:"No full stop, ! or ? at the end",th:"ไม่มี . ! ? ท้ายพาดหัว"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"anyOf",p:[["Klong Day","Clean-Up","Clean Up","Cleanup","Saen Saep"]],en:"Says what the news is (Klong Day / clean-up)",th:"บอกว่าข่าวคืออะไร (Klong Day / clean-up)"}],
+    model:"Blue Klong Foundation Invites 800 Volunteers to Klong Day Clean-Up on Khlong Saen Saep",
+    why:"Organisation + present-tense verb + the news, in Title Case, with no hype. · องค์กร + กริยา + ข่าว ใช้ Title Case ไม่มีคำโอ้อวด"},
+   {k:"p2i4",type:"write",title:"Fix the ad headline",prompt:"This headline sounds like an ad. Rewrite it as a news headline about the new Adopt-a-Klong program.",promptTh:"พาดหัวนี้เหมือนโฆษณา เขียนใหม่ให้เป็นพาดหัวข่าวเรื่องโครงการ Adopt-a-Klong",
+    given:"AMAZING NEWS!!! YOU Can Adopt Your Very Own Canal — The Best Idea EVER!",
+    checks:[
+     {r:"starts",p:["Blue Klong"],en:"Starts with the organisation",th:"ขึ้นต้นด้วยชื่อองค์กร"},
+     {r:"verb",en:"Uses a strong present-tense verb (e.g. Launches)",th:"มีกริยา present tense เช่น Launches"},
+     {r:"anyOf",p:[["Adopt-a-Klong","Adopt a Klong"]],en:"Names the program (Adopt-a-Klong)",th:"ระบุชื่อโครงการ Adopt-a-Klong"},
+     {r:"words",p:[6,14],en:"About 6–14 words",th:"ยาวประมาณ 6–14 คำ"},
+     {r:"noneOf",p:[["you","your"]],en:"No “you / your”",th:"ไม่มี you / your"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"noEnd",en:"No full stop, ! or ? at the end",th:"ไม่มี . ! ? ท้ายพาดหัว"}],
+    model:"Blue Klong Foundation Launches “Adopt-a-Klong” Program for Schools and Companies",
+    why:"Remove “you”, hype and exclamation marks; keep the facts and make the organisation the subject. · ตัด you คำโอ้อวด และ ! ออก ให้องค์กรเป็นประธาน"}
+  ]},
+ {id:3,key:"subhead",icon:"✏️",title:"Subheadline",th:"พาดหัวรอง",
+  intro:"Add one more key fact under the headline: a number, a benefit, or who takes part.",
+  introTh:"เพิ่มข้อเท็จจริงสำคัญอีก 1 อย่างใต้พาดหัว เช่น ตัวเลข ประโยชน์ หรือผู้ที่เกี่ยวข้อง",
+  cards:[
+   {ic:"➕",t:"What a Subheadline Does",th:"พาดหัวรองทำหน้าที่อะไร",sum:"It supports the headline with one extra key fact.",
+    en:"The subheadline sits directly under the headline. The headline gives the main news; the subheadline adds the next most important fact — usually a number, a benefit, or who is involved — so the editor understands the story in two lines.",
+    thd:"พาดหัวรองอยู่ใต้พาดหัวทันที พาดหัวบอกข่าวหลัก ส่วนพาดหัวรองเพิ่มข้อเท็จจริงที่สำคัญรองลงมา มักเป็นตัวเลข ประโยชน์ หรือผู้ที่เกี่ยวข้อง ให้บรรณาธิการเข้าใจข่าวได้ใน 2 บรรทัด",
+    ex:[["","Headline: Blue Klong Foundation Invites Volunteers to Klong Day Clean-Up","Main news"],["good","Subheadline: 800 volunteers expected to remove 5 tonnes of waste from Khlong Saen Saep","+ numbers"]]},
+   {ic:"🚫",t:"Add, Don't Repeat",th:"เพิ่มข้อมูลใหม่ ไม่พูดซ้ำ",sum:"If it says the headline again in other words, it is wasted.",
+    en:"A weak subheadline repeats the headline with different words. A strong one gives NEW information that the headline had no space for.",
+    thd:"พาดหัวรองที่อ่อนจะพูดซ้ำพาดหัวด้วยคำอื่น พาดหัวรองที่ดีต้องให้ข้อมูลใหม่ที่พาดหัวไม่มีที่ใส่",
+    ex:[["bad","Blue Klong Foundation invites people to help clean a canal","✗ repeats the headline"],["good","Free event on November 21 includes the launch of the “Adopt-a-Klong” program","✓ new facts"]]},
+   {ic:"📐",t:"Subheadline Style",th:"รูปแบบพาดหัวรอง",sum:"One line · about 8–25 words · facts, no hype, no “you”.",
+    en:"Write one line of about 8–25 words. Many organisations use sentence case (only the first word and names capitalised) and no full stop. Keep the news voice: facts and numbers, no hype words, no “you”.",
+    thd:"เขียน 1 บรรทัด ประมาณ 8–25 คำ หลายองค์กรใช้ sentence case (ตัวพิมพ์ใหญ่เฉพาะคำแรกและชื่อเฉพาะ) และไม่ใส่จุดท้าย ใช้น้ำเสียงข่าว มีข้อเท็จจริงและตัวเลข ไม่มีคำโอ้อวดและไม่พูดกับ you",
+    ex:[["good","Schools and companies can care for a 500-metre stretch of canal for one year",""],["bad","You will LOVE this amazing new program!","✗ you + hype"]]},
+   {ic:"🔢",t:"Which Fact to Choose?",th:"เลือกข้อเท็จจริงไหนดี",sum:"Numbers → benefits → people → how it works.",
+    en:"Choose the fact that makes an editor say “this matters”: a clear number (800 volunteers, 5 tonnes), a public benefit (cleaner canals), the people involved (schools and companies), or how it works (free registration).",
+    thd:"เลือกข้อเท็จจริงที่ทำให้บรรณาธิการเห็นว่า “เรื่องนี้สำคัญ” เช่น ตัวเลขที่ชัด (800 คน, 5 ตัน) ประโยชน์ต่อส่วนรวม (คลองสะอาดขึ้น) ผู้ที่เกี่ยวข้อง (โรงเรียน บริษัท) หรือวิธีการ (ลงทะเบียนฟรี)",
+    ex:[["good","Last year 520 volunteers removed 4.2 tonnes of waste; this year the goal is 5 tonnes","numbers + comparison"]]}
+  ],
+  items:[
+   {k:"p3i1",type:"fill",title:"Choose the best subheadline",prompt:"Headline: Blue Klong Foundation Invites Volunteers to Klong Day Clean-Up. Choose the best subheadline.",promptTh:"เลือกพาดหัวรองที่ดีที่สุดสำหรับพาดหัวนี้",
+    tpl:"Subheadline: {0}",
+    blanks:[{opts:["800 volunteers expected to remove 5 tonnes of waste from Khlong Saen Saep","Blue Klong Foundation invites volunteers to the Klong Day clean-up","Don't miss the most exciting clean-up of the year!"],ans:["800 volunteers expected to remove 5 tonnes of waste from Khlong Saen Saep"]}],
+    why:"Option 1 adds new numbers. Option 2 only repeats the headline; option 3 is ad voice. · ตัวเลือกแรกเพิ่มข้อมูลใหม่ ตัวเลือกที่ 2 พูดซ้ำพาดหัว ตัวเลือกที่ 3 เป็นน้ำเสียงโฆษณา"},
+   {k:"p3i2",type:"fill",title:"Add the numbers",prompt:"Complete the subheadline with numbers from the fact sheet.",promptTh:"เติมตัวเลขจาก fact sheet",
+    tpl:"Organisers aim to remove {0} tonnes of waste with {1} volunteers, up from 4.2 tonnes in {2}",
+    blanks:[{ans:["5","five"],ph:"tonnes"},{ans:["800","eight hundred"],ph:"volunteers"},{ans:["2025"],ph:"year"}],
+    why:"Goal: 800 volunteers and 5 tonnes; last year (2025): 4.2 tonnes. Comparing numbers shows progress. · การเทียบตัวเลขกับปีก่อนช่วยให้เห็นความก้าวหน้า"},
+   {k:"p3i3",type:"order",title:"Rebuild the subheadline",prompt:"Put the phrases in order to make a subheadline about the new program.",promptTh:"เรียงวลีให้เป็นพาดหัวรองเรื่องโครงการใหม่",
+    tokens:["Schools and companies","can care for","a 500-metre stretch of canal","for one year","under the new program"],max:2,
+    why:"Subject (who) → verb → what → how long. · ประธาน (ใคร) → กริยา → อะไร → นานเท่าไร"},
+   {k:"p3i4",type:"write",title:"Write the subheadline",prompt:"Headline: Blue Klong Foundation Invites Volunteers to Klong Day Clean-Up. Write a subheadline that adds NEW facts.",promptTh:"เขียนพาดหัวรองที่เพิ่มข้อเท็จจริงใหม่ ไม่พูดซ้ำพาดหัว",
+    given:"Blue Klong Foundation Invites Volunteers to Klong Day Clean-Up",
+    checks:[
+     {r:"words",p:[8,25],en:"About 8–25 words",th:"ยาวประมาณ 8–25 คำ"},
+     {r:"num",en:"Includes at least one number from the fact sheet",th:"มีตัวเลขจาก fact sheet อย่างน้อย 1 ตัว"},
+     {r:"overlap",p:["Blue Klong Foundation Invites Volunteers to Klong Day Clean-Up",.5],en:"Adds new information (does not repeat the headline)",th:"ให้ข้อมูลใหม่ ไม่ซ้ำพาดหัว"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"noneOf",p:[["you","your"]],en:"No “you / your”",th:"ไม่มี you / your"},
+     {r:"noChar",p:["!"],en:"No exclamation marks",th:"ไม่มีเครื่องหมาย !"}],
+    model:"800 volunteers expected to remove 5 tonnes of waste from Khlong Saen Saep on November 21",
+    why:"The headline says WHAT; the subheadline adds HOW MANY and HOW MUCH. · พาดหัวบอกว่า “อะไร” พาดหัวรองเพิ่ม “กี่คน/เท่าไร”"}
+  ]},
+ {id:4,key:"dateline",icon:"📍",title:"Dateline",th:"สถานที่และวันที่",
+  intro:"Tell the editor where the news comes from and when it is released — in one strict format.",
+  introTh:"บอกบรรณาธิการว่าข่าวมาจากที่ไหนและเผยแพร่เมื่อไร ด้วยรูปแบบที่ตายตัว",
+  cards:[
+   {ic:"📍",t:"Two Facts in One Line",th:"ข้อมูล 2 อย่างใน 1 บรรทัด",sum:"WHERE the news comes from + WHEN it is released.",
+    en:"The dateline gives two pieces of information: the city (and country) the news comes from, and the date the press release is issued. It opens the first paragraph and ends with a dash, so the lead follows on the same line.",
+    thd:"dateline ให้ข้อมูล 2 อย่าง คือ เมือง (และประเทศ) ที่ออกข่าว และวันที่เผยแพร่ข่าว อยู่ต้นย่อหน้าแรกและจบด้วยขีด แล้วต่อด้วย lead ในบรรทัดเดียวกัน",
+    ex:[["good","BANGKOK, Thailand – November 2, 2026 – Blue Klong Foundation will hold…","dateline + lead on one line"]]},
+   {ic:"🔠",t:"The Exact Format",th:"รูปแบบที่ถูกต้อง",sum:"CITY, Country – Month Day, Year –",
+    en:"City in CAPITAL letters, a comma, the country in normal case, a dash, the month written as a word, the day, a comma, the year, and a final dash. Example: BANGKOK, Thailand – November 2, 2026 –",
+    thd:"ชื่อเมืองพิมพ์ใหญ่ทั้งหมด ตามด้วยจุลภาค ชื่อประเทศพิมพ์ปกติ ขีด เดือนเขียนเป็นคำ วันที่ จุลภาค ปี และขีดปิดท้าย เช่น BANGKOK, Thailand – November 2, 2026 –",
+    ex:[["good","BANGKOK, Thailand – November 2, 2026 –",""],["bad","Bangkok 2/11/2026","✗ city not capitals, numeric date"],["bad","November 2, 2026, BANGKOK","✗ wrong order"]]},
+   {ic:"🗓️",t:"Release Date ≠ Event Date",th:"วันออกข่าว ≠ วันจัดงาน",sum:"Use the day the release is sent (Nov 2), not the event day (Nov 21).",
+    en:"A very common mistake: the dateline shows when the press release is ISSUED. The event date (November 21) belongs in the lead, not the dateline.",
+    thd:"ข้อผิดพลาดที่พบบ่อย: dateline ใช้วันที่ “ออกข่าว” ส่วนวันจัดงาน (November 21) ให้ใส่ใน lead ไม่ใช่ใน dateline",
+    ex:[["good","BANGKOK, Thailand – November 2, 2026 –","release date"],["bad","BANGKOK, Thailand – November 21, 2026 –","✗ event date"]]},
+   {ic:"🌐",t:"Variations You Will See",th:"รูปแบบอื่นที่พบได้",sum:"Famous cities may drop the country; two cities can share a dateline.",
+    en:"Well-known cities sometimes appear without the country (BANGKOK – …). A joint announcement can list two places (FRESNO, Calif. & HANOI, Vietnam – …). In this lesson, always write CITY, Country.",
+    thd:"เมืองที่รู้จักกันดีบางครั้งไม่ใส่ประเทศ (BANGKOK – …) ข่าวที่ออกร่วมกันอาจมี 2 เมือง ในบทเรียนนี้ให้เขียนแบบ CITY, Country เสมอ",
+    ex:[["","BANGKOK – November 2, 2026 –","short form"],["","CHIANG MAI, Thailand – June 3, 2026 –","another city"]]}
+  ],
+  items:[
+   {k:"p4i1",type:"fill",title:"Choose the correct form",prompt:"Choose the correct words for the dateline.",promptTh:"เลือกคำให้ dateline ถูกรูปแบบ",
+    tpl:"{0}, Thailand – {1} 2, 2026 –",
+    blanks:[{opts:["BANGKOK","Bangkok","bangkok"],ans:["BANGKOK"]},{opts:["November","Nov.","11"],ans:["November"]}],
+    why:"City in capitals; month written as a word. · ชื่อเมืองพิมพ์ใหญ่ เดือนเขียนเป็นคำ"},
+   {k:"p4i2",type:"fill",title:"Which date?",prompt:"Klong Day is on November 21. The release is sent on November 2. Which date goes in the dateline?",promptTh:"งานจัด 21 พ.ย. แต่ส่งข่าว 2 พ.ย. dateline ใช้วันไหน",
+    tpl:"The dateline uses the {0}.",
+    blanks:[{opts:["release date (November 2)","event date (November 21)","registration date"],ans:["release date (November 2)"]}],
+    why:"Dateline = the day the release is issued. The event date goes in the lead. · dateline ใช้วันออกข่าว วันจัดงานใส่ใน lead"},
+   {k:"p4i3",type:"order",title:"Build the dateline",prompt:"Put the pieces in the correct order.",promptTh:"เรียงชิ้นส่วนให้เป็น dateline ที่ถูกต้อง",
+    tokens:["BANGKOK,","Thailand","–","November","2,","2026","–"],max:2,
+    why:"CITY, Country – Month Day, Year – · เมือง, ประเทศ – เดือน วัน, ปี –"},
+   {k:"p4i4",type:"write",title:"Write the dateline",prompt:"Type the full dateline for the Blue Klong press release.",promptTh:"พิมพ์ dateline ฉบับเต็มของข่าว Blue Klong",
+    checks:[
+     {r:"regex",p:["^[A-Z][A-Z .]{2,},"],en:"Starts with the CITY in capital letters + comma",th:"ขึ้นต้นด้วยชื่อเมืองพิมพ์ใหญ่ ตามด้วย ,"},
+     {r:"anyOf",p:[["Thailand"]],en:"Includes the country (Thailand)",th:"มีชื่อประเทศ (Thailand)"},
+     {r:"regex",p:["\\b(January|February|March|April|May|June|July|August|September|October|November|December)\\b"],en:"Month written as a word",th:"เขียนเดือนเป็นคำ"},
+     {r:"regex",p:["November 2,\\s*2026"],en:"Uses the release date: November 2, 2026",th:"ใช้วันออกข่าว November 2, 2026"},
+     {r:"noRegex",p:["November 21"],en:"Not the event date (November 21)",th:"ไม่ใช้วันจัดงาน (21 พ.ย.)"},
+     {r:"regex",p:["[–—-]\\s*$"],en:"Ends with a dash",th:"ปิดท้ายด้วยขีด –"}],
+    model:"BANGKOK, Thailand – November 2, 2026 –",
+    why:"Two facts — place and release date — in the fixed order CITY, Country – Month Day, Year –. · สถานที่ + วันออกข่าว ตามลำดับตายตัว"}
+  ]},
+ {id:5,key:"lead",icon:"🎯",title:"Lead (5W1H)",th:"ย่อหน้านำ",
+  intro:"Write the most important paragraph: who, what, when, where, why and how — in one or two sentences.",
+  introTh:"เขียนย่อหน้าที่สำคัญที่สุด ตอบใคร อะไร เมื่อไร ที่ไหน ทำไม อย่างไร ใน 1–2 ประโยค",
+  cards:[
+   {ic:"🎯",t:"The Most Important Paragraph",th:"ย่อหน้าที่สำคัญที่สุด",sum:"If an editor reads only this, they still have the story.",
+    en:"The lead is the first paragraph, right after the dateline. It gives the whole story in about 25–50 words (one or two sentences). Editors cut from the bottom, so everything essential must be here.",
+    thd:"lead คือย่อหน้าแรกต่อจาก dateline เล่าข่าวทั้งหมดในประมาณ 25–50 คำ (1–2 ประโยค) บรรณาธิการตัดข่าวจากท้ายขึ้นมา ข้อมูลสำคัญทั้งหมดจึงต้องอยู่ที่นี่",
+    ex:[["good","Blue Klong Foundation will hold Klong Day 2026, a volunteer clean-up along Khlong Saen Saep in Bangkok, on November 21 to remove 5 tonnes of waste from the canal.","34 words · complete story"]]},
+   {ic:"❓",t:"Answer 5W1H",th:"ตอบ 5W1H",sum:"Who · What · When · Where · Why · How",
+    en:"Check your lead against six questions: Who (Blue Klong Foundation) · What (a volunteer clean-up / Klong Day 2026) · When (November 21) · Where (Khlong Saen Saep, Bangkok) · Why (to remove waste and restore the canal) · How (with 800 volunteers / free registration).",
+    thd:"ตรวจ lead ด้วยคำถาม 6 ข้อ: ใคร · ทำอะไร · เมื่อไร · ที่ไหน · ทำไม · อย่างไร",
+    ex:[["","WHO Blue Klong Foundation · WHAT will hold a clean-up · WHEN on November 21 · WHERE along Khlong Saen Saep · WHY to remove 5 tonnes of waste · HOW with 800 volunteers","one W per phrase"]]},
+   {ic:"🏁",t:"Start Strong",th:"เปิดให้หนักแน่น",sum:"Start with WHO + action verb. Never start with a question or history.",
+    en:"Open with the organisation and what it is doing (“Blue Klong Foundation will hold…” / “…today announced…”). Do not open with a question, the date, the organisation's history, or an opinion.",
+    thd:"เปิดด้วยองค์กรและสิ่งที่กำลังทำ เช่น “Blue Klong Foundation will hold…” ห้ามเปิดด้วยคำถาม วันที่ ประวัติองค์กร หรือความคิดเห็น",
+    ex:[["bad","Do you care about our canals?","✗ question opening"],["bad","Since 2015, Blue Klong Foundation has…","✗ history first"],["good","Blue Klong Foundation today announced…","✓ who + action"]]},
+   {ic:"⚠️",t:"Common Lead Mistakes",th:"ข้อผิดพลาดที่พบบ่อย",sum:"Too long · missing WHY · hype · “you / we”.",
+    en:"Typical problems: more than 50 words, missing the WHY, hype words (amazing, best), and first/second person (we, our, you). Keep it third person and factual; save opinions for the quote.",
+    thd:"ปัญหาที่พบบ่อย: ยาวเกิน 50 คำ ไม่มี “ทำไม” ใช้คำโอ้อวด และใช้บุรุษที่ 1–2 (we, our, you) ให้ใช้บุรุษที่ 3 และข้อเท็จจริง เก็บความคิดเห็นไว้ใน quote",
+    ex:[["bad","We are super excited to invite you to our amazing clean-up!","✗ we/you + hype"],["good","The foundation expects 800 volunteers to join the free event.","✓ third person, facts"]]}
+  ],
+  items:[
+   {k:"p5i1",type:"fill",title:"Tag the 5W1H",prompt:"Which question does each phrase answer?",promptTh:"แต่ละวลีตอบคำถามข้อไหน",
+    tpl:"“Blue Klong Foundation” → {0}<br>“will hold a volunteer clean-up” → {1}<br>“on November 21” → {2}<br>“along Khlong Saen Saep” → {3}<br>“to remove 5 tonnes of waste” → {4}<br>“with 800 volunteers” → {5}",
+    blanks:["Who","What","When","Where","Why","How"].map(a=>({opts:["Who","What","When","Where","Why","How"],ans:[a]})),
+    why:"Each phrase answers one question; a complete lead has all six. · แต่ละวลีตอบคำถาม 1 ข้อ lead ที่ครบต้องมีทั้ง 6"},
+   {k:"p5i2",type:"fill",title:"Complete the lead",prompt:"Fill in the missing parts of the lead.",promptTh:"เติมส่วนที่หายไปของ lead",
+    tpl:"{0} will hold Klong Day 2026, a volunteer canal clean-up, on {1} along Khlong Saen Saep in Bangkok to {2}.",
+    blanks:[{ans:["Blue Klong Foundation","The Blue Klong Foundation"],ph:"who"},{ans:["November 21","Saturday, November 21","November 21, 2026","Saturday, November 21, 2026"],ph:"when"},
+     {opts:["remove 5 tonnes of waste from the canal","have the best day ever","sell gloves and bags"],ans:["remove 5 tonnes of waste from the canal"]}],
+    why:"Who + When + Why from the fact sheet. The WHY must be a fact, not hype. · ทำไม ต้องเป็นข้อเท็จจริง ไม่ใช่คำโอ้อวด"},
+   {k:"p5i3",type:"order",title:"Rebuild the lead",prompt:"Put the phrases in order to make a strong lead.",promptTh:"เรียงวลีให้เป็น lead ที่ดี",
+    tokens:["Blue Klong Foundation","will hold Klong Day 2026,","a volunteer canal clean-up,","on November 21","along Khlong Saen Saep in Bangkok","to remove 5 tonnes of waste."],max:2,
+    alt:[["Blue Klong Foundation","will hold Klong Day 2026,","a volunteer canal clean-up,","along Khlong Saen Saep in Bangkok","on November 21","to remove 5 tonnes of waste."]],
+    why:"Who → what → (when / where) → why. When and Where may swap. · ใคร → อะไร → เมื่อไร/ที่ไหน → ทำไม (เมื่อไร/ที่ไหน สลับได้)"},
+   {k:"p5i4",type:"write",title:"Write the lead",prompt:"Write the lead (1–2 sentences) for Klong Day 2026. Do not repeat the dateline.",promptTh:"เขียน lead 1–2 ประโยคสำหรับ Klong Day 2026 ไม่ต้องพิมพ์ dateline ซ้ำ",
+    checks:[
+     {r:"starts",p:["Blue Klong"],en:"Starts with WHO (the organisation)",th:"ขึ้นต้นด้วย “ใคร” (ชื่อองค์กร)"},
+     {r:"words",p:[25,50],en:"About 25–50 words",th:"ยาวประมาณ 25–50 คำ"},
+     {r:"sentences",p:[2],en:"One or two sentences",th:"1–2 ประโยค"},
+     {r:"anyOf",p:[["Klong Day","clean-up","clean up","cleanup"]],en:"WHAT: the clean-up / Klong Day",th:"อะไร: งาน clean-up / Klong Day"},
+     {r:"anyOf",p:[["November 21","Nov. 21","21 November"]],en:"WHEN: November 21",th:"เมื่อไร: 21 พ.ย."},
+     {r:"anyOf",p:[["Saen Saep","Pratunam"]],en:"WHERE: Khlong Saen Saep / Pratunam Pier",th:"ที่ไหน: คลองแสนแสบ / ท่าเรือประตูน้ำ"},
+     {r:"regex",p:["\\b(to|so that|in order to)\\s+(help\\s+)?(remove|reduce|restore|protect|clean|keep|cut|collect|improve|save|stop|tackle|raise)","i"],en:"WHY: a purpose (to remove / reduce / restore …)",th:"ทำไม: บอกจุดประสงค์ (to …)"},
+     {r:"anyOf",p:[["volunteer"]],en:"HOW: volunteers take part",th:"อย่างไร: มีอาสาสมัครเข้าร่วม"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"noneOf",p:[["you","your","we","our","us"]],en:"Third person only (no you / we / our)",th:"ใช้บุรุษที่ 3 เท่านั้น"}],
+    model:"Blue Klong Foundation will hold Klong Day 2026, a volunteer clean-up along Khlong Saen Saep in Bangkok, on November 21 to remove 5 tonnes of waste, with 800 volunteers expected to join.",
+    why:"All six questions in one sentence, third person, no hype. · ครบ 6 คำถามใน 1 ประโยค บุรุษที่ 3 ไม่มีคำโอ้อวด"},
+   {k:"p5i5",type:"write",title:"Fix the weak lead",prompt:"This lead breaks several rules. Rewrite it as a correct lead about the Adopt-a-Klong program.",promptTh:"lead นี้ผิดหลายจุด เขียนใหม่ให้ถูกต้อง เรื่องโครงการ Adopt-a-Klong",
+    given:"Do you love Bangkok? Since 2015 our amazing foundation has worked so hard, and now we are super excited to invite you to adopt your very own canal!",
+    checks:[
+     {r:"starts",p:["Blue Klong"],en:"Starts with WHO, not a question or history",th:"ขึ้นต้นด้วยชื่อองค์กร ไม่ใช่คำถามหรือประวัติ"},
+     {r:"words",p:[20,50],en:"About 20–50 words",th:"ยาวประมาณ 20–50 คำ"},
+     {r:"anyOf",p:[["Adopt-a-Klong","Adopt a Klong"]],en:"WHAT: names the Adopt-a-Klong program",th:"อะไร: ระบุชื่อโครงการ"},
+     {r:"anyOf",p:[["school","compan"]],en:"WHO can join: schools and companies",th:"ใครเข้าร่วมได้: โรงเรียนและบริษัท"},
+     {r:"anyOf",p:[["500","one year","1 year"]],en:"HOW: 500 metres / one year",th:"อย่างไร: 500 เมตร / 1 ปี"},
+     {r:"noChar",p:["?"],en:"No question",th:"ไม่มีคำถาม"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"noneOf",p:[["you","your","we","our","us"]],en:"Third person only",th:"ใช้บุรุษที่ 3 เท่านั้น"}],
+    model:"Blue Klong Foundation today launched “Adopt-a-Klong,” a program that invites schools and companies in Bangkok to care for a 500-metre stretch of canal for one year to keep the city's waterways clean.",
+    why:"Remove the question, the history and the we/you voice; lead with who + action + facts. · ตัดคำถาม ประวัติ และ we/you ออก เปิดด้วยใคร + ทำอะไร + ข้อเท็จจริง"}
+  ]},
+ {id:6,key:"body",icon:"📄",title:"Body",th:"เนื้อข่าว",
+  intro:"Give the details after the lead: how to join, what happens, and the numbers that support the story.",
+  introTh:"ให้รายละเอียดต่อจาก lead เช่น วิธีเข้าร่วม สิ่งที่จะเกิดขึ้น และตัวเลขที่สนับสนุนข่าว",
+  cards:[
+   {ic:"🔻",t:"The Inverted Pyramid Continues",th:"พีระมิดหัวกลับต่อจาก lead",sum:"Most useful details first, background last.",
+    en:"After the lead, each paragraph is a little less important than the one before. Put practical details first (how to join, time, place), then supporting facts (last year's result), then background. If an editor cuts the last paragraph, the story still works.",
+    thd:"หลังจาก lead แต่ละย่อหน้าสำคัญน้อยลงตามลำดับ ใส่รายละเอียดที่ใช้ได้จริงก่อน (วิธีเข้าร่วม เวลา สถานที่) ต่อด้วยข้อมูลสนับสนุน (ผลปีที่แล้ว) แล้วจึงเป็นข้อมูลพื้นหลัง ถ้าบรรณาธิการตัดย่อหน้าสุดท้าย ข่าวก็ยังสมบูรณ์",
+    ex:[["","1 How to join → 2 What happens on the day → 3 Last year's result → 4 Background","order of importance"]]},
+   {ic:"🔢",t:"Facts, Numbers, Attribution",th:"ข้อเท็จจริง ตัวเลข และที่มา",sum:"Every claim needs a number or a source.",
+    en:"Use exact facts from the fact sheet (7:00–11:00 a.m., 800 volunteers, 4.2 tonnes). When a statement is a claim or estimate, say who says so: “according to the foundation”, “organisers expect…”.",
+    thd:"ใช้ข้อเท็จจริงที่แน่นอนจาก fact sheet และเมื่อเป็นการอ้างหรือคาดการณ์ ให้บอกว่าใครเป็นคนบอก เช่น “according to the foundation”, “organisers expect…”",
+    ex:[["good","Last year, 520 volunteers removed 4.2 tonnes of waste, according to the foundation.","fact + source"],["bad","Everyone loves this event and it is very successful.","✗ no facts, no source"]]},
+   {ic:"✂️",t:"Short Paragraphs, News Voice",th:"ย่อหน้าสั้น น้ำเสียงข่าว",sum:"2–3 sentences per paragraph · third person · no hype.",
+    en:"Keep each paragraph to two or three sentences. Write in the third person (the foundation, volunteers, organisers), not “we” or “you”. Use the passive when the doer is not important: “Gloves will be provided.”",
+    thd:"ย่อหน้าละ 2–3 ประโยค ใช้บุรุษที่ 3 (the foundation, volunteers) ไม่ใช้ we หรือ you ใช้ passive ได้เมื่อไม่สำคัญว่าใครทำ เช่น “Gloves will be provided.”",
+    ex:[["good","Gloves, bags and drinking water will be provided.","passive, neutral"],["bad","We will give you free gloves and bags!","✗ we/you + !"]]},
+   {ic:"🧭",t:"What Goes in This Body?",th:"เนื้อข่าวนี้ควรมีอะไร",sum:"Registration · time & meeting point · equipment · recycling · last year.",
+    en:"For Klong Day: free registration at blueklong.example/klongday; 7:00–11:00 a.m. from Pratunam Pier; gloves, bags and water provided; waste sorted on site, plastics to Siam Recycle Co.; last year 520 volunteers removed 4.2 tonnes. The Adopt-a-Klong details can follow.",
+    thd:"สำหรับ Klong Day: ลงทะเบียนฟรี · เวลา 7:00–11:00 น. เริ่มที่ท่าเรือประตูน้ำ · มีถุงมือ ถุง และน้ำดื่มให้ · คัดแยกขยะในพื้นที่ พลาสติกส่งให้ Siam Recycle Co. · ปีที่แล้วอาสาสมัคร 520 คนเก็บขยะได้ 4.2 ตัน",
+    ex:[["good","Collected waste will be sorted on site, with plastics sent to partner Siam Recycle Co.",""]]}
+  ],
+  items:[
+   {k:"p6i1",type:"fill",title:"Body or not?",prompt:"Which sentence belongs in the BODY of the press release?",promptTh:"ประโยคใดควรอยู่ในส่วนเนื้อข่าว (body)",
+    tpl:"{0}",
+    blanks:[{opts:["Volunteers can register for free at blueklong.example/klongday.","About Blue Klong Foundation: founded in 2015 and based in Bangkok…","Media Contact: Kanokwan Saelim, Communications Manager"],ans:["Volunteers can register for free at blueklong.example/klongday."]}],
+    why:"Registration details are body information. “About…” is the boilerplate; the contact block comes at the end. · ข้อมูลลงทะเบียนอยู่ใน body ส่วน About… คือ boilerplate"},
+   {k:"p6i2",type:"fill",title:"Attribution & news grammar",prompt:"Choose the correct words.",promptTh:"เลือกคำให้ถูกต้อง",
+    tpl:"Last year, 520 volunteers removed 4.2 tonnes of waste, {0} the foundation. Organisers {1} 800 volunteers to join this year. Collected plastics {2} to Siam Recycle Co.",
+    blanks:[{opts:["according to","said by","told from"],ans:["according to"]},{opts:["expect","are expecting amazing","hope you"],ans:["expect"]},{opts:["will be sent","will sending","sends to"],ans:["will be sent"]}],
+    why:"“according to” gives the source; “expect” states an estimate neutrally; passive “will be sent” keeps the focus on the plastics. · according to = บอกแหล่งที่มา"},
+   {k:"p6i3",type:"order",title:"Order the paragraph",prompt:"Put the sentences in a logical order (what happens on the day).",promptTh:"เรียงประโยคตามลำดับเหตุการณ์ในวันงาน",
+    tokens:["Volunteers will meet at Pratunam Pier at 7:00 a.m.","Gloves, bags and drinking water will be provided.","Waste will be sorted on site before the event ends at 11:00 a.m."],max:2,
+    why:"Time order: meet → equipment → sorting and finish. · เรียงตามเวลา: นัดพบ → อุปกรณ์ → คัดแยกและจบงาน"},
+   {k:"p6i4",type:"write",title:"Write a body paragraph",prompt:"Write ONE body paragraph (2–4 sentences) that tells readers how to join and what will happen on the day.",promptTh:"เขียนเนื้อข่าว 1 ย่อหน้า (2–4 ประโยค) บอกวิธีเข้าร่วมและสิ่งที่จะเกิดขึ้นในวันงาน",
+    checks:[
+     {r:"words",p:[30,85],en:"About 30–85 words",th:"ยาวประมาณ 30–85 คำ"},
+     {r:"sentRange",p:[2,4],en:"2–4 sentences",th:"2–4 ประโยค"},
+     {r:"anyOf",p:[["blueklong.example"]],en:"Gives the registration website",th:"ระบุเว็บไซต์ลงทะเบียน"},
+     {r:"anyOf",p:[["free"]],en:"Says registration is free",th:"บอกว่าลงทะเบียนฟรี"},
+     {r:"anyOf",p:[["7:00","7 a.m","7.00","7am"]],en:"Gives the start time (7:00 a.m.)",th:"บอกเวลาเริ่ม 7:00 น."},
+     {r:"anyOf",p:[["glove","bag","water"]],en:"Mentions the equipment provided",th:"บอกอุปกรณ์ที่จัดให้"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"},
+     {r:"noneOf",p:[["you","your","we","our","us"]],en:"Third person only",th:"ใช้บุรุษที่ 3 เท่านั้น"}],
+    model:"Volunteers can register for free at blueklong.example/klongday. The clean-up will run from 7:00 to 11:00 a.m., starting at Pratunam Pier, and the foundation will provide gloves, bags and drinking water. Collected waste will be sorted on site, with plastics sent to partner Siam Recycle Co.",
+    why:"Practical details first, all from the fact sheet, in the third person. · รายละเอียดที่ใช้ได้จริงก่อน ทุกข้อมาจาก fact sheet ใช้บุรุษที่ 3"}
+  ]},
+ {id:7,key:"quote",icon:"💬",title:"Quote",th:"คำพูดอ้างอิง",
+  intro:"Give the story a human voice: why this matters, in the words of a real spokesperson.",
+  introTh:"ใส่เสียงของคนลงในข่าว: ทำไมเรื่องนี้สำคัญ ผ่านคำพูดของโฆษก",
+  cards:[
+   {ic:"🗣️",t:"Why Quotes Matter",th:"ทำไมต้องมี quote",sum:"Facts tell what; a quote tells why it matters.",
+    en:"The rest of the release must stay neutral. The quote is the one place where opinion, feeling and vision are allowed — because a named person is saying it. Journalists often copy the quote directly into their story.",
+    thd:"ส่วนอื่นของข่าวต้องเป็นกลาง quote เป็นที่เดียวที่ใส่ความคิดเห็น ความรู้สึก และวิสัยทัศน์ได้ เพราะมีผู้พูดที่ระบุชื่อ นักข่าวมักคัดลอก quote ไปใช้ในข่าวโดยตรง",
+    ex:[["good","“Clean canals are the heart of a healthy city,” said Napat Wongsiri, Executive Director of Blue Klong Foundation.","opinion + named speaker"]]},
+   {ic:"✍️",t:"The Quote Format",th:"รูปแบบการเขียน quote",sum:"“Sentence,” said Name, Title.",
+    en:"Put the words inside quotation marks, end the quoted sentence with a comma inside the closing mark, then add said + full name + job title. On second mention use the surname only (Wongsiri said). You can split a long quote: “First part,” said Name. “Second part.”",
+    thd:"ใส่คำพูดในเครื่องหมายคำพูด จบประโยคที่อ้างด้วยจุลภาคไว้ “ข้างใน” เครื่องหมายปิด ตามด้วย said + ชื่อเต็ม + ตำแหน่ง ครั้งถัดไปใช้นามสกุลอย่างเดียว และแบ่ง quote ยาวเป็น 2 ช่วงได้",
+    ex:[["good","“Every volunteer makes a difference,” said Napat Wongsiri, Executive Director of Blue Klong Foundation.",""],["bad","Napat Wongsiri said that every volunteer makes a difference.","✗ reported speech, no quote marks"]]},
+   {ic:"💡",t:"What to Put in a Quote",th:"ควรพูดอะไรใน quote",sum:"Meaning, motivation, vision — not times, prices or data.",
+    en:"A good quote explains why the event matters, what the organisation hopes for, or how people feel. Leave times, prices, websites and numbers for the body. Avoid ad lines like “Don't miss it!”.",
+    thd:"quote ที่ดีอธิบายว่าทำไมเรื่องนี้สำคัญ องค์กรหวังอะไร หรือผู้คนรู้สึกอย่างไร เวลา ราคา เว็บไซต์ และตัวเลขให้อยู่ใน body ไม่ใช้ประโยคโฆษณา เช่น “Don't miss it!”",
+    ex:[["bad","“The event starts at 7:00 a.m. and registration is free,” said…","✗ data — belongs in the body"],["bad","“Don't miss the best clean-up ever!” said…","✗ ad voice"],["good","“Our canals connect communities, and keeping them clean is everyone's job,” said…","✓ meaning"]]},
+   {ic:"🙋",t:"Who Speaks?",th:"ใครเป็นผู้พูด",sum:"A senior, named spokesperson with a clear title.",
+    en:"Use a real, named person with a title that gives authority: here, Napat Wongsiri, Executive Director. Never invent a speaker or a quote that is not approved by the organisation.",
+    thd:"ใช้บุคคลที่มีชื่อและตำแหน่งชัดเจน ในข่าวนี้คือ Napat Wongsiri, Executive Director ห้ามแต่งผู้พูดหรือคำพูดที่องค์กรไม่ได้อนุมัติ",
+    ex:[["good","said Napat Wongsiri, Executive Director of Blue Klong Foundation",""],["bad","said a happy volunteer","✗ unnamed, no title"]]}
+  ],
+  items:[
+   {k:"p7i1",type:"fill",title:"Punctuate the quote",prompt:"Choose the correct punctuation and verb.",promptTh:"เลือกเครื่องหมายและกริยาให้ถูกต้อง",
+    tpl:"“Clean canals belong to everyone{0}” {1} Napat Wongsiri, Executive Director of Blue Klong Foundation.",
+    blanks:[{opts:[",",".","!"],ans:[","]},{opts:["said","says loudly","is saying"],ans:["said"]}],
+    why:"Comma inside the closing quotation mark, then “said”. · จุลภาคอยู่ในเครื่องหมายคำพูด ตามด้วย said"},
+   {k:"p7i2",type:"fill",title:"Choose the best quote",prompt:"Which sentence works best as the spokesperson's quote?",promptTh:"ประโยคใดเหมาะที่สุดเป็นคำพูดของโฆษก",
+    tpl:"{0}",
+    blanks:[{opts:["“When neighbours clean a canal together, the whole city benefits.”","“The event starts at 7:00 a.m. and registration is free.”","“Don't miss the best clean-up ever!”"],ans:["“When neighbours clean a canal together, the whole city benefits.”"]}],
+    why:"The quote should give meaning or opinion. Times and registration are body facts; the third option is ad voice. · quote ควรให้ความหมาย ไม่ใช่ข้อมูลหรือโฆษณา"},
+   {k:"p7i3",type:"order",title:"Build the quote",prompt:"Put the parts in order to make a correctly formatted quote.",promptTh:"เรียงส่วนต่าง ๆ ให้เป็น quote ที่ถูกรูปแบบ",
+    tokens:["“Every bag of waste removed","is a gift to the next generation,”","said","Napat Wongsiri,","Executive Director","of Blue Klong Foundation."],max:2,
+    why:"Quoted words → said → name → title. · คำพูด → said → ชื่อ → ตำแหน่ง"},
+   {k:"p7i4",type:"write",title:"Write the quote",prompt:"Write a quote from Napat Wongsiri, Executive Director, explaining why Klong Day matters.",promptTh:"เขียนคำพูดของ Napat Wongsiri อธิบายว่าทำไม Klong Day จึงสำคัญ",
+    checks:[
+     {r:"regex",p:["[“\"].{8,}[”\"]"],en:"Uses quotation marks “…”",th:"มีเครื่องหมายคำพูด “…”"},
+     {r:"anyOf",p:[["said","says"]],en:"Uses “said”",th:"มีคำว่า said"},
+     {r:"anyOf",p:[["Wongsiri"]],en:"Names the speaker (Napat Wongsiri)",th:"ระบุชื่อผู้พูด"},
+     {r:"anyOf",p:[["Executive Director"]],en:"Gives the title (Executive Director)",th:"ระบุตำแหน่ง"},
+     {r:"regex",p:[",\\s*[”\"]"],en:"Comma inside the closing quotation mark (,”)",th:"มีจุลภาคก่อนเครื่องหมายปิด (,”)"},
+     {r:"words",p:[15,60],en:"About 15–60 words",th:"ยาวประมาณ 15–60 คำ"},
+     {r:"noRegex",p:["[“\"][^”\"]*\\d[^”\"]*[”\"]"],en:"No numbers or data inside the quote",th:"ไม่มีตัวเลขหรือข้อมูลในคำพูด"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"}],
+    model:"“Bangkok's canals connect our communities, and keeping them clean is everyone's responsibility,” said Napat Wongsiri, Executive Director of Blue Klong Foundation. “Klong Day shows what neighbours can achieve together.”",
+    why:"Opinion and meaning inside the quote marks; facts stay in the body. · ความคิดเห็นอยู่ในเครื่องหมายคำพูด ข้อเท็จจริงอยู่ใน body"}
+  ]},
+ {id:8,key:"close",icon:"🏢",title:"Boilerplate & Contact",th:"ข้อมูลองค์กรและผู้ติดต่อ",
+  intro:"Close the release: a standard “About” paragraph, a media contact, and the end mark ###.",
+  introTh:"ปิดท้ายข่าว: ย่อหน้า About มาตรฐาน ผู้ติดต่อสำหรับสื่อ และสัญลักษณ์จบข่าว ###",
+  cards:[
+   {ic:"🏢",t:"The Boilerplate",th:"Boilerplate คืออะไร",sum:"A standard “About …” paragraph at the end of every release.",
+    en:"The boilerplate is a short, standard paragraph that describes the organisation. It appears near the end of every press release, usually starting “About [Organisation]”. The same text is reused in every release.",
+    thd:"boilerplate คือย่อหน้าสั้นมาตรฐานที่อธิบายองค์กร อยู่ช่วงท้ายของข่าวทุกฉบับ มักขึ้นต้นว่า “About [ชื่อองค์กร]” และใช้ข้อความเดิมซ้ำในทุกข่าว",
+    ex:[["good","About Blue Klong Foundation: Founded in 2015 and based in Bangkok, Blue Klong Foundation is a non-profit that restores the city's canals.",""]]},
+   {ic:"🧱",t:"What a Boilerplate Includes",th:"boilerplate มีอะไรบ้าง",sum:"Who · founded · where · what it does · how big.",
+    en:"Include: what the organisation is (a non-profit), when it was founded (2015), where it is based (Bangkok), what it does (restores canals) and its scale (3,000 volunteers, 18 km cleaned). Write in the third person, present tense, with no news and no hype.",
+    thd:"ใส่: องค์กรคืออะไร (non-profit) ก่อตั้งเมื่อไร (2015) ตั้งอยู่ที่ไหน (Bangkok) ทำอะไร (ฟื้นฟูคลอง) และขนาด (อาสาสมัคร 3,000 คน ทำความสะอาดแล้ว 18 กม.) ใช้บุรุษที่ 3 present tense ไม่ใส่ข่าวใหม่และไม่โอ้อวด",
+    ex:[["good","It has 3,000 registered volunteers and has cleaned 18 km of canals.","scale"],["bad","We are the best and most amazing canal charity!","✗ we + hype"]]},
+   {ic:"☎️",t:"Media Contact",th:"ผู้ติดต่อสำหรับสื่อ",sum:"Name · title · email · phone.",
+    en:"Journalists need a real person to call. Give the full name, job title, email and phone number: Media Contact: Kanokwan Saelim, Communications Manager · press@blueklong.example · +66 2 555 0142.",
+    thd:"นักข่าวต้องการคนจริงที่ติดต่อได้ ระบุชื่อเต็ม ตำแหน่ง อีเมล และเบอร์โทร",
+    ex:[["good","Media Contact: Kanokwan Saelim, Communications Manager · press@blueklong.example · +66 2 555 0142",""],["bad","Contact us on our website!","✗ no person, no details"]]},
+   {ic:"🏁",t:"The End Mark",th:"สัญลักษณ์จบข่าว",sum:"### centred at the very end.",
+    en:"Finish with ### (or -END-) centred on its own line, so the editor knows nothing is missing.",
+    thd:"จบด้วย ### (หรือ -END-) อยู่กึ่งกลางบรรทัดสุดท้าย เพื่อให้บรรณาธิการรู้ว่าข่าวครบแล้ว",
+    ex:[["good","###",""],["bad","Thank you!","✗ not an end mark"]]}
+  ],
+  items:[
+   {k:"p8i1",type:"fill",title:"Complete the boilerplate",prompt:"Fill in the facts from the fact sheet.",promptTh:"เติมข้อมูลจาก fact sheet",
+    tpl:"About Blue Klong Foundation: Founded in {0} and based in {1}, Blue Klong Foundation is a non-profit that restores city canals. It has {2} registered volunteers and has cleaned 18 km of canals.",
+    blanks:[{ans:["2015"],ph:"year"},{ans:["Bangkok"],ph:"city"},{ans:["3,000","3000","three thousand"],ph:"number"}],
+    why:"Founded 2015 · based in Bangkok · 3,000 volunteers. · ก่อตั้ง 2015 ตั้งอยู่กรุงเทพฯ อาสาสมัคร 3,000 คน"},
+   {k:"p8i2",type:"order",title:"Order the closing",prompt:"Put the closing parts of the release in the correct order.",promptTh:"เรียงส่วนปิดท้ายของข่าวให้ถูกลำดับ",
+    tokens:["Last paragraph of the body","About Blue Klong Foundation…","Media Contact: Kanokwan Saelim…","###"],max:2,
+    why:"Body → boilerplate → media contact → end mark. · body → boilerplate → ผู้ติดต่อ → ###"},
+   {k:"p8i3",type:"fill",title:"Contact & end mark",prompt:"Complete the media contact and choose the end mark.",promptTh:"เติมชื่อผู้ติดต่อและเลือกสัญลักษณ์จบข่าว",
+    tpl:"Media Contact: {0}, Communications Manager · press@blueklong.example · +66 2 555 0142<br>{1}",
+    blanks:[{ans:["Kanokwan Saelim","Kanokwan Saelim,"],ph:"full name"},{opts:["###","THE END","Thank you!"],ans:["###"]}],
+    why:"Use the full name from the fact sheet and the standard end mark ###. · ใช้ชื่อเต็มและ ###"},
+   {k:"p8i4",type:"write",title:"Write the boilerplate",prompt:"Write the “About Blue Klong Foundation” paragraph.",promptTh:"เขียนย่อหน้า About Blue Klong Foundation",
+    checks:[
+     {r:"starts",p:["About Blue Klong"],en:"Starts with “About Blue Klong Foundation”",th:"ขึ้นต้นด้วย About Blue Klong Foundation"},
+     {r:"words",p:[25,75],en:"About 25–75 words",th:"ยาวประมาณ 25–75 คำ"},
+     {r:"anyOf",p:[["2015"]],en:"When it was founded (2015)",th:"ปีที่ก่อตั้ง (2015)"},
+     {r:"anyOf",p:[["Bangkok"]],en:"Where it is based (Bangkok)",th:"ที่ตั้ง (Bangkok)"},
+     {r:"anyOf",p:[["canal","klong"]],en:"What it does (restores canals)",th:"ทำอะไร (ฟื้นฟูคลอง)"},
+     {r:"anyOf",p:[["3,000","3000","18 km","18 kilomet","12 staff"]],en:"How big it is (3,000 volunteers / 18 km)",th:"ขนาดองค์กร (3,000 คน / 18 กม.)"},
+     {r:"noneOf",p:[["we","our","us","you","your"]],en:"Third person only",th:"ใช้บุรุษที่ 3 เท่านั้น"},
+     {r:"noHype",en:"No hype words",th:"ไม่มีคำโอ้อวด"}],
+    model:"About Blue Klong Foundation: Founded in 2015 and based in Bangkok, Blue Klong Foundation is a non-profit organisation that restores the city's canals. It has 12 staff and 3,000 registered volunteers, and has cleaned 18 km of canals.",
+    why:"Who, when, where, what and how big — the same text in every release. · ใคร เมื่อไร ที่ไหน ทำอะไร ขนาดเท่าไร"},
+   {k:"p8i5",type:"write",title:"Write the media contact",prompt:"Write the media contact block.",promptTh:"เขียนส่วนผู้ติดต่อสำหรับสื่อ",
+    checks:[
+     {r:"anyOf",p:[["Media Contact","Contact"]],en:"Labelled “Media Contact”",th:"มีหัวข้อ Media Contact"},
+     {r:"anyOf",p:[["Kanokwan Saelim"]],en:"Full name of the contact",th:"ชื่อเต็มผู้ติดต่อ"},
+     {r:"anyOf",p:[["Communications Manager"]],en:"Job title",th:"ตำแหน่ง"},
+     {r:"regex",p:["[\\w.-]+@[\\w.-]+\\.[a-z]{2,}","i"],en:"Email address",th:"อีเมล"},
+     {r:"regex",p:["\\+?\\d[\\d\\s-]{7,}"],en:"Phone number",th:"เบอร์โทรศัพท์"}],
+    model:"Media Contact: Kanokwan Saelim, Communications Manager · press@blueklong.example · +66 2 555 0142",
+    why:"A real person a journalist can reach: name, title, email, phone. · บุคคลจริงที่นักข่าวติดต่อได้"}
+  ]},
+ {id:9,key:"assemble",icon:"🧩",title:"Assemble & Exit",th:"รวมเป็นข่าวฉบับเต็ม",
+  intro:"See your own sentences assembled into one press release, check it, and reflect.",
+  introTh:"ดูประโยคที่นักศึกษาเขียนรวมเป็นข่าวฉบับเต็ม ตรวจทาน แล้วสะท้อนการเรียนรู้",
+  cards:[
+   {ic:"🧩",t:"Your Release, Assembled",th:"ข่าวฉบับเต็มของคุณ",sum:"The preview uses your latest answers from Parts 2–8.",
+    en:"The preview below takes your most recent written answers — headline, subheadline, dateline, lead, body, quote, boilerplate and contact — and places them in press-release order. Go back to any Part to improve a sentence; the preview updates automatically.",
+    thd:"ตัวอย่างด้านล่างนำคำตอบข้อเขียนล่าสุดของนักศึกษาจาก Part 2–8 มาเรียงตามลำดับข่าว ถ้าต้องการปรับประโยคไหน กลับไปแก้ใน Part นั้นได้ ตัวอย่างจะอัปเดตเอง",
+    ex:[["","FOR IMMEDIATE RELEASE → Headline → Subheadline → Dateline + Lead → Body → Quote → About… → Media Contact → ###","the order used"]]},
+   {ic:"✅",t:"Final Self-Check",th:"ตรวจทานก่อนส่ง",sum:"Facts from the sheet · third person · no hype · ###.",
+    en:"Before you send a release: every fact comes from the fact sheet; the lead answers 5W1H; only the quote contains opinion; no “you/we” outside the quote; no hype words; the dateline uses the release date; it ends with ###.",
+    thd:"ก่อนส่งข่าว: ข้อเท็จจริงทุกอย่างมาจาก fact sheet · lead ตอบ 5W1H · ความคิดเห็นอยู่ใน quote เท่านั้น · ไม่มี you/we นอก quote · ไม่มีคำโอ้อวด · dateline ใช้วันออกข่าว · จบด้วย ###",
+    ex:[["good","Change the form, never the facts.","the golden rule"]]}
+  ],
+  items:[
+   {k:"exit",type:"exit",title:"Exit ticket",prompt:"Reflect on today's lesson. Your answers go to your teacher.",promptTh:"สะท้อนการเรียนรู้วันนี้ คำตอบจะส่งถึงอาจารย์",
+    why:"Your reflection helps your teacher plan the next lesson. · คำตอบช่วยให้อาจารย์วางแผนบทเรียนถัดไป"}
+  ]}
+];
+const ITEMS = {}; PARTS.forEach(p=>(p.items||[]).forEach(it=>{it.part=p.id;ITEMS[it.k]=it}));
+const maxOf = it=> it.type==="exit"?0 : it.type==="fill"?it.blanks.length : it.type==="order"?(it.max||2) : it.checks.length;
+
+/* ================= STATE ================= */
+const S = {role:null, student:null, part:1, open:PARTS.map(p=>p.id), data:{items:{},exit:null}, drafts:{}, comments:{}, queue:[], tkey:{}, deck:{}, track:null, sel:null, tfilter:"all", tq:""};
+const $=s=>document.querySelector(s);
+const esc=t=>String(t??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const norm=t=>String(t||"").toLowerCase().replace(/[“”"‘’'`]/g,"").replace(/[–—]/g,"-").replace(/[^a-z0-9฀-๿\- ]+/g," ").replace(/\s+/g," ").trim();
+const wc=t=>(String(t).trim().match(/[A-Za-z0-9฀-๿’'“”"\-–.,:&]+/g)||[]).filter(w=>/[A-Za-z0-9฀-๿]/.test(w)).length;
+function fnv(s){let h=0x811c9dc5;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return h.toString(16).padStart(8,"0")}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2600)}
+const store={get(k){try{return JSON.parse(localStorage.getItem(LS+k)||"null")}catch(e){return null}},set(k,v){try{localStorage.setItem(LS+k,JSON.stringify(v))}catch(e){}}};
+
+/* ================= GRADING ================= */
+const wordRe=w=>new RegExp("(^|[^a-z])"+w.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"($|[^a-z])","i");
+const RULES={
+ starts:(t,p)=>({ok:norm(t).startsWith(norm(p[0]))}),
+ words:(t,p)=>{const n=wc(t);return{ok:n>=p[0]&&n<=p[1],val:n+" words"}},
+ anyOf:(t,p)=>({ok:p[0].some(w=>norm(t).includes(norm(w)))}),
+ noneOf:(t,p)=>{const hit=p[0].filter(w=>wordRe(w).test(t));return{ok:!hit.length,val:hit.length?"found: "+hit.join(", "):""}},
+ noHype:(t)=>{const hit=HYPE.filter(w=>wordRe(w).test(t));return{ok:!hit.length,val:hit.length?"found: "+hit.join(", "):""}},
+ noChar:(t,p)=>({ok:!t.includes(p[0])}),
+ noEnd:(t)=>({ok:!/[.!?]\s*$/.test(t.trim())}),
+ verb:(t)=>{const ws=norm(t).split(" ");return{ok:VERBS.some(v=>ws.includes(v))}},
+ title:(t)=>{const ws=t.trim().split(/\s+/).filter(w=>/^[“"']?[A-Za-z]/.test(w)&&w.replace(/[^A-Za-z]/g,"").length>3);
+   const cap=ws.filter(w=>/^[“"']?[A-Z]/.test(w)).length;return{ok:ws.length>0&&cap/ws.length>=.8}},
+ regex:(t,p)=>({ok:new RegExp(p[0],p[1]||"").test(t.trim())}),
+ noRegex:(t,p)=>({ok:!new RegExp(p[0],p[1]||"").test(t.trim())}),
+ num:(t)=>({ok:/\d/.test(t)}),
+ sentRange:(t,p)=>{const n=(t.trim().match(/[.!?](\s|$)/g)||[]).length||1;return{ok:n>=p[0]&&n<=p[1],val:n+" sentence"+(n>1?"s":"")}},
+ sentences:(t,p)=>{const n=(t.trim().match(/[.!?](\s|$)/g)||[]).length||1;return{ok:n<=p[0],val:n+" sentence"+(n>1?"s":"")}},
+ overlap:(t,p)=>{const key=w=>norm(w).split(" ").filter(x=>x.length>3);const a=key(t),g=new Set(key(p[0]));
+   const r=a.length?a.filter(x=>g.has(x)).length/a.length:1;return{ok:r<=p[1],val:Math.round(r*100)+"% same words as headline"}}
+};
+function grade(it,a){
+ if(it.type==="exit") return {score:0,max:0};
+ if(it.type==="fill"){
+  const res=it.blanks.map((b,i)=>{const raw=String(a[i]||"").trim(),v=norm(raw);return !!raw&&b.ans.some(x=>x.trim()===raw||(!!v&&norm(x)===v))});
+  return {score:res.filter(Boolean).length,max:it.blanks.length,res};
+ }
+ if(it.type==="order"){
+  const got=a.map(i=>it.tokens[i]), keys=[it.tokens].concat(it.alt||[]);
+  const ok=got.length===it.tokens.length&&keys.some(k=>k.every((w,i)=>w===got[i]));
+  const best=keys[0], pos=got.map((w,i)=>w===best[i]);
+  return {score:ok?(it.max||2):0,max:it.max||2,ok,pos};
+ }
+ const res=it.checks.map(c=>{const r=RULES[c.r](a,c.p||[]);return{ok:!!r.ok,val:r.val||""}});
+ return {score:res.filter(x=>x.ok).length,max:it.checks.length,res};
+}
+function serialize(it,a){if(it.type==="exit"){a=a||{};return `Hardest: ${a.hard||""} | Learned: ${a.learn||""} | Question: ${a.q||"-"} | Confidence: ${a.conf||""}/5`}return it.type==="fill"?a.join(" | "):it.type==="order"?a.map(i=>it.tokens[i]).join(" / "):a}
+function fbSummary(it,g){if(it.type==="exit")return "exit ticket";return it.type==="write"?it.checks.map((c,i)=>(g.res[i].ok?"✓ ":"✗ ")+c.en).join("; "):it.type==="fill"?g.res.map((x,i)=>"blank "+(i+1)+(x?" ✓":" ✗")).join("; "):(g.ok?"correct order":"wrong order")}
+
+/* ================= NETWORK ================= */
+async function apiGet(params){
+ if(!API_URL) throw new Error("no API");
+ const q=new URLSearchParams(Object.assign({t:Date.now()},params)).toString();
+ const r=await fetch(API_URL+(API_URL.includes("?")?"&":"?")+q); return r.json();
+}
+async function apiPost(body){
+ if(!API_URL) throw new Error("no API");
+ const r=await fetch(API_URL,{method:"POST",body:JSON.stringify(body),keepalive:true}); return r.json();
+}
+function logEv(event,extra){
+ if(!API_URL||S.role!=="s") return;
+ const st=S.student;
+ apiPost({action:"log",events:[Object.assign({event,id:st[1],name:st[2],no:st[0],part:S.part},extra||{})]}).catch(()=>{});
+}
+async function flushQueue(){
+ if(!API_URL||!S.queue.length) return;
+ const q=S.queue.slice();
+ for(const body of q){
+  try{const j=await apiPost(body);if(j&&j.ok){S.queue.shift();const rec=S.data.items[body.item];if(rec){rec.sync=true;if(j.attempt)rec.att=j.attempt}}else break}
+  catch(e){break}
+ }
+ saveLocal(); if(S.role==="s"&&!S.queue.length) refreshSync();
+}
+function refreshSync(){document.querySelectorAll("[data-sync]").forEach(el=>{const r=S.data.items[el.dataset.sync];el.textContent=!r?"":(r.sync||!API_URL)?(API_URL?"☁️ saved":"💾 saved on this device"):"⏳ saving…"})}
+
+/* ================= STUDENT ================= */
+function saveLocal(){if(S.role!=="s")return;store.set(S.student[1],{data:S.data,drafts:S.drafts,part:S.part,queue:S.queue,comments:S.comments,epoch:S.epoch||0})}
+/* teacher cleared data → drop this device's local copy so old answers don't linger */
+function applyEpoch(j){const ep=Number(j&&j.epoch||0);if(ep&&ep!==(S.epoch||0)){S.epoch=ep;S.data={items:{},exit:null};S.drafts={};S.queue=[];S.comments={};S.part=1;return true}return false}
+async function startStudent(st){
+ S.role="s";S.student=st;
+ const loc=store.get(st[1]);
+ if(loc){S.epoch=loc.epoch||0;S.data=loc.data||S.data;S.drafts=loc.drafts||{};S.part=loc.part||1;S.queue=loc.queue||[];S.comments=loc.comments||{}}
+ showApp(); logEv("login");
+ try{
+  const j=await apiGet({action:"mystate",id:st[1]});
+  if(j&&j.ok){
+   if(j.openParts) S.open=j.openParts;
+   applyEpoch(j);
+   const srv=(j.state&&j.state.items)||{};
+   Object.keys(srv).forEach(k=>{const a=S.data.items[k],b=srv[k];if(!a||(b.t||0)>(a.t||0))S.data.items[k]=Object.assign({},b,{sync:true})});
+   if(j.state&&j.state.exit&&!S.data.exit) S.data.exit=j.state.exit;
+   if(j.state&&j.state.part&&!loc) S.part=j.state.part;
+   S.comments=j.comments||{};
+   saveLocal(); render();
+  }
+ }catch(e){}
+ flushQueue();
+ clearInterval(S.hb); S.hb=setInterval(()=>{if(document.visibilityState==="visible"){logEv("heartbeat");flushQueue();pullComments()}},HEARTBEAT_MS);
+}
+async function pullComments(){
+ try{const j=await apiGet({action:"mystate",id:S.student[1]});if(j&&j.ok){if(applyEpoch(j)){saveLocal();render();toast("🔄 อาจารย์ล้างข้อมูลแล้ว เริ่มใหม่ได้เลย");return}const changed=JSON.stringify(j.comments||{})!==JSON.stringify(S.comments);S.comments=j.comments||{};if(j.openParts)S.open=j.openParts;saveLocal();if(changed){render();toast("💬 อาจารย์ให้ความเห็นใหม่")}}}catch(e){}
+}
+/* sequential gate: a Part opens only when every earlier OPEN part has all items submitted */
+function blockerOf(p){if(!SEQUENTIAL)return null;return PARTS.find(q=>q.id<p.id&&!q.soon&&S.open.includes(q.id)&&(q.items||[]).length&&partStats(q).done<q.items.length)||null}
+function lockReason(p){
+ if(p.soon) return "Part นี้ยังไม่เปิด · Coming next";
+ if(!S.open.includes(p.id)) return "อาจารย์ยังไม่เปิด Part นี้";
+ const b=blockerOf(p); return b?`ทำ Part ${b.id} ให้ครบทุกข้อก่อน · Finish Part ${b.id} first (${partStats(b).done}/${b.items.length})`:"";
+}
+function firstAllowed(){const ok=PARTS.filter(p=>!lockReason(p));return ok.length?ok[ok.length-1].id:1}
+function partStats(p){const its=p.items||[];const done=its.filter(it=>S.data.items[it.k]).length;return{done,total:its.length}}
+
+function renderNav(){
+ const items=(S.role==="t"?[{id:0,icon:"📊",title:"Tracker"}]:[]).concat(PARTS);
+ $("#pnav").innerHTML=items.map(p=>{
+  const locked=S.role==="s"&&p.id&&!!lockReason(p);
+  const st=p.id&&S.role==="s"?partStats(p):null, done=st&&st.total&&st.done===st.total;
+  return `<button class="pill ${S.part===p.id?"on":""} ${done?"done":""} ${locked?"lock":""}" data-p="${p.id}"><i>${done?"✓":p.id||"📊"}</i>${esc(p.title)}${locked?" 🔒":""}</button>`}).join("");
+ document.querySelectorAll(".pill").forEach(b=>b.onclick=()=>{
+  const id=+b.dataset.p, p=PARTS.find(x=>x.id===id);
+  if(S.role==="s"&&p){const why=lockReason(p);if(why)return toast("🔒 "+why)}
+  go(id)});
+ const nv=$("#pnav"),on=nv.querySelector(".pill.on"); if(on) nv.scrollTo({left:on.offsetLeft-(nv.clientWidth-on.offsetWidth)/2,behavior:nv._init?"smooth":"auto"});
+ nv._init=true; navEdges();
+}
+function navEdges(){const nv=$("#pnav"),w=$("#pwrap"),max=nv.scrollWidth-nv.clientWidth,l=nv.scrollLeft>4,r=nv.scrollLeft<max-4;
+ w.classList.toggle("fl",l);w.classList.toggle("fr",r);$("#paL").hidden=!l;$("#paR").hidden=!r}
+(function initNavSlider(){const nv=document.getElementById("pnav");if(!nv)return;
+ nv.addEventListener("scroll",navEdges,{passive:true});window.addEventListener("resize",navEdges);
+ $("#paL").onclick=()=>nv.scrollBy({left:-nv.clientWidth*.7,behavior:"smooth"});$("#paR").onclick=()=>nv.scrollBy({left:nv.clientWidth*.7,behavior:"smooth"});
+ nv.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&nv.scrollWidth>nv.clientWidth){nv.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
+ let down=false,sx=0,sl=0,moved=false;
+ nv.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;down=true;moved=false;sx=e.clientX;sl=nv.scrollLeft});
+ window.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;nv.classList.add("drag")}if(moved)nv.scrollLeft=sl-dx});
+ window.addEventListener("pointerup",()=>{if(!down)return;down=false;setTimeout(()=>nv.classList.remove("drag"),0)});
+})();
+function go(id){S.part=id;saveLocal();render();window.scrollTo({top:0});if(S.role==="s")logEv("enter")}
+function render(){renderNav();const v=$("#vApp");v.className="view";
+ if(S.role==="t"){if(S.part===0)renderTracker();else renderDeck()} else renderPart()}
+
+function renderPart(){
+ let p=PARTS.find(x=>x.id===S.part)||PARTS[0];
+ if(lockReason(p)){S.part=firstAllowed();p=PARTS.find(x=>x.id===S.part);renderNav()}
+ const st=partStats(p);
+ if(p.soon){$("#vApp").innerHTML=`<div class="card soon"><div style="font-size:44px">${p.icon}</div><h2 class="disp" style="font-size:42px">${esc(p.title)}</h2><p class="muted">Coming next · กำลังจัดทำ</p></div>`;return}
+ $("#vApp").innerHTML=`
+  <div class="phead"><div><div class="eb">Part ${p.id} · ${esc(p.th)}</div><h2 class="disp">${p.icon} <span class="gt">${esc(p.title.toUpperCase())}</span></h2>
+   <p>${esc(p.intro)}<br><span class="th muted">${esc(p.introTh)}</span></p></div>
+   <div class="prog"><div class="muted" style="margin-bottom:6px">${st.done}/${st.total} items submitted</div><div class="bar"><i style="width:${st.total?st.done/st.total*100:0}%"></i></div></div></div>
+  <div class="sec-t"><span class="n">1</span>Review the rules <span class="muted th" style="font-weight:500">· ทบทวนหลักการ (แตะการ์ดเพื่ออ่านละเอียด)</span></div>
+  <div class="rgrid">${p.cards.map((c,i)=>cardHTML(c,i,p.id)).join("")}</div>
+  ${p.id===1?factsHTML():""}
+  ${p.id===9?assembleHTML(S.data.items,false):""}
+  <div class="sec-t"><span class="n">2</span>Practise <span class="muted th" style="font-weight:500">· ฝึกเขียน (ส่งแล้วแก้และส่งใหม่ได้)</span></div>
+  ${p.items.map((it,i)=>`<div class="item ${S.data.items[it.k]?"sub":""}" id="it-${it.k}">${itemHTML(it,p.id+"."+(i+1))}</div>`).join("")}
+  ${st.done===st.total?`<div class="pdone">✅ Part ${p.id} complete · ${nextPartBtn(p)}</div>`:(PARTS.some(x=>x.id>p.id&&!lockReason(x))?`<div style="text-align:center;margin-top:20px">${nextPartBtn(p)}<div class="muted th" style="margin-top:6px">ข้ามไปก่อนได้ กลับมาทำข้อที่เหลือภายหลัง (${st.done}/${st.total})</div></div>`:"")}`;
+ bindCards(p); p.items.forEach(bindItem);
+ const cp=document.querySelector("[data-copyasm]");cp&&(cp.onclick=()=>{const t=assembleText(S.data.items,false);(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Copied · คัดลอกแล้ว"),()=>toast("Copy failed — select the text manually"))});
+ const nb=$("#nextP"); nb&&(nb.onclick=()=>go(+nb.dataset.p));
+}
+/* Part 9: assemble the student's latest written answers into one release */
+const ASM=[["p2i3","Headline",2],["p3i4","Subheadline",3],["p4i4","Dateline",4],["p5i4","Lead",5],["p6i4","Body",6],["p7i4","Quote",7],["p8i4","Boilerplate",8],["p8i5","Media contact",8]];
+function assembleText(items,model){const g=k=>model?ITEMS[k].model:(items&&items[k]&&items[k].a)||"";
+ return ["FOR IMMEDIATE RELEASE",g("p2i3"),g("p3i4"),(g("p4i4")+" "+g("p5i4")).trim(),g("p6i4"),g("p7i4"),g("p8i4"),g("p8i5"),"###"].filter(Boolean).join("\n\n")}
+function assembleHTML(items,model){
+ const g=k=>model?ITEMS[k].model:(items&&items[k]&&items[k].a)||"";
+ const miss=(k,l,pt)=>`<span class="miss">(not written yet — Part ${pt} ${l} · ยังไม่ได้เขียน)</span>`;
+ const v=k=>{const a=ASM.find(x=>x[0]===k);const t=g(k);return t?esc(t):miss(k,a[1],a[2])};
+ const sc=ASM.filter(a=>!model&&items&&items[a[0]]).map(a=>items[a[0]]);const done=model?ASM.length:sc.length;
+ return `<div class="card asm"><div class="asmh"><h3>🧩 ${model?"Model release · ข่าวตัวอย่าง":"Your press release · ข่าวของคุณ"}</h3>${model?"":`<span class="tag">${done}/${ASM.length} sections written</span><button class="btn btn-g" data-copyasm style="min-height:38px;padding:6px 14px">📋 Copy</button>`}</div>
+  <div class="paper"><div class="rl">FOR IMMEDIATE RELEASE</div><div class="hl">${v("p2i3")}</div><div class="sub">${v("p3i4")}</div>
+  <p><b>${v("p4i4")}</b> ${v("p5i4")}</p><p>${v("p6i4")}</p><p>${v("p7i4")}</p><p class="bp">${v("p8i4")}</p><p class="mc">${v("p8i5")}</p><div class="end">###</div></div>
+  ${model?"":`<p class="muted th" style="margin-top:8px">กลับไปแก้ใน Part ไหนก็ได้ แล้วตัวอย่างนี้จะอัปเดตเอง · Edit any Part and this preview updates.</p>`}</div>`}
+function nextPartBtn(p){const n=PARTS.find(x=>x.id>p.id&&!lockReason(x));return n?`<button class="btn btn-p" id="nextP" data-p="${n.id}" style="margin-left:8px">Go to Part ${n.id} →</button>`:"<span class='th'>รอ Part ถัดไปจากอาจารย์</span>"}
+function cardHTML(c,i,pid){return `<button class="rcard" style="--i:${i}" data-c="${pid}-${i}"><div class="ic">${c.ic}</div><h3>${esc(c.t)}</h3><div class="sum">${esc(c.sum)}</div><div class="sum th muted">${esc(c.th)}</div><div class="more">Tap for details · แตะเพื่ออ่าน →</div></button>`}
+function factsHTML(){return `<div class="card facts" style="margin-top:16px"><h3>📋 Fact Sheet · Klong Day 2026 <span class="tag">fictional NGO for practice</span></h3><dl class="fgrid">${FACTS.map(f=>`<dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd>`).join("")}</dl></div>`}
+function bindCards(p){document.querySelectorAll(".rcard").forEach(b=>b.onclick=()=>{const [pid,i]=b.dataset.c.split("-");openCard(PARTS.find(x=>x.id==pid).cards[+i])})}
+function openCard(c){modal(`<div style="font-size:34px">${c.ic}</div><h3>${esc(c.t)}</h3><div class="tht th">${esc(c.th)}</div>
+  <div class="bil"><div><small>ENGLISH</small>${esc(c.en)}</div><div class="th"><small>ภาษาไทย</small>${esc(c.thd)}</div></div>
+  <div class="exs"><h4>Examples · ตัวอย่าง</h4>${c.ex.map(e=>`<div class="ex ${e[0]}">${esc(e[1])}${e[2]?`<small>${esc(e[2])}</small>`:""}</div>`).join("")}</div>`)}
+function modal(html){const w=document.createElement("div");w.className="mwrap";w.innerHTML=`<div class="modal" role="dialog" aria-modal="true"><button class="mx" aria-label="Close">✕</button>${html}</div>`;
+ document.body.appendChild(w);const close=()=>{w.remove();document.removeEventListener("keydown",k)};const k=e=>{if(e.key==="Escape")close()};
+ w.onclick=e=>{if(e.target===w)close()};w.querySelector(".mx").onclick=close;document.addEventListener("keydown",k);w.querySelector(".mx").focus()}
+
+function itemHTML(it,num){
+ const rec=S.data.items[it.k], d=S.drafts[it.k];
+ const typeL={fill:["t-fill","✏️ Fill in"],order:["t-order","🔀 Word order"],write:["t-write","✍️ Write"],exit:["t-write","🎟️ Exit ticket"]}[it.type];
+ let body="";
+ if(it.type==="fill"){
+  const val=d||(rec&&rec.a)||it.blanks.map(()=> "");
+  body=`<div class="sent">${it.tpl.replace(/\{(\d)\}/g,(m,n)=>{const b=it.blanks[+n],v=val[+n]||"";const cls=rec&&rec.res?(rec.res[+n]?"w-ok":"w-bad"):"";
+   return b.opts?`<select data-b="${n}" class="${cls}" aria-label="blank ${+n+1}"><option value="">— choose —</option>${b.opts.map(o=>`<option ${o===v?"selected":""}>${esc(o)}</option>`).join("")}</select>`
+   :`<input data-b="${n}" class="${cls}" value="${esc(v)}" placeholder="${esc(b.ph||"")}" aria-label="blank ${+n+1}" autocomplete="off">`})}</div>`;
+ }else if(it.type==="order"){
+  const built=d||(rec&&rec.a)||[];
+  const pool=shuffledIdx(it).filter(i=>!built.includes(i));
+  body=`<div class="built" data-built>${built.map((ti,pos)=>`<button class="chip ${rec&&rec.pos&&JSON.stringify(rec.a)===JSON.stringify(built)?(rec.pos[pos]?"good":"bad"):""}" data-rm="${pos}">${esc(it.tokens[ti])}</button>`).join("")}</div>
+   <div class="pool">${pool.map(ti=>`<button class="chip" data-add="${ti}">${esc(it.tokens[ti])}</button>`).join("")||"<span class='muted'>All words used · ใช้ครบแล้ว</span>"}</div>`;
+ }else if(it.type==="exit"){
+  const v=d||(rec&&rec.a)||{};
+  body=`<div class="exitf">
+   <label>1. Which Part was the hardest? <span class="th muted">Part ไหนยากที่สุด</span><select class="inp" data-x="hard"><option value="">— choose —</option>${PARTS.filter(p=>p.id<9).map(p=>{const o="Part "+p.id+" "+p.title;return `<option ${o===v.hard?"selected":""}>${esc(o)}</option>`}).join("")}</select></label>
+   <label>2. One thing you learned today <span class="th muted">สิ่งที่ได้เรียนรู้ 1 อย่าง (EN/TH)</span><textarea class="inp" data-x="learn" placeholder="e.g. The dateline uses the release date, not the event date.">${esc(v.learn||"")}</textarea></label>
+   <label>3. A question for your teacher (optional) <span class="th muted">คำถามถึงอาจารย์ (ไม่บังคับ)</span><textarea class="inp" data-x="q" placeholder="Optional">${esc(v.q||"")}</textarea></label>
+   <label>4. How confident are you writing a press release now? <span class="th muted">ความมั่นใจ 1–5</span><select class="inp" data-x="conf"><option value="">— choose —</option>${[1,2,3,4,5].map(n=>`<option value="${n}" ${String(v.conf)===String(n)?"selected":""}>${n} ${["","😟 not yet","🙁","😐 okay","🙂","😎 very confident"][n]}</option>`).join("")}</select></label></div>`;
+ }else{
+  const val=d!=null?d:(rec?rec.a:"");
+  body=`${it.given?`<div class="given"><small>Given · ข้อความตั้งต้น</small>${esc(it.given)}</div>`:""}
+   <textarea class="inp" data-w placeholder="Type your answer in English…" aria-label="answer">${esc(val)}</textarea><div class="wc" data-wc>${wc(val)} words</div>`;
+ }
+ const status=it.type==="exit"?(rec?`<span class="ist ok">✓ Submitted · attempt ${rec.att||1}</span>`:`<span class="ist">Not submitted</span>`):rec?`<span class="ist ${rec.score===rec.max?"ok":""}">${rec.score===rec.max?"✓ ":"Submitted · "}${rec.score}/${rec.max} · attempt ${rec.att||1}</span>`:`<span class="ist">Not submitted</span>`;
+ const com=S.comments[it.k];
+ return `<div class="ihead"><span class="itype ${typeL[0]}">${typeL[1]}</span><b>${num} ${esc(it.title)}</b>${status}</div>
+  <p class="iprompt">${esc(it.prompt)}<span class="th">${esc(it.promptTh)}</span></p>${body}
+  <div class="iact"><button class="btn btn-p" data-sub>${rec?"Resubmit · ส่งใหม่":"Submit · ส่งคำตอบ"}</button>${it.type==="order"?`<button class="btn btn-g" data-clear>Clear</button>`:""}<span class="sync" data-sync="${it.k}"></span></div>
+  ${rec?fbHTML(it,rec):""}
+  ${com?`<div class="tc">💬 <b>Teacher · อาจารย์:</b> ${esc(com)}</div>`:""}`;
+}
+function shuffledIdx(it){ // stable shuffle per item so chips don't jump
+ if(!it._sh){const a=it.tokens.map((_,i)=>i);let seed=[...it.k].reduce((s,c)=>s+c.charCodeAt(0),7);for(let i=a.length-1;i>0;i--){seed=(seed*9301+49297)%233280;const j=Math.floor(seed/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  if(a.every((v,i)=>v===i))a.reverse();it._sh=a}return it._sh}
+function fbHTML(it,rec){
+ if(it.type==="exit") return `<div class="fb"><h4>🙏 Thank you! Your exit ticket was sent · ส่งแล้ว แก้ไขและส่งใหม่ได้</h4><div class="why">💡 ${esc(it.why)}</div></div>`;
+ const reveal=rec.score===rec.max||(rec.att||1)>=2;
+ let list="";
+ if(it.type==="fill") list=it.blanks.map((b,i)=>`<li><span>${rec.res[i]?"✅":"❌"}</span><div>Blank ${i+1}${rec.res[i]?"":reveal?` · answer: <b>${esc(b.ans[0])}</b>`:` <small class="th">ลองดูข้อมูลใน fact sheet อีกครั้ง</small>`}</div></li>`).join("");
+ else if(it.type==="order") list=`<li><span>${rec.ok?"✅":"❌"}</span><div>${rec.ok?"Correct order":"Not yet: red words are in the wrong place"}${!rec.ok&&reveal?`<small>Answer: ${esc(it.tokens.join(" · "))}</small>`:""}</div></li>`;
+ else list=it.checks.map((c,i)=>`<li><span>${rec.res[i].ok?"✅":"⚠️"}</span><div>${esc(c.en)}${rec.res[i].val?` <b>(${esc(rec.res[i].val)})</b>`:""}<small class="th">${esc(c.th)}</small></div></li>`).join("");
+ const head=rec.score===rec.max?"🎉 Great! All checks passed":`Score ${rec.score}/${rec.max} · fix the ⚠️/❌ points and resubmit`;
+ return `<div class="fb"><h4>${head}</h4><ul>${list}</ul>
+  ${reveal||it.type==="write"?`<div class="why">💡 ${esc(it.why)}</div>`:""}
+  ${it.type==="write"?`<details style="margin-top:8px"><summary class="muted" style="cursor:pointer">See a model answer · ดูตัวอย่างคำตอบ</summary><div class="model">${esc(it.model)}</div></details>`:""}</div>`;
+}
+function bindItem(it){
+ const box=$("#it-"+it.k); if(!box) return;
+ const saveDraft=()=>{saveLocal()};
+ if(it.type==="fill") box.querySelectorAll("[data-b]").forEach(el=>el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{
+   const v=S.drafts[it.k]||(S.data.items[it.k]?S.data.items[it.k].a.slice():it.blanks.map(()=> ""));v[+el.dataset.b]=el.value;S.drafts[it.k]=v;el.classList.remove("w-ok","w-bad");saveDraft()}));
+ if(it.type==="order"){
+  const cur=()=>S.drafts[it.k]||(S.data.items[it.k]?S.data.items[it.k].a.slice():[]);
+  box.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{const v=cur();v.push(+b.dataset.add);S.drafts[it.k]=v;saveDraft();box.innerHTML=itemHTML(it,numOf(it));bindItem(it)});
+  box.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const v=cur();v.splice(+b.dataset.rm,1);S.drafts[it.k]=v;saveDraft();box.innerHTML=itemHTML(it,numOf(it));bindItem(it)});
+  const cl=box.querySelector("[data-clear]");cl&&(cl.onclick=()=>{S.drafts[it.k]=[];saveDraft();box.innerHTML=itemHTML(it,numOf(it));bindItem(it)});
+ }
+ if(it.type==="exit") box.querySelectorAll("[data-x]").forEach(el=>el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{
+   const v=Object.assign({},S.drafts[it.k]||(S.data.items[it.k]&&S.data.items[it.k].a)||{});v[el.dataset.x]=el.value;S.drafts[it.k]=v;saveDraft()}));
+ if(it.type==="write"){const ta=box.querySelector("[data-w]");let tm;ta.oninput=()=>{S.drafts[it.k]=ta.value;box.querySelector("[data-wc]").textContent=wc(ta.value)+" words";clearTimeout(tm);tm=setTimeout(saveDraft,600)}}
+ box.querySelector("[data-sub]").onclick=()=>submitItem(it);
+ refreshSync();
+}
+function numOf(it){const p=PARTS.find(x=>x.id===it.part);return p.id+"."+(p.items.indexOf(it)+1)}
+function submitItem(it){
+ const rec=S.data.items[it.k];
+ let a=S.drafts[it.k]!=null?S.drafts[it.k]:(rec?rec.a:null);
+ if(it.type==="fill"){a=(a||[]).slice();if(it.blanks.some((_,i)=>!String(a[i]||"").trim()))return toast("Please fill every blank · กรุณาเติมให้ครบทุกช่อง")}
+ if(it.type==="order"&&(!a||a.length!==it.tokens.length))return toast("Use all the words · ใช้คำให้ครบ");
+ if(it.type==="write"&&(!a||wc(a)<2))return toast("Please write your answer · กรุณาพิมพ์คำตอบ");
+ if(it.type==="exit"){a=Object.assign({},a||{});if(!a.hard||!a.conf||wc(a.learn||"")<2)return toast("Please answer 1, 2 and 4 · กรุณาตอบข้อ 1, 2 และ 4");S.data.exit=a}
+ const g=grade(it,a), att=(rec&&rec.att||0)+1;
+ S.data.items[it.k]=Object.assign({a,t:Date.now(),att,sync:!API_URL},g);
+ delete S.drafts[it.k];
+ const body={action:"submit",id:S.student[1],name:S.student[2],no:S.student[0],part:it.part,item:it.k,type:it.type,raw:a,answer:serialize(it,a),score:g.score,max:g.max,res:g.res,pos:g.pos,ok:g.ok,feedback:fbSummary(it,g)};
+ if(API_URL) S.queue.push(body);
+ saveLocal();
+ const p=PARTS.find(x=>x.id===it.part), st=partStats(p);
+ if(st.done===st.total) render(); else {const box=$("#it-"+it.k);box.classList.add("sub");box.innerHTML=itemHTML(it,numOf(it));bindItem(it);renderNav()}
+ flushQueue();
+}
+
+/* ================= TEACHER: DECK ================= */
+function deckSlides(p){
+ if(p.soon) return [{type:"soon"}];
+ return [{type:"title"},{type:"cards"}].concat(p.id===1?[{type:"facts"}]:[]).concat(p.id===9?[{type:"model"}]:[]).concat(p.items.map(it=>({type:"item",it})));
+}
+function renderDeck(){
+ const p=PARTS.find(x=>x.id===S.part), sl=deckSlides(p), i=Math.min(S.deck[p.id]||0,sl.length-1), s=sl[i];
+ let html="";
+ if(s.type==="soon") html=`<div class="soon"><div style="font-size:50px">${p.icon}</div><h2 class="disp">${esc(p.title)}</h2><p class="muted">Coming next · กำลังจัดทำ</p></div>`;
+ if(s.type==="title") html=`<div style="display:grid;place-items:center;min-height:440px;text-align:center"><div><div class="tag">Part ${p.id} · ${esc(p.th)}</div><div style="font-size:64px;margin:10px 0">${p.icon}</div>
+   <h2 class="disp gt">${esc(p.title.toUpperCase())}</h2><p style="font-size:20px;margin-top:12px;color:var(--ink2)">${esc(p.intro)}</p><p class="th muted" style="font-size:17px">${esc(p.introTh)}</p></div></div>`;
+ if(s.type==="cards") html=`<div class="tag">Review · ทบทวนหลักการ</div><h2 class="disp" style="font-size:44px;margin:8px 0 18px">The Rules</h2><div class="rgrid">${p.cards.map((c,k)=>cardHTML(c,k,p.id)).join("")}</div>`;
+ if(s.type==="facts") html=`<div class="tag">Anchor case</div><h2 class="disp" style="font-size:44px;margin:8px 0 14px">Fact Sheet</h2>${factsHTML()}`;
+ if(s.type==="model") html=`<div class="tag">Assemble</div><h2 class="disp" style="font-size:44px;margin:8px 0 14px">The Full Release</h2>
+   <div class="keybar"><span class="lbl">🔑 Model release</span><button class="btn btn-g" data-key="_model">${S.tkey._model?"Hide · ซ่อน":"Show · เปิด"}</button><span class="muted th">นักศึกษาไม่เห็นส่วนนี้</span></div>
+   ${S.tkey._model?assembleHTML(null,true):`<p class="muted" style="font-size:19px">FOR IMMEDIATE RELEASE → Headline → Subheadline → Dateline + Lead → Body → Quote → About… → Media Contact → ###</p>`}`;
+ if(s.type==="item"&&s.it.type==="exit"){const it=s.it;html=`<div class="tag">🎟️ Exit ticket</div><h2 class="disp" style="font-size:44px;margin:8px 0">${esc(it.title)}</h2><p style="font-size:19px">${esc(it.prompt)}</p><p class="th muted">${esc(it.promptTh)}</p>
+   <ol style="margin:12px 0 0 22px;font-size:18px;line-height:1.8"><li>Which Part was the hardest?</li><li>One thing you learned today</li><li>A question for your teacher (optional)</li><li>Confidence 1–5</li></ol><p class="muted th" style="margin-top:10px">ดูคำตอบทั้งห้องได้ที่ Tracker → คลิกชื่อนักศึกษา / Export CSV</p>`}
+ else if(s.type==="item"){const it=s.it, shown=S.tkey[it.k];
+  html=`<div class="tag">${it.type==="fill"?"✏️ Fill in":it.type==="order"?"🔀 Word order":"✍️ Write"} · ${numOf(it)}</div><h2 class="disp" style="font-size:42px;margin:8px 0">${esc(it.title)}</h2>
+   <p style="font-size:19px">${esc(it.prompt)}</p><p class="th muted">${esc(it.promptTh)}</p>
+   ${it.given?`<div class="given" style="margin-top:12px"><small>Given</small>${esc(it.given)}</div>`:""}
+   ${it.type==="fill"?`<div class="sent" style="margin-top:10px">${it.tpl.replace(/\{(\d)\}/g,(m,n)=>`<b style="display:inline-block;min-width:90px;border-bottom:3px solid var(--c2)">&nbsp;${shown?esc(it.blanks[+n].ans[0]):"____"}&nbsp;</b>`)}</div>
+     ${it.blanks.some(b=>b.opts)?`<p class="muted">Options: ${it.blanks.filter(b=>b.opts).map(b=>esc(b.opts.join(" / "))).join(" · ")}</p>`:""}`:""}
+   ${it.type==="order"?`<div class="pool" style="margin-top:10px">${shuffledIdx(it).map(ti=>`<span class="chip">${esc(it.tokens[ti])}</span>`).join("")}</div>`:""}
+   ${it.type==="write"?`<ul style="margin:10px 0 0 20px">${it.checks.map(c=>`<li>${esc(c.en)} <span class="th muted">· ${esc(c.th)}</span></li>`).join("")}</ul>`:""}
+   <div class="keybar"><span class="lbl">🔑 Answer key</span><button class="btn btn-g" data-key="${it.k}">${shown?"Hide answer · ซ่อนเฉลย":"Show answer · เปิดเฉลย"}</button><span class="muted th">นักศึกษาไม่เห็นส่วนนี้</span></div>
+   ${shown?`<div class="ans"><small>${it.type==="write"?"MODEL ANSWER · แนวคำตอบ":"ANSWER · เฉลย"}</small>${esc(it.type==="fill"?it.blanks.map(b=>b.ans[0]).join(" · "):it.type==="order"?it.tokens.join(" "):it.model)}<div class="why" style="margin-top:8px;font-size:15px">💡 ${esc(it.why)}</div></div>`:""}`;
+ }
+ $("#vApp").innerHTML=`<div class="deck" id="deck"><div class="stage"><div class="slide">${html}</div></div>
+  <div class="dbar"><button class="btn btn-g" id="dPrev" ${i===0?"disabled":""} aria-label="Previous">←</button>
+   <div class="dots">${sl.map((_,k)=>`<button class="${k===i?"on":""}" data-d="${k}" aria-label="slide ${k+1}"></button>`).join("")}</div>
+   <span class="cnt">${i+1}/${sl.length}</span><button class="btn btn-g" id="dFs" title="Full screen">⤢</button><button class="btn btn-p" id="dNext" ${i===sl.length-1?"disabled":""} aria-label="Next">→</button></div></div>`;
+ bindCards(p);
+ const set=k=>{S.deck[p.id]=Math.max(0,Math.min(sl.length-1,k));renderDeck()};
+ $("#dPrev").onclick=()=>set(i-1);$("#dNext").onclick=()=>set(i+1);
+ document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>set(+b.dataset.d));
+ document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>{S.tkey[b.dataset.key]=!S.tkey[b.dataset.key];renderDeck()});
+ $("#dFs").onclick=()=>{const d=$("#deck");if(document.fullscreenElement)document.exitFullscreen();else if(d.requestFullscreen)d.requestFullscreen().catch(()=>toast("Full screen not supported"));else toast("Full screen not supported")};
+ S.deckKeys=e=>{if(S.role!=="t"||S.part===0||document.querySelector(".mwrap"))return;if(e.key==="ArrowRight"||e.key==="PageDown")set(i+1);if(e.key==="ArrowLeft"||e.key==="PageUp")set(i-1)};
+}
+document.addEventListener("keydown",e=>S.deckKeys&&S.deckKeys(e));
+document.addEventListener("fullscreenchange",()=>{if(S.role==="t"&&S.part!==0)renderDeck()});
+
+/* ================= TEACHER: TRACKER ================= */
+const ALLITEMS=()=>PARTS.flatMap(p=>p.items||[]);
+const SCORED=()=>ALLITEMS().filter(it=>it.type!=="exit");
+async function loadTracker(manual){
+ if(!API_URL){S.track={now:Date.now(),progress:[],comments:{},demo:true};renderTracker();if(manual)toast("ยังไม่ได้ใส่ API_URL");return}
+ try{const j=await apiGet({action:"dashboard",code:S.tcode});
+  if(!j.ok) throw new Error(j.error||"error");
+  S.track=j; if(j.openParts) S.open=j.openParts; if(S.part===0) renderTracker(); if(manual) toast("Updated · อัปเดตแล้ว");
+ }catch(e){S.track=S.track||{progress:[],comments:{}};S.track.err=String(e.message||e);if(S.part===0)renderTracker()}
+}
+function rowsT(){
+ const t=S.track||{progress:[]}, now=t.now||Date.now(), by={};
+ (t.progress||[]).forEach(r=>by[r.id]=r);
+ return STUDENTS.map(s=>{const r=by[s[1]]||{}, st=r.state||{items:{}}, last=r.last?Date.parse(r.last):0;
+  const status=!r.first?"no":(now-last<ONLINE_MS?"on":"seen");
+  const parts=PARTS.filter(p=>!p.soon).map(p=>{let d=0,sc=0,mx=0;p.items.forEach(it=>{const x=st.items&&st.items[it.k];if(x){d++;sc+=x.score;mx+=x.max}});return{id:p.id,d,n:p.items.length,pct:mx?Math.round(sc/mx*100):null}});
+  const total=ALLITEMS().length, done=parts.reduce((a,b)=>a+b.d,0);
+  return {s,r,st,status,parts,done,total,last,curPart:r.part||""}});
+}
+function renderTracker(){
+ const t=S.track; const rows=rowsT();
+ const c={on:rows.filter(x=>x.status==="on").length,seen:rows.filter(x=>x.status!=="no").length,no:rows.filter(x=>x.status==="no").length,fin:rows.filter(x=>x.done===x.total&&x.total).length};
+ let list=rows;
+ if(S.tfilter==="on") list=rows.filter(x=>x.status==="on");
+ if(S.tfilter==="no") list=rows.filter(x=>x.status==="no");
+ if(S.tfilter==="nf") list=rows.filter(x=>x.status!=="no"&&x.done<x.total);
+ if(S.tq){const q=S.tq.toLowerCase();list=list.filter(x=>x.s[2].toLowerCase().includes(q)||x.s[1].includes(q))}
+ const built=PARTS.filter(p=>!p.soon);
+ const ago=ms=>{const m=Math.floor(ms/60000);return m<1?"just now":m<60?m+" min ago":Math.floor(m/60)+" h ago"};
+ $("#vApp").innerHTML=`
+  <div class="phead"><div><div class="eb">Teacher · ผู้สอน</div><h2 class="disp">📊 <span class="gt">TRACKER</span></h2><p class="muted">Auto-refresh every 15 s · อัปเดตอัตโนมัติทุก 15 วินาที</p></div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-g" id="tRef">↻ Refresh</button><button class="btn btn-p" id="tCsv">⬇ Export CSV</button><button class="btn btn-g" id="tClr" style="color:#c0264f;border-color:#f3b4c8">🗑 Clear data</button></div></div>
+  ${t&&t.err?`<div class="tc" style="margin-bottom:12px">⚠️ Cannot load data: ${esc(t.err)} · ตรวจ API_URL / Deploy เป็น Anyone</div>`:""}
+  ${t&&t.demo?`<div class="tc" style="margin-bottom:12px">ℹ️ ยังไม่ได้เชื่อม Apps Script (API_URL ว่าง) ตารางจึงว่าง</div>`:""}
+  <div class="tstats">
+   <button class="ts ${S.tfilter==="on"?"on":""}" data-f="on"><div class="n" style="color:#16A34A">${c.on}</div><div class="k">🟢 Active now</div></button>
+   <button class="ts ${S.tfilter==="all"?"on":""}" data-f="all"><div class="n gt">${c.seen}/${rows.length}</div><div class="k">Logged in</div></button>
+   <button class="ts ${S.tfilter==="no"?"on":""}" data-f="no"><div class="n" style="color:var(--muted)">${c.no}</div><div class="k">⚪ Not logged in</div></button>
+   <button class="ts ${S.tfilter==="nf"?"on":""}" data-f="nf"><div class="n" style="color:var(--c4)">${rows.filter(x=>x.status!=="no"&&x.done<x.total).length}</div><div class="k">⏳ Not finished</div></button>
+  </div>
+  <div class="ttools"><input class="inp" id="tq" placeholder="🔍 Search name / ID" value="${esc(S.tq)}" style="max-width:320px"><span class="muted">${c.fin} finished all items · ${list.length} shown</span></div>
+  <div class="tbl"><table><thead><tr><th>#</th><th>Name</th><th>Status</th><th class="hide-m">Now</th>${built.map(p=>`<th>P${p.id}</th>`).join("")}<th>Items</th><th class="hide-m">Last seen</th></tr></thead>
+  <tbody>${list.map(x=>`<tr class="r ${S.sel===x.s[1]?"sel":""}" data-id="${x.s[1]}"><td>${x.s[0]}</td><td>${esc(x.s[2])}<div class="muted" style="font-size:12px">${x.s[1]}</div></td>
+   <td><span class="dot d-${x.status}"></span>${x.status==="on"?"Active":x.status==="seen"?"Seen":"—"}</td><td class="hide-m">${x.curPart?"P"+x.curPart:"—"}</td>
+   ${x.parts.map(pp=>`<td class="pc ${pp.pct!=null&&pp.pct<50?"low":""} ${pp.d===pp.n?"full":""}"><b>${pp.d}/${pp.n}</b>${pp.pct!=null?` · ${pp.pct}%`:""}</td>`).join("")}
+   <td><b>${x.done}</b>/${x.total}</td><td class="hide-m">${x.last?ago((t.now||Date.now())-x.last):"—"}</td></tr>`).join("")}</tbody></table></div>
+  <div id="drawer"></div>
+  <div class="card drawer"><h3 style="margin-bottom:8px">📈 Item analysis · % of full marks (submitted students)</h3>${itemAnalysis(rows)}</div>
+  <div class="card drawer"><h3 style="margin-bottom:8px">🔓 Open parts for students · เปิด/ปิด Part</h3>
+   <div style="display:flex;flex-wrap:wrap;gap:8px">${PARTS.map(p=>`<label class="pill" style="cursor:pointer"><input type="checkbox" data-op="${p.id}" ${S.open.includes(p.id)?"checked":""}> P${p.id} ${esc(p.title)}${p.soon?" (soon)":""}</label>`).join("")}</div>
+   <button class="btn btn-g" id="tOpen" style="margin-top:10px">Save · บันทึก</button></div>`;
+ document.querySelectorAll(".ts").forEach(b=>b.onclick=()=>{S.tfilter=b.dataset.f;renderTracker()});
+ $("#tq").oninput=e=>{S.tq=e.target.value;const pos=e.target.selectionStart;renderTracker();const n=$("#tq");n.focus();n.setSelectionRange(pos,pos)};
+ $("#tRef").onclick=()=>loadTracker(true); $("#tCsv").onclick=exportCsv; $("#tClr").onclick=()=>confirmClear("all");
+ document.querySelectorAll("tr.r").forEach(tr=>tr.onclick=()=>{S.sel=S.sel===tr.dataset.id?null:tr.dataset.id;renderTracker()});
+ $("#tOpen").onclick=saveOpen;
+ if(S.sel) renderDrawer(rows.find(x=>x.s[1]===S.sel));
+}
+function itemAnalysis(rows){
+ return SCORED().map(it=>{const subs=rows.map(x=>x.st.items&&x.st.items[it.k]).filter(Boolean);const pct=subs.length?Math.round(subs.filter(r=>r.score===r.max).length/subs.length*100):null;
+  return `<div class="ia"><span>${numOf(it)} ${esc(it.title)}</span><div class="b"><i class="${pct!=null&&pct<50?"low":""}" style="width:${pct||0}%"></i></div><span>${pct==null?"—":pct+"%"} <small class="muted">(${subs.length})</small></span></div>`}).join("");
+}
+function renderDrawer(x){
+ if(!x) return; const com=(S.track.comments||{})[x.s[1]]||{};
+ $("#drawer").innerHTML=`<div class="card drawer"><h3>${esc(x.s[2])} <span class="muted">${x.s[1]}</span> <button class="btn btn-g" id="clrOne" style="min-height:34px;padding:4px 12px;font-size:13px;color:#c0264f;border-color:#f3b4c8;margin-left:8px">🗑 Clear this student</button></h3>
+  <details style="margin:8px 0 12px"><summary style="cursor:pointer;font-weight:700">🧩 Assembled release · ข่าวที่ประกอบแล้ว</summary>${assembleHTML(x.st.items||{},false).replace(/<button[^>]*data-copyasm[^>]*>.*?<\/button>/,"")}</details>
+  ${ALLITEMS().map(it=>{const r=x.st.items&&x.st.items[it.k];return `<div class="dit"><b>${numOf(it)} ${esc(it.title)}</b> ${r?`<span class="tag">${it.type==="exit"?"submitted":r.score+"/"+r.max} · attempt ${r.att||1}</span>`:`<span class="muted">not submitted</span>`}
+   ${r?`<div class="a">${esc(serialize(it,r.a))}</div>`:""}
+   ${r&&(it.type==="write"||it.type==="exit")?`<textarea data-cm="${it.k}" placeholder="Comment to student · ความเห็นถึงนักศึกษา">${esc(com[it.k]||"")}</textarea><button class="btn btn-g" data-cs="${it.k}" style="margin-top:6px;min-height:38px;padding:6px 14px">💬 Send comment</button>`:""}</div>`}).join("")}</div>`;
+ $("#clrOne").onclick=()=>confirmClear("one",x);
+ document.querySelectorAll("[data-cs]").forEach(b=>b.onclick=async()=>{
+  const k=b.dataset.cs, text=document.querySelector(`[data-cm="${k}"]`).value.trim();
+  if(!API_URL) return toast("ยังไม่ได้ใส่ API_URL");
+  b.disabled=true;
+  try{const j=await apiPost({action:"comment",code:S.tcode,id:x.s[1],item:k,text});if(!j.ok)throw new Error(j.error);
+   S.track.comments=S.track.comments||{};(S.track.comments[x.s[1]]=S.track.comments[x.s[1]]||{})[k]=text;toast("Sent · ส่งความเห็นแล้ว")}
+  catch(e){toast("ส่งไม่สำเร็จ: "+(e.message||e))}finally{b.disabled=false}});
+}
+/* teacher: clear all students (scope "all") or one student (id). Typed confirmation to avoid accidents. */
+function confirmClear(scope,x){
+ const all=scope==="all", who=all?"ALL 37 students · นักศึกษาทั้งหมด":`${esc(x.s[2])} (${x.s[1]})`;
+ modal(`<h3>🗑 Clear data · ล้างข้อมูล</h3><div class="tht th">${all?"ล้างข้อมูลการเข้าใช้ คำตอบ คะแนน และความเห็น ของทุกคน":"ล้างข้อมูลการเข้าใช้ คำตอบ คะแนน และความเห็น ของนักศึกษาคนนี้"}</div>
+  <p style="margin:12px 0"><b>${who}</b><br>Login times, answers, scores, exit tickets and your comments will be deleted from the Google Sheet. This cannot be undone — export CSV first. <span class="th muted">กู้คืนไม่ได้ ควร Export CSV ก่อน</span></p>
+  <p class="muted">Type <b>CLEAR</b> to confirm · พิมพ์ CLEAR เพื่อยืนยัน</p>
+  <input class="inp" id="clrIn" autocomplete="off" placeholder="CLEAR" style="margin:6px 0 12px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-g" id="clrCsv">⬇ Export CSV first</button><button class="btn btn-p" id="clrGo" disabled style="background:#c0264f">Delete · ลบข้อมูล</button></div>`);
+ const inp=$("#clrIn"),go=$("#clrGo");inp.oninput=()=>go.disabled=inp.value.trim()!=="CLEAR";
+ $("#clrCsv").onclick=exportCsv;
+ go.onclick=async()=>{
+  if(!API_URL) return toast("ยังไม่ได้ใส่ API_URL");
+  go.disabled=true;go.textContent="…";
+  try{const j=await apiPost(all?{action:"clear",code:S.tcode,scope:"all"}:{action:"clear",code:S.tcode,scope:"student",id:x.s[1]});
+   if(!j.ok) throw new Error(j.error||"error");
+   document.querySelector(".mwrap")&&document.querySelector(".mwrap .mx").click();
+   if(all){S.track={now:Date.now(),progress:[],comments:{}};S.sel=null}
+   else if(S.track){S.track.progress=(S.track.progress||[]).map(r=>r.id===x.s[1]?Object.assign({},r,{first:"",last:"",part:"",state:{}}):r);delete (S.track.comments||{})[x.s[1]]}
+   renderTracker();toast("Cleared · ล้างข้อมูลแล้ว");loadTracker();
+  }catch(e){toast("ล้างไม่สำเร็จ: "+(e.message||e));go.disabled=false;go.textContent="Delete · ลบข้อมูล"}};
+}
+async function saveOpen(){
+ const ids=[...document.querySelectorAll("[data-op]")].filter(c=>c.checked).map(c=>+c.dataset.op);
+ if(!API_URL) return toast("ยังไม่ได้ใส่ API_URL");
+ try{const j=await apiPost({action:"setParts",code:S.tcode,parts:ids.join(",")});if(!j.ok)throw new Error(j.error);S.open=ids;toast("Saved · บันทึกแล้ว")}catch(e){toast("บันทึกไม่สำเร็จ: "+(e.message||e))}
+}
+function exportCsv(){
+ const its=ALLITEMS(), q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+ const head=["No","StudentID","Name","Status","ItemsDone"].concat(its.filter(i=>i.type!=="exit").map(it=>"Score "+numOf(it))).concat(its.filter(i=>i.type==="write"||i.type==="exit").map(it=>(it.type==="exit"?"Exit ticket ":"Answer ")+numOf(it)));
+ const lines=[head.map(q).join(",")].concat(rowsT().map(x=>[x.s[0],`="${x.s[1]}"`,x.s[2],x.status,x.done+"/"+x.total]
+  .concat(its.filter(i=>i.type!=="exit").map(it=>{const r=x.st.items&&x.st.items[it.k];return r?r.score+"/"+r.max:""}))
+  .concat(its.filter(i=>i.type==="write"||i.type==="exit").map(it=>{const r=x.st.items&&x.st.items[it.k];return r?serialize(it,r.a):""})).map(q).join(",")));
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"}));
+ a.download=`W13_PressRelease_Writing_${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();a.remove();
+}
+
+/* ================= APP SHELL ================= */
+function showApp(){$("#vLogin").hidden=true;$("#hdr").hidden=false;$("#vApp").hidden=false;
+ $("#who").textContent=S.role==="t"?"🧑‍🏫 Teacher":`${S.student[1]} · ${S.student[2]}`;render()}
+function logout(){clearInterval(S.hb);clearInterval(S.tt);location.reload()}
+(function initLogin(){
+ const sel=$("#selS"); STUDENTS.forEach(s=>{const o=document.createElement("option");o.value=s[1];o.textContent=`${s[0]}. ${s[2]} (${s[1]})`;sel.appendChild(o)});
+ sel.value=""; sel.onchange=()=>$("#goS").disabled=!sel.value;
+ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));$("#loginS").hidden=b.dataset.r!=="s";$("#loginT").hidden=b.dataset.r!=="t";$("#lerr").textContent=""});
+ $("#goS").onclick=()=>{const st=STUDENTS.find(s=>s[1]===sel.value);if(st)startStudent(st)};
+ const tgo=()=>{const v=$("#inT").value.trim();if(fnv(v)!==T_HASH){$("#lerr").textContent="Incorrect code · รหัสไม่ถูกต้อง";return}
+  S.role="t";S.tcode=v;S.part=0;showApp();loadTracker();S.tt=setInterval(()=>{if(S.part===0&&!document.hidden)loadTracker()},TRACK_MS)};
+ $("#goT").onclick=tgo; $("#inT").onkeydown=e=>{if(e.key==="Enter")tgo()};
+ $("#btnOut").onclick=logout;
+ $("#btnFacts").onclick=()=>modal(`<h3>📋 Fact Sheet</h3><div class="tht th">ข้อมูลสำหรับเขียนข่าว (องค์กรสมมติ)</div><dl class="fgrid">${FACTS.map(f=>`<dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd>`).join("")}</dl>`);
+ document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&S.role==="s"){logEv("heartbeat");flushQueue()}});
+})();
+</script>
+</body>
+</html>
