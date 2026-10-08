@@ -12,7 +12,7 @@
 |---|---|
 | [`fab_aida_presentation_rubric_1.html`](https://ruangsin.github.io/fab-aida-rubric/fab_aida_presentation_rubric_1.html) | เกณฑ์ประเมินการนำเสนองานตามโมเดล FAB-AIDA |
 | [`PressRelease_Lab.html`](https://ruangsin.github.io/fab-aida-rubric/PressRelease_Lab.html) | Press Release Lab — แบบฝึกหัดเขียนข่าวประชาสัมพันธ์ |
-
+| [`PressReleaseWriting.html`](https://ruangsin.github.io/fab-aida-rubric/PressReleaseWriting.html) | Press Release Writing — บทเรียน/แบบฝึกหัดการเขียนข่าวประชาสัมพันธ์ |
 ---
 
 *อัปเดตล่าสุด: ตุลาคม 2569*
