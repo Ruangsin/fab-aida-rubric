@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Press Release Writing Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#7c3aed;--p2:#a855f7;--k:#ec4899;--k2:#f472b6;--ink:#2a1055;--mut:#6b5b8c;--bg:#fbf5ff;--card:rgba(255,255,255,.74);--line:rgba(124,58,237,.18);--ok:#10b981;--bad:#f43f5e;--r:22px;--sh:0 18px 50px -18px rgba(124,58,237,.35);--surf:#fff;--surf2:#fff5fb;--top:rgba(251,245,255,.72)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Prompt',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden;line-height:1.5}
+button,input,textarea{font-family:inherit;color:inherit}
+/* animated background */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(135deg,#fbf5ff,#fff1f8 55%,#f3ecff)}
+.blob{position:absolute;border-radius:50%;filter:blur(64px);opacity:.55;animation:float 20s ease-in-out infinite}
+.b1{width:46vmax;height:46vmax;background:#c4b5fd;left:-12vmax;top:-14vmax}
+.b2{width:40vmax;height:40vmax;background:#f9a8d4;right:-10vmax;top:10vh;animation-delay:-7s}
+.b3{width:34vmax;height:34vmax;background:#a5b4fc;left:25vw;bottom:-16vmax;animation-delay:-13s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vmax,4vmax) scale(1.12)}66%{transform:translate(-4vmax,7vmax) scale(.94)}}
+.spark{position:absolute;bottom:-30px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(236,72,153,.0) 70%);opacity:0;animation:rise-up linear infinite}
+@keyframes rise-up{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-110vh) scale(1.3);opacity:0}}
+/* header */
+#top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px clamp(12px,3vw,28px);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:var(--top);border-bottom:1px solid var(--line)}
+.brand{font-weight:800;letter-spacing:.2px;margin-right:auto;background:linear-gradient(90deg,var(--p),var(--k),var(--p));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:13px;box-shadow:0 4px 14px -8px rgba(124,58,237,.5);max-width:46vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip.score b{font-variant-numeric:tabular-nums}
+.chip button{all:unset;cursor:pointer;color:var(--p);font-weight:600}
+/* screens */
+#app{padding:clamp(12px,3vw,28px);max-width:1280px;margin:0 auto}
+.screen{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.center{min-height:78vh;display:grid;place-items:center}
+@keyframes rise{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.card{background:var(--card);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);box-shadow:var(--sh);padding:clamp(16px,2.4vw,28px)}
+.hero{width:min(560px,100%);text-align:center;position:relative}
+.kicker{display:inline-block;padding:4px 12px;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--k));color:#fff;font-size:12px;letter-spacing:.6px;font-weight:600;animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(236,72,153,0)}0%{box-shadow:0 0 0 0 rgba(236,72,153,.45)}}
+h1.title{font-size:clamp(30px,6vw,46px);line-height:1.1;margin:16px 0 8px;font-weight:800}
+.ltr{display:inline-block;opacity:0;transform:translateY(.7em) rotate(8deg);animation:ltr .7s cubic-bezier(.2,.9,.3,1.5) forwards;animation-delay:calc(var(--i)*38ms);background:linear-gradient(120deg,var(--p),var(--k));-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes ltr{to{opacity:1;transform:none}}
+.sub{color:var(--mut);margin:0 0 18px}
+.search{position:relative;text-align:left}
+.search input{width:100%;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--surf);font-size:16px;outline:none;transition:.25s}
+.search input:focus{border-color:var(--p2);box-shadow:0 0 0 5px rgba(168,85,247,.16)}
+.res{display:grid;gap:6px;margin-top:8px}
+.res button{all:unset;cursor:pointer;padding:10px 14px;border-radius:14px;background:var(--surf);border:1px solid var(--line);animation:rise .35s both;animation-delay:calc(var(--i)*40ms);transition:.2s}
+.res button:hover,.res button:focus-visible{transform:translateX(6px);border-color:var(--k);background:var(--surf2)}
+.res small{color:var(--mut);margin-left:8px}
+.note{margin-top:16px;font-size:13px;color:var(--mut)}
+.demo{margin-top:12px;padding:8px 12px;border-radius:12px;background:#fff7d6;border:1px dashed #e0b400;font-size:13px;color:#7a5b00}
+/* buttons */
+.btn{all:unset;cursor:pointer;padding:11px 20px;border-radius:14px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--p),var(--k));box-shadow:0 10px 24px -10px rgba(236,72,153,.7);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;text-align:center}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn:active{transform:scale(.97)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%)}
+.btn:hover::after{transition:transform .7s;transform:translateX(120%)}
+.btn.ghost{background:var(--surf);color:var(--p);border:1px solid var(--line);box-shadow:none}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.btn.big{font-size:17px;padding:14px 24px;width:100%}
+/* story picker */
+.ph1{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:6px 0 18px}
+.ph1 h2{margin:0;font-size:clamp(22px,4vw,32px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;perspective:900px}
+.story{all:unset;cursor:pointer;display:block;padding:18px;border-radius:var(--r);background:var(--card);border:1px solid rgba(255,255,255,.9);box-shadow:var(--sh);transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .18s ease-out,box-shadow .25s;animation:rise .65s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*70ms);position:relative;overflow:hidden}
+.story:hover{box-shadow:0 26px 50px -16px rgba(236,72,153,.5)}
+.story::before{content:"";position:absolute;inset:-60% -30%;background:conic-gradient(from 0deg,transparent,rgba(236,72,153,.25),transparent 40%);opacity:0;transition:.4s;animation:spin 6s linear infinite}
+.story:hover::before{opacity:1}
+@keyframes spin{to{transform:rotate(1turn)}}
+.story>*{position:relative}
+.story .ic{font-size:44px;display:inline-block;animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i)*-.4s)}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-6deg)}}
+.tag{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--k);font-weight:700;display:block;margin-top:6px}
+.story h3{margin:2px 0 2px;font-size:18px}
+.story p{margin:0;color:var(--mut);font-size:14px}
+.story .n{position:absolute;right:14px;top:10px;font-weight:800;font-size:28px;color:rgba(124,58,237,.12)}
+.story .prog{margin-top:10px;font-size:12px;color:var(--p);font-weight:600}
+/* modal */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(42,16,85,.38);backdrop-filter:blur(6px);display:grid;place-items:center;padding:14px;animation:fade .3s both}
+@keyframes fade{from{opacity:0}}
+.modal{width:min(640px,100%);max-height:90vh;overflow:auto;animation:pop .45s cubic-bezier(.2,1.2,.3,1) both;background:var(--surf)}
+@keyframes pop{from{opacity:0;transform:scale(.8) translateY(30px)}}
+.modal h3{margin:0 0 4px;font-size:22px}
+.mact{display:flex;gap:10px;margin-top:16px}.mact .btn{flex:1}
+/* fact sheet */
+.facts{display:grid;gap:8px;margin-top:10px}
+.fr{display:grid;grid-template-columns:104px 1fr;gap:10px;padding:8px 10px;border-radius:12px;background:var(--surf);border:1px solid var(--line);font-size:13.5px;animation:rise .5s both;animation-delay:calc(var(--i)*35ms)}
+.fr b{color:var(--p);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.fr.extra{border-style:dashed;background:#f7f4ff}
+.fr.extra b::after{content:" · not lead-worthy";color:var(--mut);text-transform:none;letter-spacing:0;font-weight:500}
+.fr.must{border-color:var(--k);background:#fff5fb}
+/* workspace */
+.ws{display:grid;grid-template-columns:minmax(300px,390px) 1fr;gap:18px;align-items:start}
+.fs{position:sticky;top:78px;max-height:calc(100vh - 96px);overflow:auto}
+.fs summary{cursor:pointer;list-style:none;display:flex;gap:12px;align-items:center;font-weight:700}
+.fs summary::-webkit-details-marker{display:none}
+.fs .sic{font-size:34px;animation:bob 3s ease-in-out infinite}
+.fs summary i{margin-left:auto;font-style:normal;transition:.3s}
+.fs[open] summary i{transform:rotate(180deg)}
+.stepper{position:relative;display:flex;gap:8px;overflow-x:auto;padding:6px 4px 12px;scrollbar-width:thin}
+.pill{all:unset;cursor:pointer;flex:0 0 auto;padding:8px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600;position:relative;z-index:1;transition:color .3s,transform .2s;display:flex;gap:6px;align-items:center;white-space:nowrap}
+.pill:hover{transform:translateY(-2px)}
+.pill.on{color:#fff}
+.pill.done{border-color:var(--p2)}
+.pill.perfect::after{content:"★";color:#f59e0b;margin-left:2px;animation:twinkle 1.6s infinite}
+.pill.on.perfect::after{color:#fde68a}
+@keyframes twinkle{50%{transform:scale(1.4) rotate(20deg)}}
+.ind{position:absolute;top:6px;left:0;height:calc(100% - 18px);border-radius:99px;background:linear-gradient(135deg,var(--p),var(--k));box-shadow:0 8px 20px -8px rgba(236,72,153,.8);transition:transform .45s cubic-bezier(.3,1.2,.4,1),width .45s cubic-bezier(.3,1.2,.4,1);z-index:0}
+.meter{height:8px;border-radius:99px;background:rgba(124,58,237,.12);overflow:hidden;margin:2px 0 16px;position:relative}
+.meter b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--k),#f59e0b);background-size:200% 100%;animation:shine 3s linear infinite;transition:width .8s cubic-bezier(.2,.9,.3,1)}
+.part{animation:inr .5s cubic-bezier(.2,.8,.2,1) both}
+.part.in-l{animation-name:inl}
+@keyframes inr{from{opacity:0;transform:translateX(50px)}}
+@keyframes inl{from{opacity:0;transform:translateX(-50px)}}
+.phd{display:flex;gap:14px;align-items:center}
+.pic{font-size:38px;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#f3e8ff,#ffe4f3);animation:bob 3s ease-in-out infinite}
+.pn{font-size:12px;letter-spacing:1px;color:var(--k);font-weight:700}
+.phd h2{margin:0;font-size:clamp(20px,3.4vw,28px);line-height:1.15}
+.phd h2 small{display:block;font-size:14px;color:var(--mut);font-weight:500}
+.ring{margin-left:auto;position:relative;width:70px;height:70px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.ring .t{stroke:rgba(124,58,237,.14)}
+.ring .v{stroke:url(#g);transition:stroke-dashoffset .8s cubic-bezier(.2,.9,.3,1)}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.rule{margin:16px 0 10px;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(124,58,237,.09),rgba(236,72,153,.09));border-left:4px solid var(--k)}
+.rule p{margin:0}.rule .th{color:var(--mut);font-size:14px;margin-top:2px}
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ex div{padding:10px 12px;border-radius:14px;font-size:13.5px}
+.ex b{display:block;font-size:11px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px}
+.ex .g{background:#ecfdf5;border:1px solid #a7f3d0}.ex .g b{color:#047857}
+.ex .b{background:#fff1f2;border:1px solid #fecdd3}.ex .b b{color:#be123c}
+textarea{width:100%;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--surf);font-size:16px;line-height:1.55;resize:vertical;outline:none;transition:.25s;min-height:80px}
+textarea:focus{border-color:var(--p2);box-shadow:0 0 0 5px rgba(168,85,247,.16),0 0 28px -6px rgba(236,72,153,.35)}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mut);margin:6px 2px 10px}
+.meta .btn{padding:4px 12px;font-size:12px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.chk{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:13px;background:var(--surf);border:1px solid var(--line);transition:background .35s,border-color .35s,transform .35s;animation:rise .5s both;animation-delay:calc(var(--i)*55ms)}
+.chk .dot{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;background:#efe8ff;color:transparent;font-size:14px;font-weight:800;transition:.35s}
+.chk b{font-weight:600;font-size:14px;display:block}.chk small{color:var(--mut);font-size:12px}
+.chk.ok{background:#ecfdf5;border-color:#6ee7b7}
+.chk.ok .dot{background:var(--ok);color:#fff}
+.chk.pop{animation:okpop .6s cubic-bezier(.2,1.4,.3,1)}
+.chk.pop .dot{animation:dotpop .6s}
+@keyframes okpop{30%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(16,185,129,.18)}}
+@keyframes dotpop{0%{transform:scale(.3) rotate(-90deg)}60%{transform:scale(1.4)}}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+/* assemble */
+.asm{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}
+.paper{background:#fffdf8;color:#2a1055;border-radius:6px 6px 22px 22px;padding:clamp(18px,3vw,34px);box-shadow:0 30px 60px -24px rgba(124,58,237,.45);position:relative;font-family:Georgia,'Times New Roman','Noto Serif Thai',serif;animation:paper .8s cubic-bezier(.2,.9,.3,1.1) both}
+@keyframes paper{from{opacity:0;transform:translateY(60px) rotate(-2deg) scale(.96)}}
+.paper::before{content:"";position:absolute;left:50%;top:-12px;width:110px;height:26px;transform:translateX(-50%) rotate(-2deg);background:rgba(244,114,182,.5);border-radius:4px}
+.blk{position:relative;padding:8px 0 8px 0;animation:fly .7s cubic-bezier(.2,.9,.3,1.1) both;animation-delay:calc(var(--i)*170ms + 300ms)}
+@keyframes fly{from{opacity:0;transform:translateX(-60px) scale(.95)}}
+.blk .lab{font-family:'Prompt',sans-serif;display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,var(--p),var(--k));padding:2px 9px;border-radius:99px;margin-bottom:4px}
+.blk .tx{white-space:pre-wrap;font-size:16px;line-height:1.6}
+.blk.hd .tx{font-size:24px;font-weight:700;line-height:1.25}
+.blk.sb .tx{font-size:17px;font-style:italic;color:#4b3b6b}
+.blk.rl .tx,.blk.dl b{font-weight:700;letter-spacing:.5px}
+.blk .empty{color:#b7a8d3;cursor:pointer;font-family:'Prompt',sans-serif;font-size:14px}
+.board{position:sticky;top:78px}
+.big{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.big .ring{width:104px;height:104px}.big .ring span{font-size:24px}
+.cat{margin:9px 0}
+.cat .row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:3px}
+.cat .row b{font-variant-numeric:tabular-nums}
+.bar{height:9px;border-radius:99px;background:rgba(124,58,237,.12);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--k));transition:width 1.1s cubic-bezier(.2,.9,.3,1)}
+.weak{margin:14px 0;display:grid;gap:6px;font-size:13px}
+.weak button{all:unset;cursor:pointer;padding:7px 11px;border-radius:12px;background:#fff7fb;border:1px solid #fbcfe8;transition:.2s}
+.weak button:hover{transform:translateX(5px)}
+.ok-msg{padding:10px 14px;border-radius:14px;margin-top:12px;font-size:14px;animation:rise .5s both}
+.ok-msg.good{background:#ecfdf5;border:1px solid #6ee7b7}.ok-msg.warn{background:#fff7d6;border:1px dashed #e0b400}.ok-msg.err{background:#fff1f2;border:1px solid #fecdd3}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:60}
+@media(max-width:959px){.ws,.asm{grid-template-columns:1fr}.fs,.board{position:static;max-height:none}.ex{grid-template-columns:1fr}.fr{grid-template-columns:90px 1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;animation-delay:0ms!important}.ltr{opacity:1;transform:none}}
+.ws>*,.asm>*,.main{min-width:0}
+html,body{max-width:100%;overflow-x:hidden}
+.pill.on{background:transparent;border-color:transparent}
+.cat .row>span:first-child{flex:1;padding-right:10px}
+.cat .row .v{white-space:nowrap}
+/* ===== theme toggle + roles ===== */
+.tbtn{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);font-size:18px;transition:transform .5s cubic-bezier(.3,1.5,.4,1)}
+.tbtn:hover{transform:rotate(25deg) scale(1.08)}
+.tbtn.spin{animation:tspin .6s cubic-bezier(.3,1.4,.4,1)}
+@keyframes tspin{from{transform:rotate(-180deg) scale(.4)}}
+.roles{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:16px;background:rgba(124,58,237,.1);margin:4px 0 14px}
+.roles button{all:unset;cursor:pointer;text-align:center;padding:10px;border-radius:12px;font-weight:700;position:relative;z-index:1;transition:color .3s}
+.roles button.on{color:#fff}
+.roles .knob{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:12px;background:linear-gradient(135deg,var(--p),var(--k));box-shadow:0 8px 20px -8px rgba(236,72,153,.8);transition:transform .45s cubic-bezier(.3,1.3,.4,1)}
+.roles.t .knob{transform:translateX(100%)}
+.tlog{display:grid;gap:10px;text-align:left;animation:rise .4s both}
+.tlog label{font-size:13px;color:var(--mut)}
+.pw{position:relative}
+.pw input{width:100%;padding:14px 48px 14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--surf);font-size:16px;outline:none;transition:.25s}
+.pw input:focus{border-color:var(--p2);box-shadow:0 0 0 5px rgba(168,85,247,.16)}
+.pw button{all:unset;cursor:pointer;position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:18px}
+.terr{color:var(--bad);font-size:13px;min-height:18px}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+/* ===== teacher ===== */
+.tbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.tbar .stepper{flex:1 1 auto;padding:6px 4px 8px}
+.upd{font-size:12.5px;color:var(--mut);display:flex;gap:8px;align-items:center}
+.live-dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(16,185,129,.6);animation:ld 1.6s infinite}
+@keyframes ld{70%{box-shadow:0 0 0 9px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.kpi{padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--sh);animation:rise .5s both;animation-delay:calc(var(--i)*60ms)}
+.kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12.5px;color:var(--mut)}
+.kpi.k-ok b{color:var(--ok)}.kpi.k-w b{color:var(--p2)}.kpi.k-i b{color:#f59e0b}.kpi.k-n b{color:var(--mut)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tools input{flex:1 1 200px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surf);font-size:14px;outline:none}
+.seg{display:inline-flex;padding:4px;border-radius:12px;background:rgba(124,58,237,.1)}
+.seg button{all:unset;cursor:pointer;padding:6px 12px;border-radius:9px;font-size:13px;font-weight:600}
+.seg button.on{background:var(--surf);box-shadow:0 2px 8px -2px rgba(124,58,237,.4);color:var(--p)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.lc{padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:grid;gap:6px;animation:rise .45s both;animation-delay:calc(var(--i)*18ms);border-left:5px solid var(--line);cursor:pointer;transition:transform .2s}
+.lc:hover{transform:translateY(-3px)}
+.lc.s-sub{border-left-color:var(--ok)}.lc.s-wr{border-left-color:var(--p2)}.lc.s-idle{border-left-color:#f59e0b}.lc.s-none{opacity:.6}
+.lc .nm{font-weight:700;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.lc .nm small{color:var(--mut);font-weight:500}
+.lc .st{font-size:12.5px;color:var(--mut);display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.lc .warn{color:#f59e0b;font-weight:700}
+.mini{height:6px;border-radius:99px;background:rgba(124,58,237,.12);overflow:hidden}
+.mini i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--k));border-radius:99px;transition:width .6s}
+.badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(124,58,237,.12);color:var(--p)}
+.badge.ok{background:rgba(16,185,129,.15);color:var(--ok)}.badge.idle{background:rgba(245,158,11,.15);color:#d97706}
+.tw{overflow:auto;border-radius:18px;border:1px solid var(--line);background:var(--card)}
+table.sc{width:100%;border-collapse:collapse;font-size:13.5px;min-width:900px}
+.sc th{position:sticky;top:0;background:var(--surf);text-align:left;padding:10px;font-size:12px;color:var(--mut);cursor:pointer;white-space:nowrap;user-select:none;z-index:1}
+.sc th.num,.sc td.num{text-align:right;font-variant-numeric:tabular-nums}
+.sc th .ar{opacity:.6}
+.sc td{padding:9px 10px;border-top:1px solid var(--line)}
+.sc tr{animation:rise .4s both;animation-delay:calc(var(--i)*12ms)}
+.sc tbody tr{cursor:pointer;transition:background .2s}
+.sc tbody tr:hover{background:rgba(236,72,153,.07)}
+.sc .fin{font-weight:800;color:var(--p)}
+.sc .ovr{color:var(--k)}
+.sc .muted{color:var(--mut)}
+.drawer{width:min(980px,100%)}
+.dgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:10px}
+.prt{padding:10px 12px;border-radius:14px;background:var(--surf);border:1px solid var(--line);margin-bottom:8px}
+.prt .ph{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--p)}
+.prt .tx{white-space:pre-wrap;font-size:14px;margin:4px 0}
+.prt .fl{font-size:12px;color:var(--bad)}
+.prt .tx.none{color:var(--mut);font-style:italic}
+.gform{display:grid;gap:8px}
+.gform .gr{display:grid;grid-template-columns:1fr 76px 52px;gap:8px;align-items:center;font-size:13.5px}
+.gform input,.gform textarea{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surf);font-size:14px;width:100%}
+.gform .auto{font-size:12px;color:var(--mut);text-align:right}
+.gtot{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:14px;background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(236,72,153,.12));font-weight:800}
+.att{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.att button{all:unset;cursor:pointer;padding:4px 10px;border-radius:99px;border:1px solid var(--line);font-size:12px;background:var(--surf)}
+.att button.on{background:linear-gradient(135deg,var(--p),var(--k));color:#fff;border-color:transparent}
+.keyg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:14px}
+.keyg button{all:unset;cursor:pointer;padding:12px;border-radius:16px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px;transition:.2s}
+.keyg button:hover,.keyg button.on{border-color:var(--k);transform:translateY(-2px)}
+.veil{display:grid;place-items:center;min-height:180px;border-radius:18px;border:2px dashed var(--line);color:var(--mut);text-align:center;padding:20px}
+.btn.sm{padding:7px 14px;font-size:13px}
+.btn.danger{background:linear-gradient(135deg,#f43f5e,#e11d48)}
+@media(max-width:959px){.dgrid{grid-template-columns:1fr}}
+/* ===== dark mode ===== */
+html[data-theme=dark]{--ink:#f3eaff;--mut:#b9a6db;--bg:#0f0820;--card:rgba(34,20,66,.72);--line:rgba(196,160,255,.2);--surf:#1b1033;--surf2:#2a1745;--top:rgba(15,8,32,.75);--sh:0 18px 50px -18px rgba(0,0,0,.7);color-scheme:dark}
+html[data-theme=dark] .bg{background:linear-gradient(135deg,#0f0820,#1d0b2e 55%,#0d0a26)}
+html[data-theme=dark] .blob{opacity:.32}
+html[data-theme=dark] .b1{background:#6d28d9}html[data-theme=dark] .b2{background:#be185d}html[data-theme=dark] .b3{background:#3730a3}
+html[data-theme=dark] .card{border-color:rgba(196,160,255,.14)}
+html[data-theme=dark] .story{border-color:rgba(196,160,255,.14)}
+html[data-theme=dark] .modal{background:#1b1033}
+html[data-theme=dark] .pic{background:linear-gradient(135deg,#3b1f6b,#5b1747)}
+html[data-theme=dark] .fr.extra{background:#221540}
+html[data-theme=dark] .fr.must{background:#2e1336}
+html[data-theme=dark] .ex .g{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4)}html[data-theme=dark] .ex .g b{color:#6ee7b7}
+html[data-theme=dark] .ex .b{background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.4)}html[data-theme=dark] .ex .b b{color:#fda4af}
+html[data-theme=dark] .chk.ok{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.55)}
+html[data-theme=dark] .chk .dot{background:#2a1a4a}
+html[data-theme=dark] .ok-msg.good{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.5)}
+html[data-theme=dark] .ok-msg.err{background:rgba(244,63,94,.14);border-color:rgba(244,63,94,.5)}
+html[data-theme=dark] .ok-msg.warn,html[data-theme=dark] .demo{background:rgba(234,179,8,.12);color:#fde68a;border-color:rgba(234,179,8,.5)}
+html[data-theme=dark] .weak button{background:rgba(236,72,153,.1);border-color:rgba(236,72,153,.35)}
+html[data-theme=dark] .story .n{color:rgba(196,160,255,.18)}
+html[data-theme=dark] .btn.ghost{background:var(--surf);color:#d8b4fe}
+html[data-theme=dark] .rule{background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(236,72,153,.16))}
+html[data-theme=dark] .seg button.on{color:#e9d5ff}
+html.theming *{transition:background-color .5s,border-color .5s,color .3s!important}
+.btn,.pill,.story,.roles button,.res button,.seg button,.keyg button,.att button,.weak button,.tbtn{box-sizing:border-box}
+/* ===== v3: hidden fix · gradient text (#17A9E5 → #6263D9 → #E53D92 → #FD7742) · readable dark dashboard ===== */
+[hidden]{display:none!important}
+:root{--g1:#17A9E5;--g2:#6263D9;--g3:#E53D92;--g4:#FD7742;--grad:linear-gradient(90deg,var(--g1),var(--g2) 35%,var(--g3) 68%,var(--g4));--gradBtn:linear-gradient(110deg,var(--g1),var(--g2) 35%,var(--g3) 70%,var(--g4))}
+.gt{background:var(--grad);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.disp{font-family:'Anton','Prompt',Impact,'Arial Narrow',sans-serif;font-weight:400;letter-spacing:.5px;line-height:1.05}
+.brand{display:flex;align-items:center;gap:8px;background:none;animation:none;color:var(--ink);-webkit-text-fill-color:currentColor}
+.brand .gt{font-family:'Anton','Prompt',sans-serif;font-weight:400;font-size:22px;letter-spacing:.6px;text-transform:uppercase;background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;animation:shine 8s linear infinite}
+.brand small{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--gradBtn);color:#fff;-webkit-text-fill-color:#fff}
+.bi{font-size:18px}
+h1.title{font-family:'Anton','Prompt',Impact,sans-serif;font-weight:400;font-size:clamp(40px,9vw,72px);line-height:1.02;letter-spacing:.5px;text-transform:uppercase;margin:18px 0 10px}
+.ltr{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ph1 h2.gt{font-weight:800}
+.phd h2 .gt{font-size:clamp(28px,4.4vw,40px);display:inline-block;padding-right:2px}
+.kpi b.disp{font-size:34px}
+.kicker{background:var(--gradBtn)}
+.btn,.roles .knob,.ind,.pill.on::before{background:var(--gradBtn)}
+.btn.ghost{background:var(--surf)}
+.btn.danger{background:linear-gradient(135deg,#f43f5e,#e11d48)}
+.meter b,.bar i,.mini i{background:var(--grad)}
+.meter b{background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));background-size:200% 100%}
+.blk .lab,.att button.on{background:var(--gradBtn)}
+:focus-visible{outline:3px solid var(--g1);outline-offset:2px}
+textarea:focus,.search input:focus,.pw input:focus{border-color:var(--g2)}
+/* dashboard cards: readable names in both themes, no whole-card fading */
+.lc.s-none{opacity:1;border-left-style:dashed}
+.lc .nm span:first-child{color:var(--ink);font-size:14.5px;line-height:1.35}
+.lc.s-none .st,.lc.s-none .mini{opacity:.7}
+html[data-theme=dark] .lc{background:rgba(32,20,60,.82);border-color:rgba(196,160,255,.22)}
+html[data-theme=dark] .lc .nm span:first-child{color:#fff}
+html[data-theme=dark] .lc .st{color:#cbbbe8}
+html[data-theme=dark] .badge{background:rgba(196,160,255,.16);color:#e2d4ff}
+html[data-theme=dark] .badge.ok{background:rgba(16,185,129,.2);color:#6ee7b7}
+html[data-theme=dark] .badge.idle{background:rgba(245,158,11,.2);color:#fcd34d}
+html[data-theme=dark] .sc td{color:#efe6ff}
+html[data-theme=dark] .sc .muted,html[data-theme=dark] .sc small{color:#bfaee0}
+html[data-theme=dark] .sc .fin{color:#7dd3fc}
+html[data-theme=dark] .kpi span{color:#cbbbe8}
+html[data-theme=dark] .lc .warn{color:#fcd34d}
+.wd{display:inline-block;white-space:nowrap}
+.selw{position:relative}
+.selw select{appearance:none;-webkit-appearance:none;width:100%;padding:14px 44px 14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-size:16px;cursor:pointer;outline:none;transition:.25s;min-height:52px}
+.selw select:focus{border-color:var(--g2);box-shadow:0 0 0 5px rgba(98,99,217,.18)}
+.selw i{position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;font-style:normal;color:var(--g2)}
+.selw select option{background:var(--surf);color:var(--ink)}
+#ls .note{text-align:center;margin-top:4px}
+/* ===== fact sheet: single-column workspace, floating button, popup ===== */
+.ws.one{grid-template-columns:1fr;max-width:1000px;margin:0 auto}
+.ws.one .main{padding-bottom:96px}
+.fab{all:unset;box-sizing:border-box;position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 20px 12px 14px;border-radius:99px;color:#fff;background:var(--gradBtn);box-shadow:0 14px 34px -10px rgba(229,61,146,.75),0 0 0 3px rgba(255,255,255,.75);animation:fabIn .6s cubic-bezier(.2,1.3,.3,1) .4s both;transition:transform .2s}
+.fab::before{content:"";position:absolute;inset:-3px;border-radius:inherit;box-shadow:0 0 0 0 rgba(229,61,146,.55);animation:fabPulse 2.4s ease-out 1.2s 4}
+.fab:hover{transform:translateY(-3px) scale(1.03)}
+.fab:active{transform:scale(.96)}
+.fab-ic{font-size:26px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22)}
+.fab-tx{display:grid;line-height:1.15}.fab-tx b{font-size:17px;font-weight:800;letter-spacing:.2px}.fab-tx small{font-size:12px;opacity:.92}
+@keyframes fabIn{from{opacity:0;transform:translateY(40px) scale(.7)}}
+@keyframes fabPulse{to{box-shadow:0 0 0 18px rgba(229,61,146,0)}}
+html[data-theme=dark] .fab{box-shadow:0 14px 34px -10px rgba(229,61,146,.8),0 0 0 3px rgba(255,255,255,.18)}
+.fsov{z-index:55}
+.sheet{width:min(680px,100%);max-height:86vh;padding-top:0}
+.sheet-hd{position:sticky;top:0;z-index:2;display:flex;gap:12px;align-items:center;padding:16px 0 12px;background:inherit;border-bottom:1px solid var(--line);margin-bottom:12px}
+.sheet-hd .sic{font-size:36px}
+.sheet-hd h3{margin:0;font-size:20px}
+.sheet-hd .btn{margin-left:auto}
+.hint{padding:9px 12px;border-radius:12px;font-size:13.5px;margin-bottom:10px;background:linear-gradient(110deg,rgba(23,169,229,.12),rgba(229,61,146,.12));border:1px solid var(--line)}
+.fr.use{border:2px solid var(--g3);box-shadow:0 6px 18px -10px rgba(229,61,146,.7);background:var(--surf2)}
+.fr.use b{color:var(--g3)}
+.fsov.out{opacity:0;transition:opacity .25s}
+.fsov.out .sheet{transform:translateY(30px);transition:transform .25s}
+@media(max-width:640px){
+  .fab{left:50%;right:auto;transform:translateX(-50%);padding:10px 22px 10px 12px}
+  .fab:hover{transform:translateX(-50%) translateY(-3px)}
+  .fab:active{transform:translateX(-50%) scale(.96)}
+  @keyframes fabIn{from{opacity:0;transform:translate(-50%,40px) scale(.7)}}
+  .fsov{place-items:end center;padding:0}
+  .sheet{width:100%;max-height:88vh;border-radius:24px 24px 0 0;animation:sheetUp .4s cubic-bezier(.2,1,.3,1) both}
+  .sheet::before{content:"";display:block;width:44px;height:5px;border-radius:9px;background:var(--line);margin:10px auto 0}
+}
+@keyframes sheetUp{from{transform:translateY(100%)}}
+/* ===== mobile/tablet hardening (device test round) ===== */
+.chip button{display:inline-flex;align-items:center;justify-content:center;min-height:36px;min-width:44px;padding:0 10px;margin:-6px -8px -6px 0;border-radius:99px}
+.chip button:hover{background:rgba(98,99,217,.12)}
+.chip{padding:6px 12px;min-height:44px;box-sizing:border-box}
+.tbtn{width:44px;height:44px}
+.meta .btn,#cp,.btn.sm{min-height:44px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+.seg button{min-height:40px;display:inline-flex;align-items:center;padding:0 14px}
+.pill{min-height:44px;box-sizing:border-box}
+.att button{min-height:40px;display:inline-flex;align-items:center;padding:0 14px}
+.tools input,.gform input,.gform textarea,.pw input,.selw select,textarea{font-size:16px}
+.blk .lab{font-size:12px}
+.fr{grid-template-columns:104px minmax(0,1fr)}
+.fr span{overflow-wrap:anywhere;min-width:0}
+@media(max-width:480px){
+  .fr{grid-template-columns:1fr;gap:2px}
+  .chip{max-width:none}
+  #top{gap:8px}
+  .ph1 h2{font-size:22px}
+}
+/* phones: Fact Sheet button docks bottom-right, compact; shrinks to an icon while typing */
+@media(max-width:640px){
+  .fab{left:auto;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));transform:none;padding:6px 14px 6px 6px;gap:8px}
+  .fab:hover{transform:translateY(-2px)}
+  .fab:active{transform:scale(.96)}
+  @keyframes fabIn{from{opacity:0;transform:translateY(40px) scale(.7)}}
+  .fab-ic{width:38px;height:38px;font-size:22px}
+  .fab-tx b{font-size:15px}.fab-tx small{display:none}
+}
+body.typing .fab{padding:6px;opacity:.92}
+body.typing .fab-tx{display:none}
+/* scores table: keep columns readable on tablets */
+.sc td:nth-child(2){min-width:190px}
+.sc td:nth-child(3){min-width:160px}
+.sc th{white-space:nowrap}
+/* phones: sticky bottom action bar  ◀ Back | 📋 Facts | Next ▶  (button sits in the middle slot, nothing overlaps) */
+@media(max-width:640px){
+  .part .nav{position:sticky;bottom:max(8px,env(safe-area-inset-bottom));z-index:30;margin:16px -6px -6px;padding:8px;border-radius:20px;background:var(--top);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 10px 30px -12px rgba(98,99,217,.45);display:grid;grid-template-columns:1fr 64px 1fr;gap:8px}
+  .part .nav .btn{padding:11px 8px;min-height:48px}
+  .part .nav #nx{grid-column:3}
+  .fab{left:50%;right:auto;transform:translateX(-50%);bottom:calc(max(8px,env(safe-area-inset-bottom)) + 8px);width:56px;height:56px;padding:0;justify-content:center;border-radius:18px;box-shadow:0 10px 22px -8px rgba(229,61,146,.8)}
+  .fab:hover{transform:translateX(-50%) translateY(-2px)}
+  .fab:active{transform:translateX(-50%) scale(.95)}
+  @keyframes fabIn{from{opacity:0;transform:translate(-50%,40px) scale(.7)}}
+  .fab-ic{width:auto;height:auto;background:none;font-size:22px;line-height:1}
+  .fab{flex-direction:column;gap:0}
+  .fab-tx{display:block}.fab-tx b{font-size:11px;font-weight:800;letter-spacing:.3px}.fab-tx small{display:none}
+  body.typing .fab{padding:0;opacity:1}
+  body.typing .fab-tx{display:block}
+  .ws.one .main{padding-bottom:24px}
+  .asm{padding-bottom:80px}
+}
+.fab .fs{display:none}
+@media(max-width:640px){.fab .fl{display:none}.fab .fs{display:block}}
+/* tablet+desktop: keep Next clear of the floating Facts button */
+@media(min-width:641px){.part .nav{padding-right:200px}.ws .main,.asm{padding-bottom:40px}}
+@media(max-width:640px){.fab-tx b.fs{font-size:11px}}
+
+</style>
+</head>
+<body>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17A9E5"/><stop offset=".35" stop-color="#6263D9"/><stop offset=".7" stop-color="#E53D92"/><stop offset="1" stop-color="#FD7742"/></linearGradient></defs></svg>
+<header id="top"></header>
+<main id="app"></main>
+<canvas id="cf"></canvas>
+<script>
+/* ===== DATA: roster + 10 fictional fact sheets ===== */
+const CONFIG = {
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxVntJH0Lzo8A013PCCe16kXWIaicCwkty1F2U-ehvqnDpFy26Un4fhQovfJCqT2iBbVg/exec", // set in part 3 (Apps Script backend)
+  PING_MS: 15000
+};
+
+const ROSTER = [
+ ["467601241001","นางสาวกชกร จันนิมิต"],["467601241003","นายคณิศร การสมงาม"],["467601241005","นายชนาธิป ยมรัตน์"],
+ ["467601241006","นางสาวชลิดา นามสง่า"],["467601241007","นางสาวชุติมา ไววิญญา"],["467601241009","นางสาวดวงนภา เสงี่ยมงาม"],
+ ["467601241010","นางสาวดารินทร์ สุขประเสริฐ"],["467601241011","นางสาวธนิสร เทียวประสงค์"],["467601241012","นางสาวธัญจิรา งามสมชาติ"],
+ ["467601241013","นายธีรธัช เกษมรัตน์"],["467601241014","นายนครินทร์ สุขอร่าม"],["467601241015","นางสาวปลายฟ้า"],
+ ["467601241017","นางสาวปิยวรรณ ทองประกอบ"],["467601241018","นายปีรติ เพชรแก้ว"],["467601241020","นางสาวพิยดา ปัสสาจันทร์"],
+ ["467601241021","นางสาวระพีพัฒน์ เทียมมล"],["467601241023","นางสาววรวรรณ อมรดิษฐ์"],["467601241024","นางสาววราลักษณ์ ปัฐพี"],
+ ["467601241025","นางสาววรินธร ศรีอรุณ"],["467601241026","นายวิชยุตม์ กุลทอง"],["467601241027","นางสาวศรุตา เสือคำราม"],
+ ["467601241028","นางสาวสุกฤตา ไตรทอง"],["467601241029","นางสาวอพัชยาดา พจน์ด้วง"],["467601241030","นายธีรวัสส์ ทรัพย์เอนก"],
+ ["467601241031","นางสาววิมลรัตน์ หาญแก้ว"],["467601241032","นางสาวภูชิษา อธิกิติคุณ"],["467601241033","นายนิธิกร สมจันทร์"],
+ ["467601241034","นายสิรวิชญ์ อภัยสุข"],["467601241035","นายจิรภัทร การประเสริฐ"],["467601241037","นายกฤษฎา วิมลศิลป์"],
+ ["467601241038","นายณภัทร โพธการ"],["467601241039","นายนพกร โสดา"],["467601241040","นางสาวตัสนีม เส้นขาว"],
+ ["467601241042","นายระพีพัฒน์ จันทร์สว่าง"],["467601241044","นายสนทยา แฉ่งแดง"],["467601241045","นางสาวรุจรวี นาคะปักษิณ"],
+ ["468601221003","นางสาวปภัสสรณ์ ชินบุตร"]
+];
+
+/* kw lists drive the auto-checker. facts[] is what students see (label, value). */
+const STORIES = [
+{id:1, ic:"☕", tag:"Food & Agriculture", tagTh:"อาหาร/เกษตร", title:"Doi Kaew Coffee Co-op", news:"Farm-to-Cup Trail coffee tours", newsTh:"ทัวร์ไร่กาแฟ",
+ city:"CHIANG MAI", rel:{m:"November",a:"Nov",d:24,y:2026}, founded:2012,
+ orgKw:["doi kaew"], whatKw:["farm-to-cup","farm to cup","trail","tour","coffee farm"],
+ whenKw:["december 6","dec. 6","dec 6","6 december","weekend","saturday","sunday"], whereKw:["chiang mai","mae rim","doi kaew village"],
+ bpKw:["86","member families","9 countries","export"],
+ sp:{last:"prasert",tk:["chairman"]}, ct:{last:"ratana",tk:["marketing officer"],email:"press@doikaewcoffee.example",phone:"6653555 0101"},
+ facts:[["Organisation","Doi Kaew Coffee Co-op – a farmer-owned cooperative in Chiang Mai (founded 2012; 86 member families; exports to 9 countries)"],["Head office","Chiang Mai"],
+  ["News","Launch of “Farm-to-Cup Trail”, a guided half-day tour of coffee farms with a tasting session"],["Date/time","Saturdays and Sundays from December 6, 2026 · 8:30 a.m.–1:00 p.m."],
+  ["Place","Doi Kaew Village, Mae Rim District, Chiang Mai"],["Numbers","20 visitors per tour · 700 baht per person · 40% of ticket income goes to a village school fund"],
+  ["Booking","doikaewcoffee.example/trail"],["Spokesperson","Somchai Prasert, Co-op Chairman"],
+  ["Media contact","Ploy Ratana, Marketing Officer · press@doikaewcoffee.example · +66 53 555 0101"],["Release date","November 24, 2026 · for immediate release"],
+  ["Extra","The co-op won a regional quality award in 2024."]]},
+{id:2, ic:"🚲", tag:"Transport", tagTh:"การเดินทาง", title:"Chao Phraya Bike Share", news:"Expansion to 60 stations + student offer", newsTh:"ขยาย 60 สถานี",
+ city:"BANGKOK", rel:{m:"November",a:"Nov",d:20,y:2026}, founded:2019,
+ orgKw:["chao phraya"], whatKw:["60 stations","new stations","expan","student","free"],
+ whenKw:["december 1","dec. 1","dec 1","1 december"], whereKw:["riverfront","chao phraya","phra arthit","iconsiam","bangkok"],
+ bpKw:["1,200","1200","45,000","bicycles","users"],
+ sp:{last:"chaiyo",tk:["chief executive","ceo"]}, ct:{last:"boonma",tk:["communications manager"],email:"media@cpbikeshare.example",phone:"6625550112"},
+ facts:[["Organisation","Chao Phraya Bike Share – a Bangkok bike-sharing company (founded 2019; 1,200 bicycles; 45,000 registered users)"],["Head office","Bangkok"],
+  ["News","Expansion from 40 to 60 stations along the Chao Phraya riverfront, plus a new free first-30-minutes offer for students"],["Date/time","New stations open Monday, December 1, 2026"],
+  ["Place","Riverfront routes from Phra Arthit Pier to ICONSIAM, Bangkok"],["Numbers","20 new stations · 400 additional bicycles · students ride free for the first 30 minutes each day (with student ID)"],
+  ["Info","cpbikeshare.example"],["Spokesperson","Naree Chaiyo, Chief Executive Officer"],
+  ["Media contact","Anan Boonma, Communications Manager · media@cpbikeshare.example · +66 2 555 0112"],["Release date","November 20, 2026 · for immediate release"],
+  ["Extra","The app now supports Thai, English and Chinese."]]},
+{id:3, ic:"💳", tag:"Finance & Tech", tagTh:"การเงิน/เทค", title:"SmartSaver Thailand", news:"Student Saver account", newsTh:"บัญชีออมทรัพย์นักศึกษา",
+ city:"BANGKOK", rel:{m:"December",a:"Dec",d:10,y:2026}, founded:2021,
+ orgKw:["smartsaver"], whatKw:["student saver","savings account","account"],
+ whenKw:["january 5","jan. 5","jan 5","5 january"], whereKw:["app","ios","android","nationwide","thailand"],
+ bpKw:["600,000","600000","35 employees","users","employees"],
+ sp:{last:"wong",tk:["head of product"]}, ct:{last:"sukjai",tk:["pr manager"],email:"pr@smartsaver.example",phone:"6625550123"},
+ facts:[["Organisation","SmartSaver Thailand – a mobile banking app (founded 2021; 600,000 users; 35 employees)"],["Head office","Bangkok"],
+  ["News","Launch of “Student Saver”, a no-fee savings account for university students"],["Date/time","Available from January 5, 2027"],
+  ["Place","In the SmartSaver app (iOS and Android), nationwide"],["Numbers","No monthly fee · 2.0% annual interest on balances up to 50,000 baht · open an account in 3 minutes with a student ID"],
+  ["Info","smartsaver.example/student"],["Spokesperson","Kritsada Wong, Head of Product"],
+  ["Media contact","Mali Sukjai, PR Manager · pr@smartsaver.example · +66 2 555 0123"],["Release date","December 10, 2026 · for immediate release"],
+  ["Extra","The app received a security certification in 2025."]]},
+{id:4, ic:"🐘", tag:"Tourism & Welfare", tagTh:"ท่องเที่ยว/สวัสดิภาพสัตว์", title:"Baan Chang Elephant Sanctuary", news:"New Visitor Education Centre", newsTh:"ศูนย์การเรียนรู้ผู้เยี่ยมชม",
+ city:"KANCHANABURI", rel:{m:"December",a:"Dec",d:1,y:2026}, founded:2010,
+ orgKw:["baan chang"], whatKw:["visitor education centre","visitor education center","education centre","education center","centre","center"],
+ whenKw:["december 13","dec. 13","dec 13","13 december"], whereKw:["kanchanaburi","sai yok"],
+ bpKw:["14","rescued elephants","elephants"],
+ sp:{last:"charoen",tk:["director"]}, ct:{last:"sombat",tk:["communications officer"],email:"info@baanchang.example",phone:"6634555 0134"},
+ facts:[["Organisation","Baan Chang Elephant Sanctuary – a non-profit sanctuary in Kanchanaburi (founded 2010; cares for 14 rescued elephants)"],["Head office","Kanchanaburi"],
+  ["News","Opening of a new Visitor Education Centre; visitors observe elephants from a viewing deck (no riding or bathing)"],["Date/time","Opening Saturday, December 13, 2026 · 9:00 a.m.; open daily 9:00 a.m.–4:00 p.m. afterwards"],
+  ["Place","Sai Yok District, Kanchanaburi"],["Numbers","Centre holds 120 visitors · 5 interactive exhibits · entry 300 baht (Thai) / 600 baht (foreign visitors) · all income funds elephant food and medical care"],
+  ["Info","baanchang.example"],["Spokesperson","Dr. Wipa Charoen, Director"],
+  ["Media contact","Tanin Sombat, Communications Officer · info@baanchang.example · +66 34 555 0134"],["Release date","December 1, 2026 · for immediate release"],
+  ["Extra","The building uses solar panels for 60% of its electricity."]]},
+{id:5, ic:"🛍️", tag:"Retail", tagTh:"ค้าปลีก", title:"GreenCart Market", news:"Single-use plastic bag ban", newsTh:"เลิกถุงพลาสติก",
+ city:"BANGKOK", rel:{m:"December",a:"Dec",d:15,y:2026}, founded:2005,
+ orgKw:["greencart"], whatKw:["plastic bag","single-use","reusable","bag"],
+ whenKw:["january 12","jan. 12","jan 12","12 january"], whereKw:["48","branches","stores","all greencart"],
+ bpKw:["48","3,200","3200","employees"],
+ sp:{last:"mekha",tk:["sustainability director","director"]}, ct:{last:"dee",tk:["corporate communications"],email:"press@greencart.example",phone:"6625550145"},
+ facts:[["Organisation","GreenCart Market – a supermarket chain (founded 2005; 48 branches in central Thailand; 3,200 employees)"],["Head office","Bangkok"],
+  ["News","Ban on single-use plastic bags at all branches; customers can buy a reusable bag or bring their own"],["Date/time","Starting Monday, January 12, 2027"],
+  ["Place","All 48 GreenCart Market branches"],["Numbers","Expected to cut 12 million plastic bags a year · reusable bag 15 baht · customers who bring their own bag get 1 baht off per bill"],
+  ["Info","greencart.example/nobag"],["Spokesperson","Rungtiva Mekha, Sustainability Director"],
+  ["Media contact","Prasit Dee, Corporate Communications · press@greencart.example · +66 2 555 0145"],["Release date","December 15, 2026 · for immediate release"],
+  ["Extra","Fresh produce in loose form will still use paper bags."]]},
+{id:6, ic:"🏮", tag:"Culture & Events", tagTh:"วัฒนธรรม/อีเวนต์", title:"Lanna Lantern Festival", news:"Zero-waste festival 2026", newsTh:"เทศกาลโคมแบบ Zero Waste",
+ city:"CHIANG MAI", rel:{m:"November",a:"Nov",d:10,y:2026}, founded:1998,
+ orgKw:["lanna lantern","lantern festival"], whatKw:["zero waste","zero-waste","reusable cup","lantern","festival"],
+ whenKw:["november 24","nov. 24","nov 24","24 november","24–26","24-26"], whereKw:["tha phae","ping river","ping riverside","chiang mai"],
+ bpKw:["1998","every year","volunteer","municipality"],
+ sp:{last:"kham",tk:["chair"]}, ct:{last:"noi",tk:["press coordinator"],email:"press@lannalantern.example",phone:"6653555 0156"},
+ facts:[["Organisation","Lanna Lantern Festival Committee – a volunteer committee led by Chiang Mai Municipality (festival held every year since 1998)"],["Head office","Chiang Mai"],
+  ["News","The 2026 festival goes “zero waste”; paper lanterns replace plastic, with reusable cups at all food stalls"],["Date/time","November 24–26, 2026 · 5:00–10:00 p.m. daily"],
+  ["Place","Tha Phae Gate and the Ping Riverside, Chiang Mai"],["Numbers","150,000 visitors expected · 300 food stalls · deposit of 20 baht per reusable cup (refunded on return) · target to send under 10% of waste to landfill"],
+  ["Info","lannalantern.example"],["Spokesperson","Saowanee Kham, Committee Chair"],
+  ["Media contact","Teerasak Noi, Press Coordinator · press@lannalantern.example · +66 53 555 0156"],["Release date","November 10, 2026 · for immediate release"],
+  ["Extra","A parade of 500 performers opens the festival."]]},
+{id:7, ic:"❤️", tag:"Health", tagTh:"สุขภาพ", title:"Heart Smart Clinic", news:"Free Heart Health Day", newsTh:"ตรวจสุขภาพหัวใจฟรี",
+ city:"KHON KAEN", rel:{m:"November",a:"Nov",d:26,y:2026}, founded:2008,
+ orgKw:["heart smart"], whatKw:["free","screening","heart health day"],
+ whenKw:["december 7","dec. 7","dec 7","7 december","sunday"], whereKw:["khon kaen","mittraphap","clinic"],
+ bpKw:["9 doctors","doctors","2008"],
+ sp:{last:"rattana",tk:["cardiologist"]}, ct:{last:"suk",tk:["public relations"],email:"pr@heartsmart.example",phone:"6643555 0167"},
+ facts:[["Organisation","Heart Smart Clinic – a private heart clinic in Khon Kaen (founded 2008; 9 doctors)"],["Head office","Khon Kaen"],
+  ["News","Free Heart Health Day: blood pressure, cholesterol and ECG screening for the public"],["Date/time","Sunday, December 7, 2026 · 8:00 a.m.–3:00 p.m."],
+  ["Place","Heart Smart Clinic, Mittraphap Road, Khon Kaen"],["Numbers","First 500 visitors only · screening takes about 30 minutes · 6 doctors and 20 nurses on duty · walk-in or register online"],
+  ["Info","heartsmart.example/screening"],["Spokesperson","Dr. Anchalee Rattana, Chief Cardiologist"],
+  ["Media contact","Weerapong Suk, Public Relations · pr@heartsmart.example · +66 43 555 0167"],["Release date","November 26, 2026 · for immediate release"],
+  ["Extra","Visitors receive a free healthy-recipe booklet."]]},
+{id:8, ic:"🎓", tag:"Education", tagTh:"การศึกษา", title:"Andaman Tech Institute", news:"AI for Everyone Scholarship", newsTh:"ทุนการศึกษา AI",
+ city:"PHUKET", rel:{m:"November",a:"Nov",d:28,y:2026}, founded:1999,
+ orgKw:["andaman"], whatKw:["scholarship"],
+ whenKw:["december 1","dec. 1","dec 1","1 december","january 31","jan. 31","jan 31","31 january","applications"], whereKw:["phuket"],
+ bpKw:["6,500","6500","students","1999"],
+ sp:{last:"seri",tk:["president"]}, ct:{last:"lim",tk:["office of communications","communications"],email:"media@andamantech.example",phone:"6676555 0178"},
+ facts:[["Organisation","Andaman Tech Institute – a technology university in Phuket (founded 1999; 6,500 students)"],["Head office","Phuket"],
+  ["News","Launch of the “AI for Everyone Scholarship” for students from low-income families"],["Date/time","Applications open December 1, 2026 and close January 31, 2027; classes start in August 2027"],
+  ["Place","Andaman Tech Institute, Phuket (apply online)"],["Numbers","100 full scholarships · covers four years of tuition · open to students with a GPA of 3.00 or above"],
+  ["Info","andamantech.example/scholarship"],["Spokesperson","Assoc. Prof. Dr. Pimchanok Seri, President"],
+  ["Media contact","Nattawut Lim, Office of Communications · media@andamantech.example · +66 76 555 0178"],["Release date","November 28, 2026 · for immediate release"],
+  ["Extra","The scholarship fund is supported by three local companies."]]},
+{id:9, ic:"🥗", tag:"Food & Restaurant", tagTh:"อาหาร/ร้านอาหาร", title:"Baan Suan Kitchen", news:"New plant-based menu", newsTh:"เมนูแพลนต์เบส",
+ city:"BANGKOK", rel:{m:"November",a:"Nov",d:27,y:2026}, founded:2014,
+ orgKw:["baan suan"], whatKw:["plant-based","plant based","menu"],
+ whenKw:["december 5","dec. 5","dec 5","5 december","friday"], whereKw:["12","branches","restaurants","bangkok","nonthaburi"],
+ bpKw:["12 restaurants","bangkok","nonthaburi","2014"],
+ sp:{last:"pan",tk:["chef"]}, ct:{last:"thong",tk:["brand manager"],email:"hello@baansuankitchen.example",phone:"6625550189"},
+ facts:[["Organisation","Baan Suan Kitchen – a Thai restaurant chain (founded 2014; 12 restaurants in Bangkok and Nonthaburi)"],["Head office","Bangkok"],
+  ["News","Launch of a plant-based menu with 15 new dishes, available in all branches"],["Date/time","From Friday, December 5, 2026"],
+  ["Place","All 12 Baan Suan Kitchen restaurants"],["Numbers","15 dishes · priced 89–159 baht · made from locally grown vegetables and mushrooms from 20 partner farms · each dish uses 70% less water than the meat version (company estimate)"],
+  ["Info","baansuankitchen.example/plantbased"],["Spokesperson","Chef Boonlert Pan, Executive Chef"],
+  ["Media contact","Jiraporn Thong, Brand Manager · hello@baansuankitchen.example · +66 2 555 0189"],["Release date","November 27, 2026 · for immediate release"],
+  ["Extra","The most popular new dish is green curry with oyster mushrooms."]]},
+{id:10, ic:"🪸", tag:"NGO & Environment", tagTh:"NGO/สิ่งแวดล้อม", title:"Pattaya Ocean Guardians", news:"Coral Rescue Weekend", newsTh:"สุดสัปดาห์ฟื้นฟูปะการัง",
+ city:"PATTAYA", rel:{m:"December",a:"Dec",d:8,y:2026}, founded:2017,
+ orgKw:["ocean guardians"], whatKw:["coral","junior diver","rescue"],
+ whenKw:["december 20","dec. 20","dec 20","20 december","20–21","20-21","weekend"], whereKw:["koh larn","pattaya"],
+ bpKw:["450","members","2017"],
+ sp:{last:"boon",tk:["president"]}, ct:{last:"dao",tk:["volunteer coordinator"],email:"press@oceanguardians.example",phone:"6638555 0190"},
+ facts:[["Organisation","Pattaya Ocean Guardians – a volunteer marine conservation group (founded 2017; 450 members)"],["Head office","Pattaya"],
+  ["News","“Coral Rescue Weekend”: volunteers plant young corals and clean the seabed; includes the launch of a Junior Diver Course for ages 12–17"],["Date/time","Saturday–Sunday, December 20–21, 2026 · 7:30 a.m.–12:00 p.m."],
+  ["Place","Koh Larn, Pattaya"],["Numbers","Goal of planting 600 coral fragments · 150 volunteers (certified divers 60, snorkelers 90) · registration fee 500 baht covers boat and equipment"],
+  ["Info","oceanguardians.example/coral"],["Spokesperson","Chalermchai Boon, President"],
+  ["Media contact","Siriporn Dao, Volunteer Coordinator · press@oceanguardians.example · +66 38 555 0190"],["Release date","December 8, 2026 · for immediate release"],
+  ["Extra","Last year's event planted 380 fragments."]]}
+];
+
+if (typeof module !== "undefined") module.exports = { CONFIG, ROSTER, STORIES };
+
+/* ===== CORE: rubric (10 pts), checks, scoring ===== */
+const HYPE = ["amazing","incredible","best","ever","unbelievable","revolutionary","must-see","huge","awesome","world-class","perfect","ultimate","exciting","fantastic","biggest","greatest","guaranteed","epic","insane","don't miss","stunning","magical","unforgettable","once-in-a-lifetime","wonderful","dream","super"];
+const VERBS = ["launches","opens","expands","bans","introduces","offers","holds","hosts","invites","announces","unveils","rolls","plants","goes","brings","starts","begins","sets","gives","adds","joins","welcomes","rescues","cuts","replaces","awards","creates","debuts","rallies","calls","seeks","aims","marks","returns","unveils","kicks","opens","provides","extends","rolls","lifts","ends","removes","restores","protects","supports","gets","makes","takes","pilots","unlocks"];
+
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const HYPE_RE = new RegExp("(^|[^a-z])(" + HYPE.map(esc).join("|") + ")([^a-z]|$)", "i");
+const norm = t => (t || "").replace(/[’‘]/g, "'").replace(/[“”]/g, '"');
+const words = t => { const w = (t || "").trim().split(/\s+/).filter(Boolean); return w.length; };
+const lc = t => norm(t).toLowerCase();
+const hasAny = (t, kws) => { const x = lc(t); return kws.some(k => x.includes(k)); };
+const numsIn = t => (norm(t).match(/\d[\d,]*(?:\.\d+)?/g) || []).map(x => x.replace(/,/g, "").replace(/\.$/, ""));
+const stripQuotes = t => norm(t).replace(/"[^"]*"/g, " ");
+const sentences = t => (t.match(/[.!?](\s|$)/g) || []).length || (t.trim() ? 1 : 0);
+const quoted = t => { const m = norm(t).match(/"([^"]+)"/); return m ? m[1] : ""; };
+
+function factSets(st) {
+  const allowed = new Set(), key = new Set();
+  st.facts.forEach(([l, v]) => {
+    if (l === "Media contact") return;
+    numsIn(v).forEach(n => { allowed.add(n); if (l === "Numbers") key.add(n); });
+  });
+  allowed.add(String(st.rel.d)); allowed.add(String(st.rel.y));
+  return { allowed, key };
+}
+
+const SELF_RE = /\b(you|your|we|our|us|my|i)\b/i;
+const noHype = t => !HYPE_RE.test(lc(t));
+const thirdPerson = t => !SELF_RE.test(stripQuotes(t));
+
+/* parts: id, w = points, cat = reporting category, checks = [{id, en, th, fn(text, story, sets)}] */
+const PARTS = [
+ { id: "rl", n: 1, w: 0.5, cat: "format", ic: "📌", en: "Release Line", th: "บรรทัดกำหนดเผยแพร่",
+   rule: { en: "Start with a release line so editors know when they can publish. Use capital letters.", th: "ขึ้นต้นด้วยบรรทัดบอกว่าเผยแพร่ได้ทันที ใช้ตัวพิมพ์ใหญ่" },
+   good: "FOR IMMEDIATE RELEASE", bad: "Press release!!!", ph: "Type the release line…",
+   checks: [
+    { id: "phrase", en: "Says “for immediate release”", th: "มีวลี for immediate release", fn: t => /for immediate release/i.test(t) },
+    { id: "caps", en: "Written in CAPITAL letters", th: "เขียนด้วยตัวพิมพ์ใหญ่", fn: t => /FOR IMMEDIATE RELEASE/.test(t) } ] },
+ { id: "h", n: 2, w: 1.5, cat: "headline", ic: "📰", en: "Headline", th: "พาดหัวข่าว",
+   rule: { en: "6–14 words · organisation name + present-tense news verb · no hype, no “you”, no full stop.", th: "6–14 คำ · มีชื่อองค์กร + กริยาปัจจุบัน (launches/opens…) · ห้ามคำโฆษณา ห้าม you ห้ามจบด้วยจุด" },
+   good: "Blue Klong Foundation Launches Adopt-a-Klong Program at Canal Clean-Up", bad: "Amazing! Best Klong Day Ever!", ph: "Write your headline…",
+   checks: [
+    { id: "len", en: "6–14 words", th: "ยาว 6–14 คำ", fn: t => { const n = words(t); return n >= 6 && n <= 14; } },
+    { id: "org", en: "Names the organisation", th: "มีชื่อองค์กร", fn: (t, s) => hasAny(t, s.orgKw) },
+    { id: "verb", en: "Uses a present-tense news verb", th: "ใช้กริยาปัจจุบัน เช่น launches", fn: t => lc(t).split(/[^a-z']+/).some(w => VERBS.includes(w)) },
+    { id: "hype", en: "No hype words", th: "ไม่มีคำโฆษณาเกินจริง", fn: t => t.trim() && noHype(t) },
+    { id: "you", en: "No “you / we / our”", th: "ไม่ใช้ you/we/our", fn: t => t.trim() && !SELF_RE.test(norm(t)) },
+    { id: "stop", en: "No full stop at the end", th: "ไม่จบด้วยจุด", fn: t => t.trim() && !/[.]\s*$/.test(t.trim()) } ] },
+ { id: "sub", n: 3, w: 0.5, cat: "headline", ic: "🔎", en: "Subheadline", th: "พาดหัวรอง",
+   rule: { en: "8–25 words. Add ONE useful detail (a number, place or date) that the headline did not say.", th: "8–25 คำ · เพิ่มรายละเอียดที่พาดหัวไม่ได้บอก 1 อย่าง (ตัวเลข สถานที่ วันที่)" },
+   good: "Volunteers aim to remove 5 tonnes of waste from Khlong Saen Saep on November 21", bad: "Come and join us", ph: "Write your subheadline…",
+   checks: [
+    { id: "len", en: "8–25 words", th: "ยาว 8–25 คำ", fn: t => { const n = words(t); return n >= 8 && n <= 25; } },
+    { id: "detail", en: "Adds a number from the fact sheet", th: "มีตัวเลขจาก fact sheet", fn: (t, s, f) => numsIn(t).some(n => f.allowed.has(n)) },
+    { id: "hype", en: "No hype words", th: "ไม่มีคำโฆษณาเกินจริง", fn: t => t.trim() && noHype(t) },
+    { id: "you", en: "No “you / we / our”", th: "ไม่ใช้ you/we/our", fn: t => t.trim() && !SELF_RE.test(norm(t)) } ] },
+ { id: "dl", n: 4, w: 1.0, cat: "format", ic: "📍", en: "Dateline", th: "บรรทัดสถานที่-วันที่",
+   rule: { en: "CITY IN CAPITALS, Month D, Year – . Use the head office city and the release date.", th: "เมืองตัวพิมพ์ใหญ่, เดือน วัน, ปี – ใช้เมืองสำนักงานใหญ่และวันที่ปล่อยข่าวจาก fact sheet" },
+   good: "BANGKOK, November 2, 2026 –", bad: "Bangkok 2/11/26", ph: "CITY, Month D, Year –",
+   checks: [
+    { id: "city", en: "Starts with the CITY in capitals", th: "ขึ้นต้นด้วยชื่อเมืองตัวพิมพ์ใหญ่", fn: (t, s) => t.trim().startsWith(s.city) },
+    { id: "date", en: "Has the release date (Month D, Year)", th: "มีวันที่ปล่อยข่าว", fn: (t, s) => { const x = lc(t), r = s.rel; return (x.includes(r.m.toLowerCase()) || x.includes(r.a.toLowerCase())) && new RegExp("\\b" + r.d + "\\b").test(x) && x.includes(String(r.y)); } },
+    { id: "dash", en: "Ends with a dash –", th: "ปิดด้วยเครื่องหมาย –", fn: t => /[–—-]\s*$/.test(t.trim()) } ] },
+ { id: "lead", n: 5, w: 2.0, cat: "lead", ic: "⚡", en: "Lead (5W1H)", th: "ย่อหน้านำ",
+   rule: { en: "1–2 sentences, 15–45 words: Who, What, When, Where + Why/How. Third person, no hype.", th: "1–2 ประโยค 15–45 คำ ตอบ Who What When Where + Why/How · บุรุษที่ 3 ไม่มีคำโฆษณา" },
+   good: "Blue Klong Foundation will hold its Klong Day 2026 canal clean-up on Saturday, November 21, at Khlong Saen Saep, aiming to remove 5 tonnes of waste with 800 volunteers.", bad: "You can help save our canals!", ph: "Write your lead (without the dateline)…",
+   checks: [
+    { id: "who", en: "WHO – names the organisation", th: "Who – มีชื่อองค์กร", fn: (t, s) => hasAny(t, s.orgKw) },
+    { id: "what", en: "WHAT – says the news", th: "What – บอกว่าเกิดอะไร", fn: (t, s) => hasAny(t, s.whatKw) },
+    { id: "when", en: "WHEN – gives the date", th: "When – ระบุวันที่", fn: (t, s) => hasAny(t, s.whenKw) },
+    { id: "where", en: "WHERE – gives the place", th: "Where – ระบุสถานที่", fn: (t, s) => hasAny(t, s.whereKw) },
+    { id: "why", en: "WHY/HOW – number, goal or reason", th: "Why/How – ตัวเลข เป้าหมาย หรือเหตุผล", fn: (t, s, f) => numsIn(t).some(n => f.key.has(n)) || /\b(to|so that|because|aims?|goal|will|for)\b/i.test(t) },
+    { id: "len", en: "15–45 words", th: "ยาว 15–45 คำ", fn: t => { const n = words(t); return n >= 15 && n <= 45; } },
+    { id: "voice", en: "Third person, no hype", th: "บุรุษที่ 3 ไม่มีคำโฆษณา", fn: t => t.trim() && thirdPerson(t) && noHype(t) } ] },
+ { id: "body", n: 6, w: 1.5, cat: "body", ic: "🧱", en: "Body", th: "เนื้อข่าว",
+   rule: { en: "40–120 words, 2+ sentences. Add supporting facts (at least 2 numbers) and how to join/get info. Never invent facts.", th: "40–120 คำ 2 ประโยคขึ้นไป · ใส่ข้อเท็จจริงสนับสนุน (ตัวเลขอย่างน้อย 2 ค่า) + วิธีสมัคร/ข้อมูลเพิ่มเติม · ห้ามแต่งข้อมูล" },
+   good: "The clean-up starts at Pratunam Pier at 7:00 a.m. The foundation expects 800 volunteers, up from 520 last year. Registration is free at blueklong.example/klongday.", bad: "It will be the biggest event and over 2,000 people will come!", ph: "Write the body paragraph(s)…",
+   checks: [
+    { id: "len", en: "40–120 words", th: "ยาว 40–120 คำ", fn: t => { const n = words(t); return n >= 40 && n <= 120; } },
+    { id: "sent", en: "At least 2 sentences", th: "อย่างน้อย 2 ประโยค", fn: t => sentences(t) >= 2 },
+    { id: "nums", en: "Uses 2+ numbers from the fact sheet", th: "ใช้ตัวเลขจาก fact sheet ≥ 2 ค่า", fn: (t, s, f) => new Set(numsIn(t).filter(n => f.key.has(n))).size >= 2 },
+    { id: "fake", en: "No invented numbers", th: "ไม่แต่งตัวเลขเอง", fn: (t, s, f) => t.trim() && numsIn(t).every(n => f.allowed.has(n)) },
+    { id: "info", en: "Says how to join / get info", th: "บอกวิธีสมัคร/ดูข้อมูล", fn: t => /register|registration|book|apply|visit|join|information|website|\.example/i.test(t) },
+    { id: "voice", en: "Third person, no hype", th: "บุรุษที่ 3 ไม่มีคำโฆษณา", fn: t => t.trim() && thirdPerson(t) && noHype(t) } ] },
+ { id: "quote", n: 7, w: 1.0, cat: "quote", ic: "💬", en: "Quote", th: "คำพูดอ้างอิง",
+   rule: { en: "One quote in “ ” from the spokesperson, with name + title and a verb like said. The quote gives opinion or feeling — not new facts.", th: "คำพูด 1 ประโยคใน “ ” จากโฆษก + ชื่อ + ตำแหน่ง + said · ใส่ความรู้สึก/ความเห็น ไม่ใส่ข้อเท็จจริงใหม่" },
+   good: "“Every volunteer helps us bring the canal back to life,” said Napat Wongsiri, Executive Director of Blue Klong Foundation.", bad: "We are the best, so you must come!", ph: "“…,” said Name, Title of Organisation.",
+   checks: [
+    { id: "marks", en: "Uses quotation marks “ ”", th: "ใช้เครื่องหมายคำพูด “ ”", fn: t => /"[^"]+"/.test(norm(t)) },
+    { id: "qlen", en: "Quote is 10+ words", th: "คำพูดยาว ≥ 10 คำ", fn: t => words(quoted(t)) >= 10 },
+    { id: "name", en: "Names the right spokesperson", th: "ระบุชื่อโฆษกถูกต้อง", fn: (t, s) => new RegExp("\\b" + s.sp.last + "\\b", "i").test(t) },
+    { id: "title", en: "Gives the spokesperson’s title", th: "ระบุตำแหน่ง", fn: (t, s) => hasAny(t, s.sp.tk) },
+    { id: "said", en: "Uses said / says / added…", th: "ใช้ said/says/added", fn: t => /\b(said|says|added|explained|noted|stated|commented)\b/i.test(t) },
+    { id: "fake", en: "No invented numbers", th: "ไม่แต่งตัวเลขเอง", fn: (t, s, f) => t.trim() && numsIn(t).every(n => f.allowed.has(n)) } ] },
+ { id: "bp", n: 8, w: 1.0, cat: "bpc", ic: "🏢", en: "Boilerplate", th: "ประวัติองค์กร",
+   rule: { en: "“About [Organisation]” + 20–70 words: what it is, when founded, one size fact. Third person.", th: "“About [ชื่อองค์กร]” + 20–70 คำ: คืออะไร ก่อตั้งปีไหน ข้อมูลขนาดองค์กร 1 อย่าง · บุรุษที่ 3" },
+   good: "About Blue Klong Foundation: Blue Klong Foundation is a Bangkok-based non-profit that restores city canals. Founded in 2015, it has 12 staff and 3,000 registered volunteers.", bad: "We are the greatest group in Bangkok!", ph: "About …",
+   checks: [
+    { id: "about", en: "Starts with “About”", th: "ขึ้นต้นด้วย About", fn: t => /^\s*about\b/i.test(t) },
+    { id: "org", en: "Names the organisation", th: "มีชื่อองค์กร", fn: (t, s) => hasAny(t, s.orgKw) },
+    { id: "year", en: "Gives the founding year", th: "บอกปีที่ก่อตั้ง", fn: (t, s) => t.includes(String(s.founded)) },
+    { id: "size", en: "Adds a size fact", th: "มีข้อมูลขนาดองค์กร", fn: (t, s) => hasAny(t, s.bpKw) },
+    { id: "len", en: "20–70 words", th: "ยาว 20–70 คำ", fn: t => { const n = words(t); return n >= 20 && n <= 70; } },
+    { id: "voice", en: "Third person, no hype", th: "บุรุษที่ 3 ไม่มีคำโฆษณา", fn: t => t.trim() && thirdPerson(t) && noHype(t) } ] },
+ { id: "ct", n: 9, w: 0.5, cat: "bpc", ic: "☎️", en: "Media Contact", th: "ผู้ติดต่อสื่อ",
+   rule: { en: "Media contact: name, title, email, phone — copy them exactly.", th: "Media contact: ชื่อ ตำแหน่ง อีเมล เบอร์โทร · คัดลอกให้ตรงทุกตัวอักษร" },
+   good: "Media contact: Kanokwan Saelim, Communications Manager, press@blueklong.example, +66 2 555 0142", bad: "Call me!", ph: "Media contact: …",
+   checks: [
+    { id: "name", en: "Correct contact name", th: "ชื่อผู้ติดต่อถูกต้อง", fn: (t, s) => new RegExp("\\b" + s.ct.last + "\\b", "i").test(t) },
+    { id: "title", en: "Contact’s title", th: "ตำแหน่งถูกต้อง", fn: (t, s) => hasAny(t, s.ct.tk) },
+    { id: "email", en: "Correct email", th: "อีเมลถูกต้อง", fn: (t, s) => lc(t).includes(s.ct.email) },
+    { id: "phone", en: "Correct phone", th: "เบอร์โทรถูกต้อง", fn: (t, s) => { const d = s.ct.phone.replace(/\D/g, "").slice(-7), x = t.replace(/\D/g, ""); return x.includes(d); } } ] },
+ { id: "end", n: 10, w: 0.5, cat: "format", ic: "🔚", en: "End Mark", th: "สัญลักษณ์จบข่าว",
+   rule: { en: "Finish the release with ### on its own line.", th: "ปิดท้ายข่าวด้วย ### บรรทัดเดียว" },
+   good: "###", bad: "The end", ph: "###",
+   checks: [ { id: "mark", en: "Ends with ###", th: "ปิดท้ายด้วย ###", fn: t => /^\s*###\s*$/.test(t) } ] }
+];
+
+const CATS = [
+  { id: "format", en: "Format (Release line, Dateline, End mark)", th: "รูปแบบข่าว", max: 2.0 },
+  { id: "headline", en: "Headline & Subheadline", th: "พาดหัว", max: 2.0 },
+  { id: "lead", en: "Lead (5W1H)", th: "ย่อหน้านำ", max: 2.0 },
+  { id: "body", en: "Body", th: "เนื้อข่าว", max: 1.5 },
+  { id: "quote", en: "Quote", th: "คำพูดอ้างอิง", max: 1.0 },
+  { id: "bpc", en: "Boilerplate & Contact", th: "ประวัติองค์กร/ผู้ติดต่อ", max: 1.5 }
+];
+
+const r2 = x => Math.round(x * 100) / 100;
+
+function scorePart(part, text, story) {
+  const t = text || "", sets = factSets(story);
+  const results = part.checks.map(c => { let ok = false; if (t.trim()) { try { ok = !!c.fn(t, story, sets); } catch (e) { ok = false; } } return { id: c.id, ok }; });
+  const pass = results.filter(r => r.ok).length;
+  return { id: part.id, pass, total: part.checks.length, max: part.w, pts: r2(part.w * pass / part.checks.length), results, empty: !t.trim() };
+}
+
+function scoreAll(story, drafts) {
+  const parts = {}, cats = {}; let total = 0;
+  CATS.forEach(c => cats[c.id] = 0);
+  PARTS.forEach(p => { const s = scorePart(p, drafts[p.id], story); parts[p.id] = s; cats[p.cat] = r2(cats[p.cat] + s.pts); total = r2(total + s.pts); });
+  return { parts, cats, total };
+}
+
+if (typeof module !== "undefined") module.exports = { PARTS, CATS, HYPE, scorePart, scoreAll, factSets, numsIn, words };
+
+/* ===== TEACHER DASHBOARD: Live · Scores · Answer key ===== */
+const T = {
+  tab: "live", data: null, timer: null, q: "", flt: "all", sort: { k: "n", d: 1 }, keys: null, keySid: 0, busy: false, err: "",
+
+  async call(action, extra) {
+    if (DEMO) return { ok: true, demo: true, progress: [], submissions: [], grades: [], models: null, now: new Date().toISOString() };
+    try {
+      const r = await fetch(CONFIG.SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ action, code: S.tcode }, extra || {})) });
+      return await r.json();
+    } catch (e) { return { ok: false, msg: String(e) }; }
+  },
+  stop() { clearInterval(this.timer); this.timer = null; },
+
+  render() {
+    this.stop();
+    app.innerHTML = `<section class="screen"><div class="tbar"><nav class="stepper" id="ttabs">
+      <button class="pill" data-t="live">📡 Live</button><button class="pill" data-t="scores">🏆 Scores</button><button class="pill" data-t="key">🔑 Answer key</button><i class="ind"></i></nav>
+      <div class="upd"><span class="live-dot"></span><span id="upd">กำลังโหลด…</span><button class="btn ghost sm" id="rf">↻ Refresh</button></div></div>
+      ${DEMO ? `<div class="demo" style="margin-bottom:12px">⚠️ โหมดทดสอบ: ยังไม่ได้ใส่ SCRIPT_URL — Dashboard จะยังไม่มีข้อมูลจริง</div>` : ""}<div id="tp"></div></section>`;
+    $$("#ttabs .pill").forEach(b => b.onclick = () => this.show(b.dataset.t));
+    $("#rf").onclick = () => this.load(true);
+    this.show(this.tab);
+    this.load(true);
+    this.timer = setInterval(() => { if (!document.hidden && !$(".ov")) this.load(false); }, CONFIG.PING_MS);
+  },
+  show(t) {
+    this.tab = t;
+    $$("#ttabs .pill").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+    requestAnimationFrame(() => { const on = $("#ttabs .pill.on"), ind = $("#ttabs .ind"); if (on && ind) { ind.style.width = on.offsetWidth + "px"; ind.style.transform = `translateX(${on.offsetLeft}px)`; } });
+    this.draw(true);
+  },
+  async load(anim) {
+    if (this.busy) return; this.busy = true;
+    const r = await this.call("data");
+    this.busy = false;
+    if (!r.ok) { this.err = r.msg === "unauthorized" ? "รหัสอาจารย์ไม่ตรงกับใน Apps Script" : "โหลดข้อมูลไม่สำเร็จ: " + (r.msg || ""); }
+    else { this.err = ""; this.data = r; }
+    const u = $("#upd"); if (u) u.textContent = this.err || "อัปเดต " + new Date().toLocaleTimeString("th-TH") + " · auto 15 วิ";
+    if (this.tab !== "key") this.draw(anim);
+  },
+
+  /* ---------- derive one row per student ---------- */
+  rows() {
+    const d = this.data || { progress: [], submissions: [], grades: [] }, now = d.now ? new Date(d.now).getTime() : Date.now();
+    return ROSTER.map((r, i) => {
+      const id = r[0], p = d.progress.find(x => String(x.id) === id), subs = d.submissions.filter(x => String(x.id) === id);
+      const best = subs.slice().sort((a, b) => (b.total - a.total) || (new Date(b.ts) - new Date(a.ts)))[0] || null;
+      const g = d.grades.find(x => String(x.id) === id) || null;
+      const last = p ? new Date(p.lastSeen).getTime() : 0, idleMs = p ? now - last : 0, stageMs = p ? now - new Date(p.stageSince).getTime() : 0;
+      let st = "none";
+      if (p || subs.length) st = subs.length ? "sub" : idleMs > 120000 ? "idle" : "wr";
+      const cats = {}; CATS.forEach(c => { const ov = g && g[c.id] !== "" && g[c.id] != null ? Number(g[c.id]) : null; cats[c.id] = { auto: best ? Number(best[c.id]) : null, ov, v: ov != null ? ov : best ? Number(best[c.id]) : null }; });
+      const fin = best ? Math.round(CATS.reduce((a, c) => a + (cats[c.id].v || 0), 0) * 100) / 100 : null;
+      return { n: i + 1, id, name: r[1], p, subs, best, g, st, idleMs, stageMs, cats, fin, story: STORIES.find(s => s.id === Number((best && best.storyId) || (p && p.storyId))) };
+    });
+  },
+  ago(ms) { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? s + " วิ" : s < 3600 ? Math.floor(s / 60) + " นาที" : Math.floor(s / 3600) + " ชม."; },
+
+  draw(anim) {
+    const tp = $("#tp"); if (!tp) return;
+    if (this.tab === "live") this.live(tp, anim); else if (this.tab === "scores") this.scores(tp, anim); else this.keyTab(tp);
+    if (!anim) $$("[style*='--i']", tp).forEach(e => e.style.animation = "none");
+  },
+
+  /* ---------- LIVE ---------- */
+  live(tp) {
+    const R = this.rows(), c = k => R.filter(r => r.st === k).length;
+    const K = [["k-n", c("none"), "ยังไม่เข้า · not entered"], ["k-w", c("wr"), "กำลังเขียน · writing"], ["k-i", c("idle"), "ไม่ขยับ > 2 นาที · idle"], ["k-ok", c("sub"), "ส่งแล้ว · submitted"]];
+    const lab = { none: "not entered", wr: "writing", idle: "idle", sub: "submitted" };
+    const list = this.filter(R);
+    tp.innerHTML = `<div class="kpis">${K.map((k, i) => `<div class="kpi ${k[0]}" style="--i:${i}"><b class="disp">${k[1]}</b><span>${k[2]}</span></div>`).join("")}<div class="kpi" style="--i:4"><b class="gt disp">${ROSTER.length}</b><span>นักศึกษาทั้งหมด</span></div></div>
+      ${this.toolsHTML()}
+      <div class="lgrid">${list.map((r, i) => {
+        const p = r.p, done = p ? Number(p.done) || 0 : 0;
+        return `<div class="lc s-${r.st}" style="--i:${i}" data-id="${r.id}">
+          <div class="nm"><span>${r.n}. ${h(r.name)}</span><span class="badge ${r.st === "sub" ? "ok" : r.st === "idle" ? "idle" : ""}">${lab[r.st]}</span></div>
+          <div class="st"><span>${r.story ? r.story.ic + " " + h(r.story.title) : "— ยังไม่เลือกเรื่อง"}</span><span>${p ? "⭐ " + Number(p.score || 0).toFixed(2) : ""}</span></div>
+          <div class="mini"><i style="width:${done * 10}%"></i></div>
+          <div class="st"><span>${p ? h(p.stage) + " · " + done + "/10" : r.id}</span><span>${p ? (r.stageMs > 900000 && p.stage !== "submitted" ? `<span class="warn">⚠ ${this.ago(r.stageMs)} ในขั้นนี้</span>` : "เห็นล่าสุด " + this.ago(r.idleMs)) : ""}</span></div>
+          ${r.subs.length ? `<div class="st"><span>ส่ง ${r.subs.length} ครั้ง · best ${Number(r.best.total).toFixed(2)}</span><span>${r.fin != null ? "Final " + r.fin.toFixed(2) : ""}</span></div>` : ""}</div>`;
+      }).join("") || `<div class="veil">ไม่พบรายชื่อที่ตรงเงื่อนไข</div>`}</div>`;
+    this.wireTools(); $$(".lc", tp).forEach(c => c.onclick = () => this.open(c.dataset.id));
+  },
+  toolsHTML() {
+    const F = [["all", "ทั้งหมด"], ["sub", "ส่งแล้ว"], ["notsub", "ยังไม่ส่ง"], ["idle", "idle"]];
+    return `<div class="tools"><input id="tq" placeholder="🔎 ค้นหาชื่อหรือรหัส…" value="${h(this.q)}"><div class="seg">${F.map(f => `<button data-f="${f[0]}" class="${this.flt === f[0] ? "on" : ""}">${f[1]}</button>`).join("")}</div>
+      ${this.tab === "scores" ? `<button class="btn ghost sm" id="csv">⬇ CSV</button><button class="btn danger sm" id="clrall">🗑 Clear all</button>` : ""}</div>`;
+  },
+  wireTools() {
+    const q = $("#tq"); q.oninput = () => { this.q = q.value; const pos = q.selectionStart; this.draw(false); const n = $("#tq"); n.focus(); n.setSelectionRange(pos, pos); };
+    $$(".seg button").forEach(b => b.onclick = () => { this.flt = b.dataset.f; this.draw(false); });
+    const c = $("#csv"); if (c) c.onclick = () => this.csv();
+    const a = $("#clrall"); if (a) a.onclick = () => this.clear("all");
+  },
+  filter(R) {
+    const q = this.q.trim().toLowerCase();
+    return R.filter(r => (!q || r.name.toLowerCase().includes(q) || r.id.includes(q)) &&
+      (this.flt === "all" || (this.flt === "sub" && r.st === "sub") || (this.flt === "notsub" && r.st !== "sub") || (this.flt === "idle" && r.st === "idle")));
+  },
+
+  /* ---------- SCORES ---------- */
+  scores(tp) {
+    const R = this.filter(this.rows()), s = this.sort;
+    const val = (r, k) => k === "n" ? r.n : k === "name" ? r.name : k === "story" ? (r.story ? r.story.title : "~") : k === "att" ? r.subs.length : k === "auto" ? (r.best ? Number(r.best.total) : -1) : k === "fin" ? (r.fin == null ? -1 : r.fin) : (r.cats[k].v == null ? -1 : r.cats[k].v);
+    R.sort((a, b) => { const x = val(a, s.k), y = val(b, s.k); return (typeof x === "string" ? x.localeCompare(y, "th") : x - y) * s.d; });
+    const sub = this.rows().filter(r => r.best), avg = sub.length ? (sub.reduce((a, r) => a + r.fin, 0) / sub.length).toFixed(2) : "–";
+    const cols = [["n", "#", 1], ["name", "ชื่อ", 0], ["story", "เรื่อง", 0], ["att", "ครั้ง", 1], ...CATS.map(c => [c.id, c.en.split(" (")[0].replace("Boilerplate & Contact", "Boiler & Contact") + ` /${c.max}`, 1]), ["auto", "Auto /10", 1], ["fin", "Final /10", 1]];
+    tp.innerHTML = `<div class="kpis"><div class="kpi" style="--i:0"><b class="gt disp">${sub.length}/${ROSTER.length}</b><span>ส่งงานแล้ว</span></div><div class="kpi" style="--i:1"><b class="gt disp">${avg}</b><span>ค่าเฉลี่ย Final</span></div>
+      ${CATS.map((c, i) => { const a = sub.length ? (sub.reduce((t, r) => t + (r.cats[c.id].v || 0), 0) / sub.length) : 0; return `<div class="kpi" style="--i:${i + 2}"><b style="font-size:22px">${sub.length ? a.toFixed(2) : "–"}<small style="font-size:13px;color:var(--mut)">/${c.max}</small></b><span>${h(c.th)}</span><div class="mini" style="margin-top:6px"><i style="width:${a / c.max * 100}%"></i></div></div>`; }).join("")}</div>
+      ${this.toolsHTML()}
+      <div class="tw"><table class="sc"><thead><tr>${cols.map(c => `<th class="${c[2] ? "num" : ""}" data-k="${c[0]}">${h(c[1])} <span class="ar">${s.k === c[0] ? (s.d > 0 ? "▲" : "▼") : ""}</span></th>`).join("")}<th>💬</th></tr></thead>
+      <tbody>${R.map((r, i) => `<tr style="--i:${i}" data-id="${r.id}"><td class="num">${r.n}</td><td>${h(r.name)}<br><small class="muted">${r.id}</small></td><td>${r.story ? r.story.ic + " " + h(r.story.title) : `<span class="muted">–</span>`}</td><td class="num">${r.subs.length || `<span class="muted">0</span>`}</td>
+        ${CATS.map(c => { const x = r.cats[c.id]; return `<td class="num ${x.ov != null ? "ovr" : ""}">${x.v == null ? `<span class="muted">–</span>` : x.v.toFixed(2)}</td>`; }).join("")}
+        <td class="num">${r.best ? Number(r.best.total).toFixed(2) : `<span class="muted">–</span>`}</td><td class="num fin">${r.fin == null ? `<span class="muted">–</span>` : r.fin.toFixed(2)}</td><td>${r.g && r.g.comment ? "💬" : ""}</td></tr>`).join("")}</tbody></table></div>
+      <p class="note">คลิกแถวเพื่อดูงาน ปรับคะแนน และเขียนคอมเมนต์ · ตัวเลข<span style="color:var(--k)">สีชมพู</span> = อาจารย์ปรับเอง · Auto = คะแนนครั้งที่ดีที่สุด</p>`;
+    this.wireTools();
+    $$(".sc th[data-k]", tp).forEach(th => th.onclick = () => { const k = th.dataset.k; this.sort = { k, d: this.sort.k === k ? -this.sort.d : 1 }; this.draw(false); });
+    $$(".sc tbody tr", tp).forEach(tr => tr.onclick = () => this.open(tr.dataset.id));
+  },
+  csv() {
+    const R = this.rows(), q = v => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+    const head = ["No", "Student ID", "Name", "Story", "Attempts", ...CATS.map(c => c.en + " /" + c.max), "Auto /10", "Final /10", "Comment"];
+    const lines = R.map(r => [r.n, "'" + r.id, r.name, r.story ? r.story.title : "", r.subs.length, ...CATS.map(c => r.cats[c.id].v == null ? "" : r.cats[c.id].v), r.best ? r.best.total : "", r.fin == null ? "" : r.fin, r.g ? r.g.comment : ""].map(q).join(","));
+    const blob = new Blob(["﻿" + [head.map(q).join(","), ...lines].join("\r\n")], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "PR_Writing_Lab_Scores.csv"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  },
+  async clear(target) {
+    const who = target === "all" ? "ข้อมูลของนักศึกษาทุกคน" : "ข้อมูลของ " + (ROSTER.find(r => r[0] === target) || [, target])[1];
+    const v = prompt(`ลบ${who} (ความคืบหน้า งานที่ส่ง และคะแนนที่ปรับ) — ย้อนกลับไม่ได้\nพิมพ์ CLEAR เพื่อยืนยัน`);
+    if (v !== "CLEAR") return;
+    const r = await this.call("clear", { target });
+    if (!r.ok) { alert("ลบไม่สำเร็จ: " + (r.msg || "")); return; }
+    const ov = $(".ov"); if (ov) ov.remove();
+    this.load(true);
+  },
+
+  /* ---------- student drawer ---------- */
+  async open(id) {
+    const r = this.rows().find(x => x.id === id); if (!r) return;
+    const ov = document.createElement("div"); ov.className = "ov";
+    ov.innerHTML = `<div class="card modal drawer"><div class="phd"><div class="pic">${r.story ? r.story.ic : "👤"}</div><div><div class="pn">${r.n} · ${r.id}</div><h2>${h(r.name)}<small>${r.story ? h(r.story.title) : "ยังไม่เลือกเรื่อง"}</small></h2></div><button class="btn ghost sm" id="dx" style="margin-left:auto">✕</button></div><div id="dbody"><div class="veil">กำลังโหลดงาน…</div></div></div>`;
+    document.body.appendChild(ov);
+    const close = () => { ov.style.opacity = 0; setTimeout(() => ov.remove(), 200); };
+    ov.onclick = e => { if (e.target === ov) close(); }; $("#dx", ov).onclick = close;
+    const res = r.subs.length ? await this.call("student", { id }) : { ok: true, submissions: [] };
+    const subs = (res.submissions || []).sort((a, b) => a.attempt - b.attempt);
+    const best = subs.slice().sort((a, b) => (b.total - a.total) || (new Date(b.ts) - new Date(a.ts)))[0];
+    this.drawDrawer(ov, r, subs, best);
+  },
+  drawDrawer(ov, r, subs, cur) {
+    const body = $("#dbody", ov);
+    if (!cur) { body.innerHTML = `<div class="veil">ยังไม่มีงานที่ส่ง${r.p ? `<br><small>ขั้นปัจจุบัน: ${h(r.p.stage)} · เขียนแล้ว ${r.p.done}/10 ส่วน</small>` : ""}</div><div class="mact"><button class="btn danger sm" id="dclr">🗑 Clear ข้อมูลคนนี้</button></div>`; $("#dclr", ov).onclick = () => this.clear(r.id); return; }
+    const st = STORIES.find(s => s.id === Number(cur.storyId)), sc = scoreAll(st, cur.texts || {});
+    const failSet = new Set(String(cur.fails || "").split(" ").filter(Boolean));
+    body.innerHTML = `<div class="att">${subs.map(s => `<button data-a="${s.attempt}" class="${s.attempt === cur.attempt ? "on" : ""}">ครั้งที่ ${s.attempt} · ${Number(s.total).toFixed(2)}${s === subs.reduce((m, x) => (x.total > m.total || (x.total === m.total && new Date(x.ts) > new Date(m.ts))) ? x : m) ? " ★" : ""}</button>`).join("")}</div>
+      <div class="dgrid"><div>${PARTS.map(p => { const t = (cur.texts || {})[p.id] || "", x = sc.parts[p.id], fl = p.checks.filter(c => failSet.has(p.id + "." + c.id)).map(c => c.en);
+        return `<div class="prt"><div class="ph"><span>${p.ic} ${p.n}. ${p.en}</span><span>${x.pts.toFixed(2)} / ${p.w}</span></div><div class="tx ${t.trim() ? "" : "none"}">${t.trim() ? h(t) : "— ไม่ได้เขียน —"}</div>${fl.length ? `<div class="fl">✗ ${h(fl.join(" · "))}</div>` : ""}</div>`; }).join("")}</div>
+      <div><div class="gform"><b>ปรับคะแนน · Adjust (เว้นว่าง = ใช้คะแนน Auto)</b>
+        ${CATS.map(c => { const ov2 = r.g && r.g[c.id] !== "" && r.g[c.id] != null ? r.g[c.id] : ""; return `<div class="gr"><span>${h(c.en)}<br><small class="muted">${h(c.th)}</small></span><input type="number" step="0.25" min="0" max="${c.max}" data-c="${c.id}" value="${ov2}" placeholder="${Number(cur[c.id]).toFixed(2)}"><span class="auto">/${c.max}</span></div>`; }).join("")}
+        <div class="gtot"><span>Final</span><span id="gfin">–</span></div>
+        <label class="muted" style="font-size:13px">คอมเมนต์ถึงนักศึกษา · Comment</label><textarea id="gcm" rows="4" placeholder="Strengths / to improve…">${h(r.g ? r.g.comment || "" : "")}</textarea>
+        <div class="mact"><button class="btn danger sm" id="dclr">🗑 Clear</button><button class="btn" id="gsv">💾 บันทึก</button></div><div id="gmsg"></div></div></div></div>`;
+    const calc = () => { let f = 0; $$(".gform input", ov).forEach(i => { const v = i.value.trim(); f += v === "" ? Number(cur[i.dataset.c]) || 0 : Math.max(0, Math.min(Number(i.max), Number(v) || 0)); }); $("#gfin", ov).textContent = f.toFixed(2) + " / 10"; };
+    $$(".gform input", ov).forEach(i => i.oninput = calc); calc();
+    $$(".att button", ov).forEach(b => b.onclick = () => this.drawDrawer(ov, r, subs, subs.find(s => s.attempt === Number(b.dataset.a))));
+    $("#dclr", ov).onclick = () => this.clear(r.id);
+    $("#gsv", ov).onclick = async () => {
+      const cats = {}, auto = {}; $$(".gform input", ov).forEach(i => { cats[i.dataset.c] = i.value.trim(); auto[i.dataset.c] = Number(cur[i.dataset.c]) || 0; });
+      const btn = $("#gsv", ov); btn.disabled = true; btn.textContent = "⏳ กำลังบันทึก…";
+      const res = await this.call("grade", { id: r.id, storyId: cur.storyId, attemptTs: cur.ts, cats, auto, comment: $("#gcm", ov).value });
+      btn.disabled = false; btn.textContent = "💾 บันทึก";
+      $("#gmsg", ov).innerHTML = res.ok ? `<div class="ok-msg good">✅ บันทึกแล้ว${res.final != null ? " · Final " + Number(res.final).toFixed(2) : ""}${res.demo ? " (โหมดทดสอบ)" : ""}</div>` : `<div class="ok-msg err">❌ ${h(res.msg || "บันทึกไม่สำเร็จ")}</div>`;
+      if (res.ok) this.load(false);
+    };
+  },
+
+  /* ---------- ANSWER KEY (loaded from server, hidden until clicked) ---------- */
+  keyTab(tp) {
+    tp.innerHTML = `<div class="keyg">${STORIES.map(s => `<button data-s="${s.id}" class="${this.keySid === s.id ? "on" : ""}">${s.ic} ${String(s.id).padStart(2, "0")} · ${h(s.title)}</button>`).join("")}</div><div id="kp"><div class="veil">🔒 เฉลยซ่อนอยู่ · เลือกเรื่องด้านบนเพื่อเปิดดูคำตอบตัวอย่าง (10/10)</div></div>`;
+    $$(".keyg button", tp).forEach(b => b.onclick = async () => {
+      this.keySid = Number(b.dataset.s); $$(".keyg button", tp).forEach(x => x.classList.toggle("on", x === b));
+      const kp = $("#kp"); if (!this.keys) { kp.innerHTML = `<div class="veil">กำลังโหลดเฉลย…</div>`; const r = await this.call("key"); if (r.ok && r.models) this.keys = r.models; }
+      const m = this.keys && this.keys[this.keySid], st = STORIES.find(x => x.id === this.keySid);
+      if (!m) { kp.innerHTML = `<div class="veil">${DEMO ? "โหมดทดสอบ: เฉลยเก็บไว้ใน Apps Script จะแสดงเมื่อเชื่อม SCRIPT_URL แล้ว" : "โหลดเฉลยไม่สำเร็จ"}</div>`; return; }
+      kp.innerHTML = `<div class="asm"><div class="paper">${PARTS.map((p, i) => `<div class="blk ${p.id === "h" ? "hd" : p.id === "sub" ? "sb" : ""}" style="--i:${i}"><span class="lab">${p.n}. ${p.en}</span><div class="tx">${h(m[p.id])}</div></div>`).join("")}</div><aside class="card"><h3 style="margin-top:0">${st.ic} Fact sheet</h3><div class="facts">${factRows(st)}</div></aside></div>`;
+    });
+  }
+};
+
+/* ===== UI: screens, motion, storage, submit ===== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const h = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const S = { role: "s", tcode: "", screen: "login", student: null, sid: 0, part: 0, drafts: {}, sub: null, prev: {}, lastTotal: 0 };
+function fnv(s) { let x = 0x811c9dc5; for (const c of s) { x ^= c.codePointAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16).padStart(8, "0"); }
+const T_HASH = "14011b34";
+const app = $("#app"), topEl = $("#top");
+const RC = 2 * Math.PI * 29;
+const DEMO = !CONFIG.SCRIPT_URL || /^PASTE/.test(CONFIG.SCRIPT_URL);
+const story = () => STORIES.find(x => x.id === S.sid);
+const letters = t => { let i = 0; return t.split(" ").map(w => `<span class="wd">${[...w].map(c => `<span class="ltr" style="--i:${i++}">${h(c)}</span>`).join("")}</span>`).join(" "); };
+
+/* ---------- storage (best-effort) ---------- */
+function save() { try { localStorage.setItem("prl_" + S.student[0], JSON.stringify({ sid: S.sid, part: S.part, drafts: S.drafts, sub: S.sub })); } catch (e) {} }
+function loadSaved(id) { try { return JSON.parse(localStorage.getItem("prl_" + id) || "null"); } catch (e) { return null; } }
+
+/* ---------- network ---------- */
+async function send(payload) {
+  if (DEMO) return { ok: false, demo: true };
+  try {
+    const r = await fetch(CONFIG.SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+    return await r.json();
+  } catch (e) { return { ok: false, error: String(e) }; }
+}
+function stageName() { return S.screen === "pick" ? "choosing story" : S.screen === "work" ? (S.part === 10 ? "assembling" : "writing part " + (S.part + 1) + "/10") : S.screen; }
+function ping() {
+  if (S.role === "t" || !S.student || DEMO) return;
+  const r = S.sid ? scoreAll(story(), S.drafts[S.sid] || {}) : null;
+  send({ action: "ping", id: S.student[0], name: S.student[1], storyId: S.sid || null, stage: S.sub ? "submitted" : stageName(), done: r ? PARTS.filter(p => !r.parts[p.id].empty).length : 0, score: r ? r.total : 0, ts: new Date().toISOString() });
+}
+setInterval(ping, CONFIG.PING_MS);
+
+/* ---------- small helpers ---------- */
+function countUp(el, to, dur = 1000, dec = 2) {
+  const t0 = performance.now();
+  (function f(t) { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(f); })(t0);
+}
+function ringHTML(frac, label) {
+  return `<div class="ring" data-frac="${frac}"><svg viewBox="0 0 70 70" width="100%" height="100%"><circle class="t" cx="35" cy="35" r="29"/><circle class="v" cx="35" cy="35" r="29" stroke-dasharray="${RC}" stroke-dashoffset="${RC}"/></svg><span>${label}</span></div>`;
+}
+function setRing(el, frac) { const v = $(".v", el); if (v) v.style.strokeDashoffset = RC * (1 - Math.max(0, Math.min(1, frac))); }
+function armRings(root) { requestAnimationFrame(() => requestAnimationFrame(() => $$(".ring[data-frac]", root).forEach(r => setRing(r, +r.dataset.frac)))); }
+function confetti() {
+  const cv = $("#cf"); if (!cv || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const x = cv.getContext("2d"); cv.width = innerWidth; cv.height = innerHeight;
+  const cols = ["#7c3aed", "#ec4899", "#f59e0b", "#10b981", "#38bdf8", "#a855f7"];
+  const ps = Array.from({ length: 150 }, () => ({ x: innerWidth / 2 + (Math.random() - .5) * 200, y: innerHeight * .55, vx: (Math.random() - .5) * 16, vy: -Math.random() * 17 - 4, s: 5 + Math.random() * 7, c: cols[(Math.random() * cols.length) | 0], r: Math.random() * 6, vr: (Math.random() - .5) * .4 }));
+  let n = 0;
+  (function f() { x.clearRect(0, 0, cv.width, cv.height); ps.forEach(p => { p.vy += .42; p.x += p.vx; p.y += p.vy; p.r += p.vr; x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); x.restore(); }); if (++n < 170) requestAnimationFrame(f); else x.clearRect(0, 0, cv.width, cv.height); })();
+}
+function sparks() { const bg = $(".bg"); for (let i = 0; i < 16; i++) { const s = document.createElement("i"); s.className = "spark"; const z = 6 + Math.random() * 14; s.style.cssText = `left:${Math.random() * 100}%;width:${z}px;height:${z}px;animation-duration:${9 + Math.random() * 12}s;animation-delay:${-Math.random() * 14}s`; bg.appendChild(s); } }
+
+/* continuous gradient across per-letter spans (each span gets the slice of the full gradient under it) */
+function gradLetters(el) {
+  if (!el) return;
+  const fit = () => { const W = el.clientWidth, x0 = el.offsetLeft; $$(".ltr", el).forEach(sp => { sp.style.backgroundSize = W + "px 100%"; sp.style.backgroundPosition = -(sp.offsetLeft - x0) + "px 0"; }); };
+  fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener("resize", fit);
+}
+/* ---------- top bar ---------- */
+/* ---------- theme ---------- */
+const THEME_KEY = "prl_theme";
+function sysTheme() { return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; }
+function getTheme() { try { return localStorage.getItem(THEME_KEY) || sysTheme(); } catch (e) { return sysTheme(); } }
+function applyTheme(t) { document.documentElement.dataset.theme = t; const b = $("#thm"); if (b) { b.textContent = t === "dark" ? "☀️" : "🌙"; b.title = t === "dark" ? "Light mode" : "Dark mode"; } }
+function toggleTheme() {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+  document.documentElement.classList.add("theming"); applyTheme(t);
+  const b = $("#thm"); if (b) { b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin"); }
+  setTimeout(() => document.documentElement.classList.remove("theming"), 600);
+}
+applyTheme(getTheme());
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { let saved = null; try { saved = localStorage.getItem(THEME_KEY); } catch (e) {} if (!saved) applyTheme(sysTheme()); });
+const thmBtn = () => `<button class="tbtn" id="thm" aria-label="Toggle dark mode"></button>`;
+function wireTop() { $("#thm").onclick = toggleTheme; applyTheme(document.documentElement.dataset.theme); }
+
+function setTop() {
+  if (S.role === "t") { topEl.innerHTML = `<span class="brand"><span class="bi">✍️</span><span class="gt">PR Writing Lab</span><small>Teacher</small></span><span class="chip">🧑‍🏫 อ.เรืองสิน</span>${thmBtn()}<span class="chip"><button id="out">ออก</button></span>`; wireTop(); $("#out").onclick = () => { T.stop(); S.role = "s"; S.tcode = ""; go("login"); }; return; }
+  if (!S.student) { topEl.innerHTML = `<span class="brand"><span class="bi">✍️</span><span class="gt">PR Writing Lab</span></span>${thmBtn()}`; wireTop(); return; }
+  const st = S.sid ? story() : null, r = st ? scoreAll(st, S.drafts[S.sid] || {}) : null;
+  topEl.innerHTML = `<span class="brand"><span class="bi">✍️</span><span class="gt">PR Writing Lab</span></span>
+   <span class="chip">👤 ${h(S.student[1])}</span>
+   ${st ? `<span class="chip">${st.ic} ${h(st.title)} <button id="chg">เปลี่ยนเรื่อง</button></span><span class="chip score">⭐ <b id="tscore">${r.total.toFixed(2)}</b>/10</span>` : ""}
+   ${thmBtn()}<span class="chip"><button id="out">ออก</button></span>`;
+  wireTop();
+  const c = $("#chg"); if (c) c.onclick = () => go("pick");
+  $("#out").onclick = () => { S.student = null; S.sid = 0; S.sub = null; go("login"); };
+}
+function setScore(v) { const e = $("#tscore"); if (e) e.textContent = v.toFixed(2); }
+
+/* ---------- routing ---------- */
+function go(screen) { S.screen = screen; if (screen !== "work") { const f = $("#fab"); if (f) f.remove(); closeFacts(); document.body.classList.remove("typing"); } setTop(); ({ login, pick, work, teacher: () => T.render() })[screen](); window.scrollTo({ top: 0, behavior: "smooth" }); ping(); }
+const demoBanner = () => DEMO ? `<div class="demo">⚠️ โหมดทดสอบ: ยังไม่ได้เชื่อม Google Sheet — คะแนนจะ<b>ยังไม่ถูกส่ง</b>ถึงอาจารย์</div>` : "";
+
+/* ---------- login ---------- */
+function login() {
+  S.role = "s"; S.tcode = "";
+  app.innerHTML = `<section class="screen center"><div class="card hero">
+    <span class="kicker">ENGLISH FOR ADVERTISEMENT & PR</span>
+    <h1 class="title" id="ttl">${letters("Press Release Writing Lab")}</h1>
+    <p class="sub">เลือก 1 จาก 10 เรื่อง แล้วเขียนข่าวประชาสัมพันธ์ทีละองค์ประกอบ · เต็ม 10 คะแนน</p>
+    <div class="roles" id="roles"><i class="knob"></i><button class="on" data-r="s">🎓 นักศึกษา</button><button data-r="t">🧑‍🏫 อาจารย์</button></div>
+    <div id="ls" class="tlog"><label for="sel">เลือกชื่อของคุณ · Select your name</label><div class="selw"><select id="sel"><option value="" disabled selected>— เลือกชื่อ-สกุล —</option>${ROSTER.map((r, i) => `<option value="${r[0]}">${i + 1}. ${h(r[1])} (${r[0]})</option>`).join("")}</select><i>▾</i></div><button class="btn big" id="sgo" disabled>เข้าสู่บทเรียน →</button>
+    <p class="note">📡 ระบบจะบันทึกความคืบหน้าและคะแนนของคุณให้อาจารย์ดู · ทำซ้ำได้ไม่จำกัดครั้ง</p></div>
+    <div id="lt" class="tlog" hidden><label for="tc">Teacher code · รหัสอาจารย์</label><div class="pw"><input id="tc" type="password" autocomplete="current-password" placeholder="••••••••"><button id="eye" type="button" aria-label="Show code">👁️</button></div>
+    <div class="terr" id="terr"></div><button class="btn big" id="tgo">เข้าสู่ Teacher Dashboard →</button></div>${demoBanner()}</div></section>`;
+  gradLetters($("#ttl")); const roles = $("#roles");
+  $$("button", roles).forEach(b => b.onclick = () => {
+    const t = b.dataset.r === "t"; roles.classList.toggle("t", t);
+    $$("button", roles).forEach(x => x.classList.toggle("on", x === b));
+    $("#ls").hidden = t; $("#lt").hidden = !t; (t ? $("#tc") : $("#sel")).focus();
+  });
+  $("#eye").onclick = () => { const i = $("#tc"); i.type = i.type === "password" ? "text" : "password"; };
+  const tgo = () => {
+    const v = $("#tc").value.trim();
+    if (fnv(v) !== T_HASH) { $("#terr").textContent = "รหัสไม่ถูกต้อง · Incorrect code"; const c = $(".hero"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake"); return; }
+    S.role = "t"; S.tcode = v; go("teacher");
+  };
+  $("#tgo").onclick = tgo; $("#tc").onkeydown = e => { if (e.key === "Enter") tgo(); };
+  const sel = $("#sel"), sgo = $("#sgo");
+  sel.onchange = () => { sgo.disabled = !sel.value; };
+  sgo.onclick = () => { const rec = ROSTER.find(r => r[0] === sel.value); if (rec) start(rec); };
+}
+function start(rec) {
+  S.student = rec; const sv = loadSaved(rec[0]);
+  S.drafts = sv ? sv.drafts || {} : {}; S.sub = sv ? sv.sub : null;
+  if (sv && sv.sid) { S.sid = sv.sid; S.part = sv.part || 0; go("work"); } else { S.sid = 0; go("pick"); }
+}
+
+/* ---------- story picker ---------- */
+function pick() {
+  app.innerHTML = `<section class="screen"><div class="ph1"><h2 class="gt">สวัสดี ${h(S.student[1].split(" ")[0])} 👋 เลือกเรื่องที่จะเขียน</h2></div>
+  <div class="grid">${STORIES.map((s, i) => {
+    const d = S.drafts[s.id], n = d ? PARTS.filter(p => (d[p.id] || "").trim()).length : 0;
+    return `<button class="story" style="--i:${i}" data-id="${s.id}"><span class="n">${String(s.id).padStart(2, "0")}</span><span class="ic">${s.ic}</span><span class="tag">${h(s.tag)} · ${h(s.tagTh)}</span><h3>${h(s.title)}</h3><p>${h(s.news)}<br><small>${h(s.newsTh)}</small></p>${n ? `<div class="prog">✍️ เขียนแล้ว ${n}/10 ส่วน</div>` : ""}</button>`;
+  }).join("")}</div></section>`;
+  $$(".story").forEach(c => {
+    c.onclick = () => preview(+c.dataset.id);
+    c.onpointermove = e => { const b = c.getBoundingClientRect(); c.style.setProperty("--ry", ((e.clientX - b.left) / b.width - .5) * 14 + "deg"); c.style.setProperty("--rx", -((e.clientY - b.top) / b.height - .5) * 14 + "deg"); };
+    c.onpointerleave = () => { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); };
+  });
+}
+function factRows(st, startAt = 0) {
+  return st.facts.map(([l, v], i) => `<div class="fr ${l === "Extra" ? "extra" : ""} ${l === "Head office" ? "must" : ""}" style="--i:${i + startAt}"><b>${h(l)}</b><span>${h(v)}</span></div>`).join("");
+}
+function preview(id) {
+  const st = STORIES.find(x => x.id === id), ov = document.createElement("div");
+  ov.className = "ov";
+  ov.innerHTML = `<div class="card modal"><div style="font-size:44px">${st.ic}</div><h3>${h(st.title)}</h3><p class="sub">${h(st.news)} · ${h(st.newsTh)}</p><div class="facts">${factRows(st)}</div><div class="mact"><button class="btn ghost" id="mc">ยกเลิก</button><button class="btn" id="mo">เริ่มเขียนเรื่องนี้ ✍️</button></div></div>`;
+  document.body.appendChild(ov);
+  const close = () => { ov.style.opacity = 0; setTimeout(() => ov.remove(), 200); };
+  ov.onclick = e => { if (e.target === ov) close(); };
+  $("#mc", ov).onclick = close;
+  $("#mo", ov).onclick = () => { close(); S.sid = id; S.drafts[id] = S.drafts[id] || {}; S.part = 0; S.sub = null; save(); go("work"); };
+}
+
+/* ---------- fact sheet: floating button + popup ---------- */
+const PART_FACTS = { rl: ["Release date"], h: ["Organisation", "News"], sub: ["Numbers", "Date/time", "Place"], dl: ["Head office", "Release date"],
+  lead: ["Organisation", "News", "Date/time", "Place", "Numbers"], body: ["Numbers", "Date/time", "Place", "Booking", "Info", "Extra"],
+  quote: ["Spokesperson", "Organisation"], bp: ["Organisation"], ct: ["Media contact"], end: [] };
+function mountFab() {
+  let f = $("#fab"); if (f) f.remove();
+  f = document.createElement("button"); f.id = "fab"; f.className = "fab"; f.type = "button";
+  f.setAttribute("aria-label", "เปิด Fact Sheet");
+  f.innerHTML = `<span class="fab-ic">📋</span><span class="fab-tx"><b class="fl">Fact Sheet</b><b class="fs">FACTS</b><small>ข้อมูลที่ใช้เขียน</small></span>`;
+  f.onclick = openFacts; document.body.appendChild(f);
+}
+function closeFacts() { const ov = $("#fsov"); if (!ov) return; ov.classList.add("out"); setTimeout(() => ov.remove(), 260); document.removeEventListener("keydown", factsKey); const ta = $("#ta"); if (ta && !matchMedia("(pointer:coarse)").matches) ta.focus({ preventScroll: true }); }
+function factsKey(e) { if (e.key === "Escape") closeFacts(); }
+function openFacts() {
+  if ($("#fsov")) return;
+  const st = story(), pid = S.part < 10 ? PARTS[S.part].id : null, use = pid ? PART_FACTS[pid] : [];
+  const ov = document.createElement("div"); ov.className = "ov fsov"; ov.id = "fsov";
+  ov.innerHTML = `<div class="card modal sheet" role="dialog" aria-modal="true" aria-labelledby="fsh">
+    <div class="sheet-hd"><span class="sic">${st.ic}</span><div><div class="pn">📋 FACT SHEET</div><h3 id="fsh">${h(st.title)}</h3></div><button class="btn ghost sm" id="fsx" aria-label="ปิด">✕ ปิด</button></div>
+    ${pid ? `<div class="hint">${use.length ? `✨ ข้อมูลที่ใช้ใน <b>Part ${PARTS[S.part].n} ${PARTS[S.part].en}</b> ถูกไฮไลต์ไว้` : `Part นี้ไม่ต้องใช้ข้อมูลจาก fact sheet`}</div>` : ""}
+    <div class="facts">${st.facts.map(([l, v], i) => `<div class="fr ${l === "Extra" ? "extra" : ""} ${use.includes(l) ? "use" : ""}" style="--i:${i}"><b>${h(l)}</b><span>${h(v)}</span></div>`).join("")}</div>
+    <p class="note" style="text-align:center">ใช้ข้อมูลตามนี้เท่านั้น · ห้ามแต่งตัวเลขหรือชื่อเพิ่ม</p></div>`;
+  document.body.appendChild(ov);
+  ov.onclick = e => { if (e.target === ov) closeFacts(); };
+  $("#fsx", ov).onclick = closeFacts; $("#fsx", ov).focus();
+  document.addEventListener("keydown", factsKey);
+  const first = $(".fr.use", ov); if (first) setTimeout(() => first.scrollIntoView({ block: "nearest", behavior: "smooth" }), 350);
+}
+
+/* ---------- workspace ---------- */
+const PILLS = [...PARTS.map(p => ({ ic: p.ic, label: p.en })), { ic: "🎬", label: "Assemble" }];
+function work() {
+  const st = story(); S.drafts[S.sid] = S.drafts[S.sid] || {}; S.prev = {};
+  app.innerHTML = `<section class="screen"><div class="ws one">
+    <div class="main"><nav class="stepper" id="stp">${PILLS.map((p, i) => `<button class="pill" data-i="${i}">${p.ic} ${i < 10 ? i + 1 + ". " : ""}${p.label}</button>`).join("")}<i class="ind"></i></nav>
+    <div class="meter"><b id="mbar"></b></div><div id="pane"></div></div></div></section>`;
+  mountFab();
+  $$(".pill").forEach(b => b.onclick = () => showPart(+b.dataset.i));
+  showPart(S.part, 1, true);
+}
+function pillStates() {
+  const r = scoreAll(story(), S.drafts[S.sid]);
+  $$(".pill").forEach((b, i) => {
+    b.classList.toggle("on", i === S.part);
+    if (i < 10) { const x = r.parts[PARTS[i].id]; b.classList.toggle("done", !x.empty); b.classList.toggle("perfect", x.pass === x.total); }
+  });
+  $("#mbar").style.width = r.total * 10 + "%"; setScore(r.total); return r;
+}
+function moveInd() {
+  const on = $(".pill.on"), ind = $(".ind"); if (!on) return;
+  ind.style.width = on.offsetWidth + "px"; ind.style.transform = `translateX(${on.offsetLeft}px)`;
+  on.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+}
+function showPart(i, dir, first) {
+  dir = dir || (i >= S.part ? 1 : -1); S.part = i; S.prev = {}; save();
+  pillStates(); requestAnimationFrame(moveInd);
+  const pane = $("#pane");
+  if (i === 10) { assemble(pane); ping(); return; }
+  const p = PARTS[i], st = story(), txt = S.drafts[S.sid][p.id] || "";
+  pane.innerHTML = `<div class="card part ${dir < 0 ? "in-l" : ""}">
+   <div class="phd"><div class="pic">${p.ic}</div><div><div class="pn">PART ${p.n} / 10 · ${p.w} pts</div><h2><span class="gt disp">${p.en}</span><small>${p.th}</small></h2></div>${ringHTML(0, "0")}</div>
+   <div class="rule"><p>${h(p.rule.en)}</p><p class="th">${h(p.rule.th)}</p></div>
+   <div class="ex"><div class="g"><b>✓ Example (Blue Klong)</b>${h(p.good)}</div><div class="b"><b>✗ Avoid</b>${h(p.bad)}</div></div>
+   <textarea id="ta" rows="${["lead", "body", "quote", "bp"].includes(p.id) ? 5 : 2}" placeholder="${h(p.ph)}" spellcheck="false"></textarea>
+   <div class="meta"><span id="wc">0 words</span><button class="btn ghost" id="clr">ล้าง</button></div>
+   <ul class="checks">${p.checks.map((c, k) => `<li class="chk" data-id="${c.id}" style="--i:${k}"><span class="dot">✓</span><div><b>${h(c.en)}</b><small>${h(c.th)}</small></div></li>`).join("")}</ul>
+   <div class="nav"><button class="btn ghost" id="pv" ${i === 0 ? "disabled" : ""}>◀ Back</button><button class="btn" id="nx">${i === 9 ? "🎬 Assemble" : "Next ▶"}</button></div></div>`;
+  const ta = $("#ta"); ta.value = txt;
+  ta.onfocus = () => { if (matchMedia("(max-width:640px)").matches) document.body.classList.add("typing"); };
+  ta.onblur = () => document.body.classList.remove("typing");
+  ta.oninput = () => { S.drafts[S.sid][p.id] = ta.value; save(); live(p, true); };
+  $("#clr").onclick = () => { ta.value = ""; ta.oninput(); ta.focus(); };
+  $("#pv").onclick = () => showPart(i - 1, -1);
+  $("#nx").onclick = () => showPart(i + 1, 1);
+  live(p, false); armRings(pane);
+  if (!first && !matchMedia("(pointer:coarse)").matches) ta.focus({ preventScroll: true });
+}
+function live(p, animate) {
+  const st = story(), t = S.drafts[S.sid][p.id] || "", r = scorePart(p, t, st);
+  $("#wc").textContent = words(t) + " words";
+  r.results.forEach(x => {
+    const li = $(`.chk[data-id="${x.id}"]`), key = p.id + ":" + x.id, was = S.prev[key];
+    li.classList.toggle("ok", x.ok);
+    if (animate && x.ok && was === false) { li.classList.remove("pop"); void li.offsetWidth; li.classList.add("pop"); }
+    S.prev[key] = x.ok;
+  });
+  const ring = $(".phd .ring"); ring.dataset.frac = r.pass / r.total; setRing(ring, r.pass / r.total); $("span", ring).textContent = r.pts.toFixed(2);
+  pillStates();
+}
+
+/* ---------- assemble + submit ---------- */
+function fullText(d) { return [d.rl, d.h + "\n" + (d.sub || ""), (d.dl || "") + " " + (d.lead || ""), d.body, d.quote, d.bp, d.ct, d.end].map(x => (x || "").trim()).filter(Boolean).join("\n\n"); }
+function assemble(pane) {
+  const st = story(), d = S.drafts[S.sid], r = scoreAll(st, d);
+  const e = (k, txt) => (txt || "").trim() ? h(txt.trim()) : `<span class="empty" data-j="${k}">— ยังไม่ได้เขียน · คลิกเพื่อไปเขียน —</span>`;
+  const blocks = [["rl", "Release line", "rl", 0, e(0, d.rl)], ["h", "Headline", "hd", 1, e(1, d.h)], ["sub", "Subheadline", "sb", 2, e(2, d.sub)],
+    ["lead", "Dateline + Lead", "", 4, ((d.dl || "").trim() ? `<b>${h(d.dl.trim())}</b> ` : "") + e(4, d.lead)], ["body", "Body", "", 5, e(5, d.body)],
+    ["quote", "Quote", "", 6, e(6, d.quote)], ["bp", "Boilerplate", "", 7, e(7, d.bp)], ["ct", "Media contact", "", 8, e(8, d.ct)], ["end", "End mark", "", 9, e(9, d.end)]];
+  const weak = [];
+  PARTS.forEach((p, i) => { const x = r.parts[p.id]; if (x.empty) weak.push([i, `Part ${p.n} ${p.en}: ยังไม่ได้เขียน`]); else if (x.pass < x.total) weak.push([i, `Part ${p.n} ${p.en}: ${p.checks.filter((c, k) => !x.results[k].ok).map(c => c.en).join(" · ")}`]); });
+  pane.innerHTML = `<div class="asm"><div class="paper">${blocks.map((b, i) => `<div class="blk ${b[2]}" style="--i:${i}"><span class="lab">${b[1]}</span><div class="tx">${b[4]}</div></div>`).join("")}</div>
+   <aside class="card board"><div class="big">${ringHTML(r.total / 10, "0.00")}<div><div class="pn">YOUR SCORE · คะแนนของคุณ</div><h2 style="margin:0">${st.ic} ${h(st.title)}</h2><button class="btn ghost" id="cp" style="margin-top:8px;padding:5px 12px;font-size:12px">📋 Copy release</button></div></div>
+   ${CATS.map((c, i) => `<div class="cat"><div class="row"><span>${c.en}<br><small style="color:var(--mut)">${c.th}</small></span><span class="v"><b data-c="${i}">0.00</b>/${c.max.toFixed(2)}</span></div><div class="bar"><i data-w="${r.cats[c.id] / c.max * 100}"></i></div></div>`).join("")}
+   <div class="weak">${weak.length ? `<b>จุดที่ยังปรับได้ · Improve</b>` + weak.map(w => `<button data-j="${w[0]}">${h(w[1])}</button>`).join("") : `<div class="ok-msg good">🎉 ครบทุกเกณฑ์ · Perfect!</div>`}</div>
+   <button class="btn big" id="sb">🚀 ส่งคะแนนให้อาจารย์</button><div id="ss">${S.sub ? subMsg() : ""}</div>${demoBanner()}</aside></div>`;
+  armRings(pane);
+  const tr = $(".big .ring span", pane); setTimeout(() => countUp(tr, r.total, 1200), 350);
+  $$(".cat b", pane).forEach((b, i) => setTimeout(() => countUp(b, r.cats[CATS[i].id], 900), 350 + i * 90));
+  setTimeout(() => $$(".bar i", pane).forEach(i => i.style.width = i.dataset.w + "%"), 400);
+  $$("[data-j]", pane).forEach(b => b.onclick = () => showPart(+b.dataset.j, -1));
+  $("#cp").onclick = async () => { try { await navigator.clipboard.writeText(fullText(d)); $("#cp").textContent = "✓ Copied"; } catch (x) { $("#cp").textContent = "คัดลอกไม่ได้"; } };
+  $("#sb").onclick = () => submit(r);
+}
+const subMsg = () => `<div class="ok-msg good">✅ ส่งแล้ว · ${S.sub.total.toFixed(2)}/10${S.sub.attempt ? " · ครั้งที่ " + S.sub.attempt : ""}${S.sub.demo ? "<br><small>(โหมดทดสอบ: บันทึกในเครื่องนี้เท่านั้น)</small>" : ""}<br><small>แก้แล้วส่งใหม่ได้ ระบบนับครั้งที่ดีที่สุดให้</small></div>`;
+async function submit(r) {
+  const st = story(), d = S.drafts[S.sid], btn = $("#sb"), out = $("#ss");
+  const empties = PARTS.filter(p => r.parts[p.id].empty).length;
+  if (empties && !confirm(`ยังไม่ได้เขียน ${empties} ส่วน ต้องการส่งเลยไหม?`)) return;
+  btn.disabled = true; btn.textContent = "⏳ กำลังส่ง…";
+  const payload = { action: "submit", id: S.student[0], name: S.student[1], storyId: st.id, storyTitle: st.title,
+    scores: Object.assign({}, r.cats, { total: r.total }), parts: Object.fromEntries(PARTS.map(p => [p.id, r.parts[p.id].pts])),
+    fails: PARTS.flatMap(p => r.parts[p.id].results.filter(x => !x.ok).map(x => p.id + "." + x.id)), texts: d, ts: new Date().toISOString() };
+  const res = await send(payload);
+  btn.disabled = false; btn.textContent = "🚀 ส่งใหม่อีกครั้ง";
+  if (res.ok || res.demo) {
+    const tot = typeof res.total === "number" ? res.total : r.total;
+    S.sub = { total: tot, attempt: res.attempt || null, demo: !!res.demo, ts: payload.ts }; save();
+    out.innerHTML = subMsg(); if (tot >= 8) confetti();
+  } else out.innerHTML = `<div class="ok-msg err">❌ ส่งไม่สำเร็จ ลองอีกครั้ง (งานของคุณยังไม่หาย)<br><small>${h(res.error || res.msg || "")}</small></div>`;
+  ping();
+}
+
+/* ---------- boot ---------- */
+window.addEventListener("resize", () => { if (S.screen === "work") moveInd(); });
+sparks(); setTop(); login();
+
+</script>
+</body>
+</html>
